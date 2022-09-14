@@ -36,7 +36,7 @@
         if(isset($_GET['id_user'])){
             $id_user = $mysqli->real_escape_string($_GET['id_user']);
             $data = json_decode(file_get_contents("php://input"));
-            $sql = $mysqli->query("UPDATE students SET 
+            $sql = $mysqli->query("UPDATE tblusers SET 
             name= '".$data->name."',
             email= '".$data->email."',
             password= '".$data->password."'

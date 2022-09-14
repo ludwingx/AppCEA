@@ -2,7 +2,7 @@ import { User, GuserService } from './../../../servicios/crud/guser/guser.servic
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
- 
+
 @Component({
   selector: 'app-crearuser',
   templateUrl: './crearuser.page.html',
