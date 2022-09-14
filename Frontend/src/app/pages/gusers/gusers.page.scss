@@ -1,0 +1,22 @@
+ion-title{
+    padding: 0px 30px 0px 0px;
+}
+.avatar{
+    background-color: var(--ion-color-cea);
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+}
+.title{
+    font-weight: 600;
+    font-size: 16px;
+}
+.subtext{
+    font-size: 80%;
+    margin-top: 0;
+    color: #8b979f;
+}

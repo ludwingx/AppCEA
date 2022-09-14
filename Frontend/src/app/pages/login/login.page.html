@@ -1,0 +1,33 @@
+<ion-header>
+</ion-header>
+
+<ion-content overflow-scroll="false">
+  <div class="logocea">
+    <img src="../../assets/logotypes/logocea.png" alt="Ionic logo">
+  </div>
+
+  <form #loginForm="ngForm" novalidate>
+    <ion-list class="boxlogin">
+      <ion-item>
+        <ion-label position="floating">Correo Electronico</ion-label>
+        <ion-input type = "email"  [(ngModel)]="email" name="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password"  [(ngModel)]="password" name="password"></ion-input>
+      </ion-item>
+
+    </ion-list>
+    <ion-row>
+      <ion-col class="btnlogin">
+        <ion-button (click)="login()" expand="block" color="ion-color-cea">
+          Iniciar sesión
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+  <div class="logoscz">
+    <ion-img src="../../assets/logotypes/logoscz.png" ></ion-img>
+  </div>
+</ion-content>
