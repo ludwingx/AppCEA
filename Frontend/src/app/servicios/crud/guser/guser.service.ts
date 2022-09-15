@@ -9,34 +9,40 @@ export interface User{
   id_cargo: string;
   ncargo: string;
 }
+export interface Cargos{
+  id_cargo: string;
+  ncargo: string;
+}
 @Injectable({
   providedIn: 'root'
 })
 export class GuserService {
-  private url = 'https://appcea.000webhostapp.com/crud-guser.php';
+  private urluser = 'https://appcea.000webhostapp.com/api/';
+  private urlcargo = 'https://appcea.000webhostapp.com/api/getcargos.php';
 
   constructor(private http: HttpClient) { }
   
   getAll(){
-    return this.http.get<[User]>(this.url)
+    return this.http.get<[User]>(this.urluser + 'crud-guser.php')
   }
-  //Metodo Consultar dato
+  getCargos(){
+    return this.http.get<[Cargos]>(this.urlcargo)
+  }
+  //Metodo Consultar datos
   get(id_user: string){
-    return this.http.get<User>(this.url + '/' + id_user);
+    return this.http.get<User>(this.urluser + '/' + id_user);
   }
-  //Metodo Crear dato
-  // create(user : any){
-  //   return this.http.post(this.url, user);
-  // }
+    //Metodo crear datos
   create(User : any){
-    return this.http.get(this.url, User);
+    console.log(User)
+    return this.http.post(this.urluser + 'postuser.php',User);
   }
-  //Metodo Actualizar dato
-  update(user: User, id_user: string){
-    return this.http.put(this.url+'/'+id_user, user);
+  //Metodo Actualizar datos
+  update(id_user: string){
+    return this.http.get(this.urluser +'/'+id_user);
   }
-  //Metodo Borrar dato
+  //Metodo Borrar datos
   remove(id_user: string){
-    return this.http.delete(`${this.url}` + '/' + id_user);
+    return this.http.get(this.urluser + 'putuser.php' + '/' + id_user);
   }
 }

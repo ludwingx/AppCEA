@@ -1,4 +1,4 @@
-import { User, GuserService } from './../../../servicios/crud/guser/guser.service';
+import { User, GuserService, Cargos } from './../../../servicios/crud/guser/guser.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
@@ -19,12 +19,15 @@ export class CrearuserPage implements OnInit {
     id_cargo: '',
   };
   users: User[]
+  cargos: Cargos[]
   constructor(private suser : GuserService,
      private modalCtrl : ModalController) { 
   }
   ngOnInit() { 
-    this.suser.getAll().subscribe(response => {
-      this.users = response;
+
+    this.suser.getCargos().subscribe(response => {
+      this.cargos = response;
+      console.log(this.users);
     });
     if(this.user){
       this.isUpdate = true;
