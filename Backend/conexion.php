@@ -1,4 +1,6 @@
-<?php
-$mysqli=new mysqli('localhost','id19414251_ludwing','p4[K4DTcU_[Z\DL|','id19414251_bdcea');
-$mysqli->set_charset("utf8");
+<?php
+
+$mysqli=new mysqli('localhost','vldevelor82_adminCEA','saIP%3*]Ve[{','vldevelor82_bd_cea');
+$mysqli->set_charset("utf8");
+
 ?>

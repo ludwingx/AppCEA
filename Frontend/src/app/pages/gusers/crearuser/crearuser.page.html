@@ -33,7 +33,7 @@
       <br />
       <ion-item>
         <ion-label position="floating">Cargo</ion-label>
-        <ion-select [(ngModel)]="users.id_cargo" >
+        <ion-select [(ngModel)]="users.id_cargo">
           <ion-select-option *ngFor="let user of cargos" value="{{user.id_cargo}}">{{user.ncargo}}</ion-select-option>
         </ion-select>
       </ion-item>
