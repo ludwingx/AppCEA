@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: GarecepcionPage
+  },
+  {
+    path: 'crearar',
+    loadChildren: () => import('./crearar/crearar.module').then( m => m.CreararPageModule)
   }
 ];
 

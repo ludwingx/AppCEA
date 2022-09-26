@@ -34,14 +34,15 @@ const routes: Routes = [
   {
     path: 'gfdeceso',
     loadChildren: () => import('./pages/gfdeceso/gfdeceso.module').then( m => m.GfdecesoPageModule)
-  },  {
+  },
+  {
     path: 'garecepcion',
     loadChildren: () => import('./pages/garecepcion/garecepcion.module').then( m => m.GarecepcionPageModule)
   },
   {
     path: 'ghclinica',
     loadChildren: () => import('./pages/ghclinica/ghclinica.module').then( m => m.GhclinicaPageModule)
-  },
+  }
 
 
 

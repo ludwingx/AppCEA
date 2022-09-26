@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar class="ion-text-center">
+    <ion-buttons class="ion-no-text" mode="ios" slot="start">
+      <ion-back-button
+        text=""
+        color="cea"
+        defaultHref="login"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title color="cea">Usuarios Deshabilitados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-label class="text">Lista de las cuentas de los usuarios que han sido deshabilitados</ion-label>
+  <ion-list *ngFor="let user of users">
+    <ion-item>
+      <ion-avatar slot="start">
+        <div class="avatar">{{user.name.substring(0,1).toUpperCase()}}</div>
+      </ion-avatar>
+      <ion-label>
+        <h3 class="title">{{user.name}}</h3>
+        <p class="subtext">
+          {{ 'Cargo: ' + user.ncargo + ' | ' + user.email}}
+        </p>
+      </ion-label>
+      <ion-button (click)="enableUser(user.name)" name="refresh-circle-outline"></ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -11,7 +11,15 @@ const routes: Routes = [
   {
     path: 'crearuser',
     loadChildren: () => import('./crearuser/crearuser.module').then( m => m.CrearuserPageModule)
-  }
+  },
+  {
+    path: 'actualizaruser',
+    loadChildren: () => import('./actualizaruser/actualizaruser.module').then( m => m.ActualizaruserPageModule)
+  },
+  {
+    path: 'listdisuser',
+    loadChildren: () => import('./listdisuser/listdisuser.module').then( m => m.ListdisuserPageModule)
+  },
 
 ];
 

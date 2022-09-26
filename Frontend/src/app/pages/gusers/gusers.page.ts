@@ -1,8 +1,9 @@
 import { CrearuserPage } from './crearuser/crearuser.page';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
-import { User, GuserService } from 'src/app/servicios/crud/guser/guser.service';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { ConexionService } from '../../servicios/conexion/conexion.service';
+import { ActualizaruserPage } from './actualizaruser/actualizaruser.page';
+import { User } from 'src/app/interfaces/usuario';
 
 @Component({
   selector: 'app-gusers',
@@ -11,15 +12,30 @@ import { User, GuserService } from 'src/app/servicios/crud/guser/guser.service';
 })
 export class GusersPage implements OnInit {
   users: User[];
-  constructor(private suser: GuserService,
-     private alertCtrl: AlertController,
-      private modalCtrl : ModalController) { }
+  
+  constructor(private conexion: ConexionService,
+              private alertCtrl: AlertController,
+              private modalCtrl : ModalController,
+              private toastCtrl: ToastController) { }
 
   ngOnInit() {
-    this.suser.getAll().subscribe(response => {
-      this.users = response;
-    });
+    this.ListUser()
   }
+
+  async mensaje (m: string){
+    const t = await this.toastCtrl.create({
+      message: m,
+      duration: 3000
+    })
+    t.present();
+  }
+
+  ListUser(){
+    this.conexion.getdata("usuario.php/?aksi=list-users").subscribe((data:any)=>{
+      this.users = data.listUsers
+    })
+  }
+  
   addUser(){
     this.modalCtrl.create({
       component: CrearuserPage
@@ -28,30 +44,19 @@ export class GusersPage implements OnInit {
       modal.present();
       return modal.onDidDismiss();
     })
-    .then(({ data, role }) =>{
-      if (role === 'created'){
-        this.users.push(data);
-      }
-    })
   }
-  updateUser(user: User){
+
+  updateUser(users:any){
     this.modalCtrl.create({
-      component: CrearuserPage,
-      componentProps: { user }
+      component: ActualizaruserPage,
+      componentProps: { users }
     })
     .then(modal => {
       modal.present();
       return modal.onDidDismiss();
     })
-    .then(({ data, role }) => {
-      this.users = this.users.filter(std => {
-        if (data.id_user === std.id_user) {
-          return data;
-        }
-        return std; 
-      });
-    });
   }
+
   removeUser(id_user:string){
     this.alertCtrl.create({
       header: 'Eliminar',
@@ -59,9 +64,17 @@ export class GusersPage implements OnInit {
       buttons: [{
         text: 'Si',
         handler: () => {
-          this.suser.remove(id_user).subscribe(() => {
-            this.users = this.users.filter(std => std.id_user !== id_user)
-          });
+          const body = {
+            id_user: id_user,
+            aksi: "delete-user"
+          }
+          this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
+            if (data.success) {
+              this.mensaje(data.msg)
+            } else {
+              this.mensaje(data.msg)
+            }
+          })
         }
       },
       {text: 'No'}

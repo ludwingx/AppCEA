@@ -1,7 +1,7 @@
-import { User, GuserService } from 'src/app/servicios/crud/guser/guser.service';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
+import { User } from '../../interfaces/usuario';
+import { ConexionService } from '../../servicios/conexion/conexion.service';
+import { Storage } from "@capacitor/storage";
 
 @Component({
   selector: 'app-profile',
@@ -10,11 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePage implements OnInit {
   users: User[];
-  constructor(private http: HttpClient, private suser: GuserService) { }
+  dataStorage:any
+  dataUser:any = []
+  constructor(private conexion: ConexionService) { }
 
   ngOnInit() {
-    this.suser.getAll().subscribe(response =>{
-      this.users = response ;
+    Storage.get({key: "session_user"}).then((data:any)=>{
+      this.dataStorage = JSON.parse(data.value)
+      this.perfil(this.dataStorage.id)
+    })
+  }
+
+  perfil(id:string){
+    const body = {
+      id_user: id,
+      aksi: "profile-user"
+    }
+    this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
+    this.dataUser = data.result
     })
   }
 

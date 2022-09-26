@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar class="color-cea-fondo">
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon size="large" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Actualizar Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="boxregister">
+    <ion-item>
+      <ion-label position="floating">Nombre completo</ion-label>
+      <ion-input type="text" [(ngModel)]="users.name" ></ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-label position="floating">Correo electronico</ion-label>
+      <ion-input type="email" [(ngModel)]="users.email" name="email"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-label position="floating">Cargo</ion-label>
+      <ion-select [(ngModel)]="users.id_cargo" >
+        <ion-select-option *ngFor="let user of cargos" value="{{user.id_cargo}}">{{user.ncargo}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <br>
+  </ion-list>
+  <ion-row>
+    <ion-col class="btnregister">
+      <ion-button type="submit" expand="block" 
+      color="cea" (click)="UpdateUser()">
+        Actualizar
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

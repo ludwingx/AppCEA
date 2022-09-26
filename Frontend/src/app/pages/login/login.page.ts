@@ -50,7 +50,6 @@ export class LoginPage implements OnInit {
       }
       else{
         this.loadingController.dismiss();
-        console.log("error login")
         this.mensaje(alerta);
       }
     })

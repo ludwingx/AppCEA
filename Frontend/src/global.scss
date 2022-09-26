@@ -34,3 +34,12 @@ ion-content {
   ion-content::part(scroll) {
     padding-right: 15px;
   }
+
+.color-cea-fondo{
+  --background: var(--ion-color-cea);
+  color: var(--ion-color-cea-contrast);
+}
+
+.color-cea-texto{
+  color: var(--ion-color-cea);
+}

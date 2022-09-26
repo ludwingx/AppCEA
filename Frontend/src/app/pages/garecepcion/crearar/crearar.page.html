@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Crear Acta de Recepción</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Numero de Acta*</ion-label>
+      <br>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Fecha y hora</ion-label>
+      <ion-datetime-button slot="end" datetime="datetime"></ion-datetime-button>
+    </ion-item>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="datetime" [showDefaultButtons]="true"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-list>
+</ion-content>
