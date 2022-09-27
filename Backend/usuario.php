@@ -104,7 +104,18 @@ if ($postjson['aksi'] == "login") {
         $result = json_encode(array('success' => false, 'msg' => 'error porfavor intente nuevamente'));
     }
     echo $result;
-}else if ($_GET['aksi'] == "listDis-users") {
+} else if ($postjson['aksi'] == "reactivate-user") {
+    $id_user = $postjson['id_user'];
+
+    $res = $mysqli->query("UPDATE tblusers SET estado='1' WHERE id_user=$id_user");
+    if ($res) {
+        $result = json_encode(array("success" => TRUE, "msg" => "Usuario Eliminado"));
+    } else {
+        $result = json_encode(array("success" => false, 'msg' => 'Hubo un error al activar al usuario'));
+    }
+    echo $result;
+}
+else if ($_GET['aksi'] == "listDis-users") {
 
     $res = $mysqli->query("SELECT C.ncargo, U.name, U.email, U.id_user 
     FROM tblusers as U INNER JOIN tblcargos as C ON U.id_cargo=C.id_cargo WHERE U.estado='0'");
@@ -124,20 +135,6 @@ if ($postjson['aksi'] == "login") {
         $result = json_encode(array('success' => TRUE, "listDisUsers" => $datauser));
     } else {
         $result = json_encode(array('success' => false, 'msg' => 'No existen usuarios deshabilitados'));
-    }
-    echo $result;
-} else if ($postjson['aksi'] == "reactivate-user") {
-    $id_user = $postjson['id_user'];
-    $name = $postjson['name'];
-    $email = $postjson['email'];
-
-    $res = $mysqli->query("UPDATE tblusers SET estado='1'
-    WHERE id_user=$id_user");
-
-    if ($res) {
-        $result = json_encode(array("success" => TRUE, "msg" => "Usuario Actualizado"));
-    } else {
-        $result = json_encode(array("success" => false, 'msg' => 'Hubo un error al actualizar al usuario'));
     }
     echo $result;
 }

@@ -2,6 +2,8 @@ import { ConexionService } from 'src/app/servicios/conexion/conexion.service';
 import { Tatencion } from './../../../interfaces/atencion';
 import { Component, OnInit } from '@angular/core';
 import { Municipios } from './../../../interfaces/municipios';
+import { Edades } from 'src/app/interfaces/edades';
+import { Sexos } from 'src/app/interfaces/sexos';
 @Component({
   selector: 'app-crearar',
   templateUrl: './crearar.page.html',
@@ -10,12 +12,17 @@ import { Municipios } from './../../../interfaces/municipios';
 export class CreararPage implements OnInit {
   tatencion: Tatencion[];
   municipios: Municipios[];
+  edades: Edades[];
+  sexos: Sexos[];
   constructor(private conexion  : ConexionService,) { 
   }
 
   ngOnInit() { 
-    this.ListAtencion()
-    this.ListMunicipios()
+    this.ListEdades();
+    this.ListSexos();
+    this.ListAtencion();
+    this.ListMunicipios();
+
   }
 
   ListAtencion(){
@@ -26,6 +33,16 @@ export class CreararPage implements OnInit {
   ListMunicipios(){
     this.conexion.getdata("municipio.php/?aksi=list-municipio").subscribe((data:any)=>{
       this.municipios = data.listMunicipios
+    })
+  }
+  ListEdades(){
+    this.conexion.getdata("edad.php/?aksi=list-edad").subscribe((data:any)=>{
+      this.edades = data.listEdades
+    })
+  }
+  ListSexos(){
+    this.conexion.getdata("sexo.php/?aksi=list-sexo").subscribe((data:any)=>{
+      this.sexos = data.listSexos
     })
   }
 

@@ -95,6 +95,74 @@
     </ion-item>
     <ion-item>
       <ion-label>N°</ion-label>
+      <ion-label>1</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nombre Científico</ion-label>
+      <ion-input slot="end" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nombre Común</ion-label>
+      <ion-input slot="end" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Edad:</ion-label>
+      <ion-select>
+        <ion-select-option *ngFor="let edad of edades" >
+          {{edad.nedad}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Sexo:</ion-label>
+      <ion-select>
+        <ion-select-option *ngFor="let sexo of sexos" >
+          {{sexo.nsexo}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Observaciones</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-note color="black">Las especies serán derivados a la SDS Y MA de la Gobernación
+        de Santa Cruz, instalaciones del CAD
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Funcionario Recepcionante:</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>firma</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>CI</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Persona(Entidad) que efectúa la entrega</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>firma</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Telf</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>CI</ion-label>
+      <ion-input type="text"></ion-input>
     </ion-item>
   </ion-list>
 </ion-content>
