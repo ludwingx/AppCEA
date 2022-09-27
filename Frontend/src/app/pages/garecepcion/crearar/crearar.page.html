@@ -10,7 +10,6 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <ion-list>
     <ion-item>
@@ -22,13 +21,11 @@
       <ion-label>Fecha y hora</ion-label>
       <ion-datetime-button slot="end" datetime="datetime"></ion-datetime-button>
     </ion-item>
-
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
         <ion-datetime id="datetime" [showDefaultButtons]="true"></ion-datetime>
       </ng-template>
     </ion-modal>
-    
     <ion-item>
       <ion-label>Tipo de atención:</ion-label>
       <br>
@@ -49,7 +46,7 @@
     <ion-item>
       <ion-label>Municipio:</ion-label>
       <ion-select>
-        <ion-select-option *ngfor="let municipio of municipios">
+        <ion-select-option *ngFor="let municipio of municipios">
           {{municipio.nmunicipio}}
         </ion-select-option>
       </ion-select>
@@ -69,11 +66,14 @@
     <ion-item>
       <ion-note color="black">Lugar de donde procede el animal(donde encontro al animal la persona que hace la denuncia o llamada):</ion-note>
     </ion-item>
-    <!-- <ion-select>
-      <ion-select-option *ngfor="let municipio of municipios" >
-        {{municipio.nmunicipio}}
-      </ion-select-option>
-    </ion-select> -->
+    <ion-item>
+      <ion-label>Municipio:</ion-label>
+      <ion-select>
+        <ion-select-option *ngFor="let municipio of municipios" >
+          {{municipio.nmunicipio}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
     <ion-item>
       <ion-label>Barrio:</ion-label>
       <ion-input slot="end" type="text"></ion-input>
@@ -89,6 +89,12 @@
     <ion-item>
       <ion-label>ÁreaVerde, Área protegida, otro:</ion-label>
       <ion-input slot="end" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Especies procedentes de la atención:</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>N°</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
