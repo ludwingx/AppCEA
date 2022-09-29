@@ -12,7 +12,6 @@
 </ion-header>
 
 <ion-content>
-  <ion-label class="text">Lista de las cuentas de los usuarios que han sido deshabilitados</ion-label>
   <ion-list *ngFor="let user of users">
     <ion-item>
       <ion-avatar slot="start">
@@ -24,7 +23,9 @@
           {{ 'Cargo: ' + user.ncargo + ' | ' + user.email}}
         </p>
       </ion-label>
-      <ion-button (click)="enableUser(user.name)" name="refresh-circle-outline"></ion-button>
+      <ion-button class="btn-enable" (click)="enableUser(user.id_user,user.name)" color="warning">
+        <ion-icon class="icon" size="large"  name="refresh-circle-outline"></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-list>
 </ion-content>

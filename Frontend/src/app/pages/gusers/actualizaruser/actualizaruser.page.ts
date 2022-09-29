@@ -12,7 +12,9 @@ export class ActualizaruserPage implements OnInit {
     {
       name: "",
       email: "",
-      id_cargo: ""
+      password:"",
+      id_cargo: "",
+      ncargo: ""
     }
   ]
   cargos: Cargos[]
@@ -48,12 +50,15 @@ export class ActualizaruserPage implements OnInit {
       id_user: this.users.id_user,
       name: this.users.name,
       email: this.users.email,
+      password: this.users.password,
+      ncargo: this.users.ncargo,
       id_cargo: this.users.id_cargo,
       aksi: "update-user"
     }
     this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
       if (data.success) {
         this.mensaje(data.msg)
+        this.closeModal()
       } else {
         this.mensaje(data.msg)
       }

@@ -30,23 +30,24 @@ export class ListdisuserPage implements OnInit {
       this.users = data.listDisUsers
     })
   }
-  enableUser(id_user:string){
+  enableUser(id_user:string, name:string){
     this.alertCtrl.create({
       header: 'Habilitar',
-      message: '¿Estás seguro de que quieres habilitar a ' + id_user  +'?',
+      message: '¿Estás seguro de que quieres habilitar la cuenta de ' + name + '?',
       buttons: [{
         text: 'Si',
         handler: () => {
           const body = {
             id_user: id_user,
             aksi: "reactivate-user"
+            
           }
           this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
             if (data.success) {
               this.mensaje(data.msg)
             } else {
               this.mensaje(data.msg)
-            }
+            }this.ListDisUser()
           })
         }
       },

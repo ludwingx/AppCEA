@@ -21,7 +21,12 @@ export class GusersPage implements OnInit {
   ngOnInit() {
     this.ListUser()
   }
-
+  doRefresh(event){
+    this.ListUser();
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
+  }
   async mensaje (m: string){
     const t = await this.toastCtrl.create({
       message: m,
@@ -57,10 +62,10 @@ export class GusersPage implements OnInit {
     })
   }
 
-  removeUser(id_user:string){
+  removeUser(id_user:string, name:string){
     this.alertCtrl.create({
-      header: 'Eliminar',
-      message: '¿Estás seguro de que quieres eliminar el usuario?',
+      header: 'Deshabilitar',
+      message: '¿Estás seguro de que quieres deshabilitar la cuenta de ' + name + '?',
       buttons: [{
         text: 'Si',
         handler: () => {
@@ -73,7 +78,7 @@ export class GusersPage implements OnInit {
               this.mensaje(data.msg)
             } else {
               this.mensaje(data.msg)
-            }
+            }this.ListUser()
           })
         }
       },
