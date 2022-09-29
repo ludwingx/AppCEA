@@ -1,13 +1,12 @@
 <ion-header>
-  <ion-toolbar class="ion-text-center">
+  <ion-toolbar class="ion-text-center" color="cea">
     <ion-buttons class="ion-no-text" mode="ios" slot="start">
       <ion-back-button
         text=""
-        color="cea"
         defaultHref="login"
       ></ion-back-button>
     </ion-buttons>
-    <ion-title color="cea"> Usuarios</ion-title>
+    <ion-title class="ion-text-center"> Usuarios</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,9 +18,9 @@
   </ion-refresher>
   <br />
   <ion-button expand="block" 
-  class="color-cea-fondo" (click)="addUser()">Crear Usuario</ion-button>
+  color="cea" (click)="addUser()">Crear Usuario</ion-button>
   <ion-button expand="block" 
-  class="color-cea-fondo" [routerLink]="['listdisuser']" >Cuentas Deshabilitadas</ion-button>
+  color="cea" [routerLink]="['listdisuser']" >Cuentas Deshabilitadas</ion-button>
   <br />
     <ion-item class="ion-text-center">
       <ion-label>
