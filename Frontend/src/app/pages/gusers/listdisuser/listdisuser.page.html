@@ -12,8 +12,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let user of users">
-    <ion-item>
+  <ion-list>
+    <ion-item *ngFor="let user of users">
       <ion-avatar slot="start">
         <div class="avatar">{{user.name.substring(0,1).toUpperCase()}}</div>
       </ion-avatar>

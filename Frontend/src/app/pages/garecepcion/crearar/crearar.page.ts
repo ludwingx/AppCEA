@@ -1,3 +1,5 @@
+import { FirmaPage } from './firma/firma.page';
+import { ModalController } from '@ionic/angular';
 import { ConexionService } from 'src/app/servicios/conexion/conexion.service';
 import { Tatencion } from './../../../interfaces/atencion';
 import { Component, OnInit } from '@angular/core';
@@ -14,7 +16,7 @@ export class CreararPage implements OnInit {
   municipios: Municipios[];
   edades: Edades[];
   sexos: Sexos[];
-  constructor(private conexion  : ConexionService,) { 
+  constructor(private conexion  : ConexionService, private modalCtrl: ModalController) { 
   }
 
   ngOnInit() { 
@@ -48,5 +50,14 @@ export class CreararPage implements OnInit {
 
   change(event){
     console.log(event.detail.value); //INTRODUCIR EL VALUE EN UN OBJETO "DATE" Y ENVIARLO
+  }
+  firmar(){
+    this.modalCtrl.create({
+      component: FirmaPage
+    })
+    .then(modal => {
+      modal.present();
+      return modal.onDidDismiss();
+    })
   }
 }

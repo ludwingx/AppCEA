@@ -21,10 +21,14 @@ ion-title{
     color: #8b979f;
 }
 .btn-enable{
-    --border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    display:block;
+    --padding-top:0px;
+    --padding-bottom:0px;
+    --padding-end:0px;
+    --padding-start:0px;
+
+}
+:host{
+    --boder-radius:12px;
 }
 .icon{
     font-size:20px;
