@@ -15,7 +15,7 @@ if($_GET['aksi']=="list-sexo"){
                 );
                 $cont++;
             };
-            $result = json_encode(array('success'=> TRUE,"listSexo"=>$datasexo));
+            $result = json_encode(array('success'=> TRUE,"listSexos"=>$datasexo));
        }
        else{
         $result = json_encode(array('success'=> false, 'msg'=> 'No existen tipos de atención'));

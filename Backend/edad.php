@@ -15,7 +15,7 @@ if($_GET['aksi']=="list-edad"){
                 );
                 $cont++;
             };
-            $result = json_encode(array('success'=> TRUE,"listEdad"=>$dataedad));
+            $result = json_encode(array('success'=> TRUE,"listEdades"=>$dataedad));
        }
        else{
         $result = json_encode(array('success'=> false, 'msg'=> 'No existen tipos de atención'));
