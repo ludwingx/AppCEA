@@ -25,11 +25,14 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-item>
-      <ion-label>La siguiente firma es la que se guardará:</ion-label>
-    </ion-item>
-    <ion-item>
-      <img  src='{{ signatureImg }}' alt="No hay firma" />
-    </ion-item>
+    <div *ngIf="signatureImg">
+      <ion-item >
+        <ion-label>La siguiente firma es la que se guardará:</ion-label>
+      </ion-item>
+      <ion-item>
+        <img  src='{{ signatureImg }}' alt="No hay firma" />
+      </ion-item>
+    </div>
+
   
 </ion-content>

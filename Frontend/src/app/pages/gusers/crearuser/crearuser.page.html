@@ -29,6 +29,49 @@
         <ion-label position="floating">Repita la contraseña</ion-label>
         <ion-input type="password" [(ngModel)]="data.password" name="password" ></ion-input>
       </ion-item> -->
+      <ion-item>
+        <ion-label>Firma</ion-label>
+        <ion-button id="open-modal">
+          Agregar Firma
+        </ion-button>
+      </ion-item>
+      <ion-modal #modal trigger="open-modal">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button color="light" (click)="closeModal()">
+                  Cancelar
+                </ion-button>
+              </ion-buttons>
+              <ion-title>Agrega tu firma</ion-title>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding" >
+            <ion-item>
+              <canvas #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
+            </ion-item>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-button color="danger" (click)="clearPad()">Borrar</ion-button>
+                  </ion-col>
+                  <ion-col size="4" offset="2">
+                    <ion-button color="secondary" (click)="savePad()">Guardar</ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <div *ngIf="signatureImg">
+                <ion-item >
+                  <ion-label>La siguiente firma es la que se guardará:</ion-label>
+                </ion-item>
+                <ion-item>
+                  <img  src='{{ signatureImg }}' alt="No hay firma" />
+                </ion-item>
+              </div>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
       <br />
       <br />
       <ion-item>

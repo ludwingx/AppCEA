@@ -5,7 +5,7 @@ ion-label{
     color: var(--ion-color-cea) !important; //!important para forzar
 }
 ion-item{
-    --highlight-color-focused: var(--ion-color-cea);
+    --border-color: var(--ion-color-cea);
 }
 .boxregister{
     margin: 5%;
@@ -14,6 +14,32 @@ ion-item{
     margin: 0 2%;
 }
 :host{
+    --highlight-color-focused: var(--ion-color-cea) !important;
+
     --color-activated: var(--ion-color-cea) !important;
     --color-hover: var(--ion-color-cea) !important;
 }
+ion-modal {
+    --height: 50%;
+    --border-radius: 16px;
+    --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+  
+  ion-modal::part(backdrop) {
+    background: rgba(209, 213, 219);
+    opacity: 1;
+  }
+  
+  ion-modal ion-toolbar {
+    --background: rgb(14 116 144);
+    --color: white;
+  }
+  ion-modal.stack-modal {
+    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.32);
+  }
+  canvas {
+    display: block;
+    border: 1px solid rgb(187, 178, 178);
+    background-color: var(--ion-color-success);
+  }
