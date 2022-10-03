@@ -21,6 +21,7 @@ const routes: Routes = [
     loadChildren: () => import('./listdisuser/listdisuser.module').then( m => m.ListdisuserPageModule)
   },
 
+
 ];
 
 @NgModule({

@@ -17,13 +17,14 @@ export class CrearuserPage implements AfterViewInit {
       email: "",
       ncargo: "",
       password: "",
-      id_cargo: ""
+      id_cargo: "",
+      firma: ""
     }
   ]
   cargos: Cargos[]
   signaturePad: SignaturePad;
   @ViewChild('canvas') canvasEl : ElementRef;
-  signatureImg: string;
+  touchEvent:string;
   constructor(private conexion  : ConexionService,
               private modalCtrl : ModalController,
               private toastCtrl : ToastController) { 
@@ -54,10 +55,13 @@ export class CrearuserPage implements AfterViewInit {
       email: this.users.email,
       password: this.users.password,
       id_cargo: this.users.id_cargo,
+      firma: this.users.firma,
       aksi: "register-user"
     }
     this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
       if (data.success) {
+        this.closeModal();
+        console.log(body)
         this.mensaje(data.msg)
       } else {
         this.mensaje(data.msg)
@@ -69,6 +73,7 @@ export class CrearuserPage implements AfterViewInit {
   }
 
   startDrawing(event: Event) {
+    this.touchEvent = this.signaturePad.toDataURL()
     console.log(event);
     // works in device not in browser
 
@@ -84,8 +89,8 @@ export class CrearuserPage implements AfterViewInit {
 
   savePad() {
     const base64Data = this.signaturePad.toDataURL();
-    this.signatureImg = base64Data;
-    console.log(this.signatureImg)
+    this.users.firma = base64Data;
+    console.log(this.users.firma)
   }
   
 }

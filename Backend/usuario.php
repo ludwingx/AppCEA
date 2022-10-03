@@ -54,7 +54,7 @@ if ($postjson['aksi'] == "login") {
     $email = $postjson['email'];
     $password = $postjson['password'];
     $id_cargo = $postjson['id_cargo'];
-    $res = $mysqli->query("INSERT INTO tblusers SET name='$name', email='$email', password='$password', id_cargo=$id_cargo");
+    $res = $mysqli->query("INSERT INTO tblusers SET name='$name', email='$email', password='$password', id_cargo=$id_cargo, firma='$firma'");
     if ($res) {
         $result = json_encode(array("success" => TRUE, "msg" => "Usuario Registrado con exito"));
     } else {
@@ -66,8 +66,9 @@ if ($postjson['aksi'] == "login") {
     $name = $postjson['name'];
     $email = $postjson['email'];
     $id_cargo = $postjson['id_cargo'];
+    $firma = $postjson['firma'];
 
-    $res = $mysqli->query("UPDATE tblusers SET name='$name', email='$email',password='$password', id_cargo='$id_cargo'
+    $res = $mysqli->query("UPDATE tblusers SET name='$name', email='$email',password='$password', id_cargo='$id_cargo', firma='$firma'
     WHERE id_user=$id_user");
 
     if ($res) {
@@ -99,7 +100,8 @@ if ($postjson['aksi'] == "login") {
             'name' => $data["name"],
             'ncargo' => $data["ncargo"],
             'email' => $data["email"],
-            'password' => $data["password"]
+            'password' => $data["password"],
+            'firma' => $data["firma"]
         );
         $result = json_encode(array('success' => TRUE, "result" => $datauser));
     } else {
