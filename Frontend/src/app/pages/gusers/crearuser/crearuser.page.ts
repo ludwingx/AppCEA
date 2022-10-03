@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { ConexionService } from '../../../servicios/conexion/conexion.service';
 import { Cargos } from '../../../interfaces/cargo';
@@ -10,7 +10,7 @@ import SignaturePad from 'signature_pad';
   styleUrls: ['./crearuser.page.scss'],
 })
 
-export class CrearuserPage implements OnInit {
+export class CrearuserPage implements AfterViewInit {
   users:any = [
     {
       name: "",
@@ -87,4 +87,5 @@ export class CrearuserPage implements OnInit {
     this.signatureImg = base64Data;
     console.log(this.signatureImg)
   }
+  
 }
