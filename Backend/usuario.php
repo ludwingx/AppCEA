@@ -29,7 +29,7 @@ if ($postjson['aksi'] == "login") {
     echo $result;
 } else if ($_GET['aksi'] == "list-users") {
 
-    $res = $mysqli->query("SELECT C.ncargo, U.name, U.email, U.id_user 
+    $res = $mysqli->query("SELECT C.ncargo, U.name, U.email, U.id_user, U.password, U.id_cargo, U.firma 
     FROM tblusers as U INNER JOIN tblcargos as C ON U.id_cargo=C.id_cargo WHERE U.estado='1'");
     $cont = 0;
     $check = mysqli_num_rows($res);
@@ -40,7 +40,10 @@ if ($postjson['aksi'] == "login") {
                 'id_user' => $data["id_user"],
                 'ncargo' => $data["ncargo"],
                 'name' => $data["name"],
-                'email' => $data["email"]
+                'email' => $data["email"],
+                'password' => $data["password"],
+                'id_cargo' => $data["id_cargo"],
+                'firma' => $data["firma"],
             );
             $cont++;
         };
@@ -54,6 +57,7 @@ if ($postjson['aksi'] == "login") {
     $email = $postjson['email'];
     $password = $postjson['password'];
     $id_cargo = $postjson['id_cargo'];
+    $firma = $postjson['firma'];
     $res = $mysqli->query("INSERT INTO tblusers SET name='$name', email='$email', password='$password', id_cargo=$id_cargo, firma='$firma'");
     if ($res) {
         $result = json_encode(array("success" => TRUE, "msg" => "Usuario Registrado con exito"));
@@ -65,6 +69,7 @@ if ($postjson['aksi'] == "login") {
     $id_user = $postjson['id_user'];
     $name = $postjson['name'];
     $email = $postjson['email'];
+    $password = $postjson['password'];
     $id_cargo = $postjson['id_cargo'];
     $firma = $postjson['firma'];
 
@@ -89,7 +94,7 @@ if ($postjson['aksi'] == "login") {
     echo $result;
 } else if ($postjson['aksi'] == "profile-user") {
     $id_user = $postjson["id_user"];
-    $res = $mysqli->query("SELECT C.ncargo, U.name, U.email, U.id_user 
+    $res = $mysqli->query("SELECT C.ncargo, U.name, U.email, U.id_user,U.id_cargo, U.firma
     FROM tblusers as U INNER JOIN tblcargos as C ON U.id_cargo=C.id_cargo WHERE id_user='$id_user'");
 
     $check = mysqli_num_rows($res);
@@ -100,7 +105,7 @@ if ($postjson['aksi'] == "login") {
             'name' => $data["name"],
             'ncargo' => $data["ncargo"],
             'email' => $data["email"],
-            'password' => $data["password"],
+            'id_cargo' => $data["id_cargo"],
             'firma' => $data["firma"]
         );
         $result = json_encode(array('success' => TRUE, "result" => $datauser));

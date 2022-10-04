@@ -1,8 +1,6 @@
 <ion-header>
   <ion-toolbar color="cea">
-    <ion-buttons slot="end">
     <ion-buttons slot="start">
-
       <ion-button (click)="closeModal()">
         Cancelar
       </ion-button>
@@ -25,17 +23,41 @@
     <br>
     <ion-item>
       <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password" [(ngModel)]="users.password" name="password" ></ion-input>
+      <ion-input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="users.password" name="password" ></ion-input>
+      <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
     </ion-item>
     <br>
-    <ion-item>
-      <ion-label position="floating">Cargo</ion-label>
-      <ion-select [(ngModel)]="users.id_cargo" >
-        <ion-select-option *ngFor="let user of cargos" value="{{user.id_cargo}}">{{user.ncargo}}</ion-select-option>
+    <ion-item >
+      <ion-label position="stacked">Cargo</ion-label>
+      <ion-select  placeholder="{{datos.ncargo}}" [(ngModel)]="users.id_cargo" >
+        <ion-select-option *ngFor="let user of cargos"  value="{{user.id_cargo}}">{{user.ncargo}}</ion-select-option>
       </ion-select>
     </ion-item>
     <br>
-  </ion-list>
+    <ion-item>
+      <ion-label>Dibuja tu firma</ion-label>
+      <ion-button *ngIf="touchEvent" color="cea" (click)="savePad()">
+        Declarar firma
+      </ion-button>
+      <ion-button *ngIf="touchEvent" color="warning" (click)="clearPad()"> 
+        Borrar firma
+      </ion-button>
+    </ion-item>
+    <br>
+    <ion-item>
+      <canvas  class="ion-text-center" #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
+    </ion-item>
+    <ion-item *ngIf="users.firma">
+      <ion-label>Firma declarada actualmente:</ion-label>
+    </ion-item>
+    <ion-item *ngIf="users.firma">
+      <img src='{{ users.firma }}' alt="No existe ninguna firma registrada" />
+    </ion-item>
+    <ion-item>
+      <ion-note *ngIf="users.firma" >La firma que se muestra, será la que se registrará junto a los datos del usuario</ion-note>
+    </ion-item>
+  </ion-list> 
+  <br>
   <ion-row>
     <ion-col class="btnregister">
       <ion-button type="submit" expand="block" 

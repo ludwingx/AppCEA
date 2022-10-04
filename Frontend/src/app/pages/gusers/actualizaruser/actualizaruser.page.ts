@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalController, NavParams, ToastController } from '@ionic/angular';
 import { ConexionService } from '../../../servicios/conexion/conexion.service';
 import { Cargos } from '../../../interfaces/cargo';
+import SignaturePad from 'signature_pad';
 @Component({
   selector: 'app-actualizaruser',
   templateUrl: './actualizaruser.page.html',
@@ -14,11 +15,17 @@ export class ActualizaruserPage implements OnInit {
       email: "",
       password:"",
       id_cargo: "",
-      ncargo: ""
+      ncargo: "",
+      firma:""
     }
   ]
   cargos: Cargos[]
   datos:any
+  signaturePad: SignaturePad;
+  @ViewChild('canvas') canvasEl : ElementRef;
+  touchEvent:string;
+  showPassword = false;
+  passwordToggleIcon = 'eye';
   constructor(private modalCtrl: ModalController,
               private conexion: ConexionService,
               private toastCtrl: ToastController,
@@ -44,7 +51,15 @@ export class ActualizaruserPage implements OnInit {
   closeModal(){
     this.modalCtrl.dismiss(null,'close');
   }
-
+  togglePassword():void{
+    this.showPassword = !this.showPassword;
+    if(this.passwordToggleIcon == 'eye'){
+      this.passwordToggleIcon = 'eye-off'
+    }else{
+      this.passwordToggleIcon = 'eye';
+    }
+  }
+  
   UpdateUser(){
     const body = {
       id_user: this.users.id_user,
@@ -53,10 +68,12 @@ export class ActualizaruserPage implements OnInit {
       password: this.users.password,
       ncargo: this.users.ncargo,
       id_cargo: this.users.id_cargo,
+      firma: this.users.firma,
       aksi: "update-user"
     }
     this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
       if (data.success) {
+        console.log(body)
         this.mensaje(data.msg)
         this.closeModal()
       } else {
@@ -64,5 +81,27 @@ export class ActualizaruserPage implements OnInit {
       }
     })
   }
+  ngAfterViewInit() {
+    this.signaturePad = new SignaturePad(this.canvasEl.nativeElement);
+  }
 
+  startDrawing(event: Event) {
+    this.touchEvent = this.signaturePad.toDataURL()
+    console.log(event);
+    // works in device not in browser
+
+  }
+
+  moved(event: Event) {
+    // works in device not in browser
+  }
+
+  clearPad() {
+    this.signaturePad.clear();
+  }
+
+  savePad() {
+    const base64Data = this.signaturePad.toDataURL();
+    this.users.firma = base64Data;
+  }
 }

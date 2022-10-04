@@ -25,6 +25,8 @@ export class CrearuserPage implements AfterViewInit {
   signaturePad: SignaturePad;
   @ViewChild('canvas') canvasEl : ElementRef;
   touchEvent:string;
+  showPassword = false;
+  passwordToggleIcon = 'eye';
   constructor(private conexion  : ConexionService,
               private modalCtrl : ModalController,
               private toastCtrl : ToastController) { 
@@ -68,6 +70,14 @@ export class CrearuserPage implements AfterViewInit {
       }
     })
   }
+  togglePassword():void{
+    this.showPassword = !this.showPassword;
+    if(this.passwordToggleIcon == 'eye'){
+      this.passwordToggleIcon = 'eye-off'
+    }else{
+      this.passwordToggleIcon = 'eye';
+    }
+  }
   ngAfterViewInit() {
     this.signaturePad = new SignaturePad(this.canvasEl.nativeElement);
   }
@@ -90,7 +100,6 @@ export class CrearuserPage implements AfterViewInit {
   savePad() {
     const base64Data = this.signaturePad.toDataURL();
     this.users.firma = base64Data;
-    console.log(this.users.firma)
   }
   
 }

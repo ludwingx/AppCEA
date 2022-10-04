@@ -5,5 +5,5 @@ export interface User{
     ncargo: string;
     password:string;
     id_cargo:string;
-    firma:HTMLImageElement;
+    firma:string;
   }

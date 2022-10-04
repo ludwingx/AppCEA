@@ -27,7 +27,8 @@ export class ProfilePage implements OnInit {
       aksi: "profile-user"
     }
     this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
-    this.dataUser = data.result
+    this.dataUser = data.result;
+    console.log(this.dataUser)
     })
   }
 

@@ -5,6 +5,7 @@ import { ConexionService } from '../../servicios/conexion/conexion.service';
 import { ActualizaruserPage } from './actualizaruser/actualizaruser.page';
 import { User } from 'src/app/interfaces/usuario';
 
+
 @Component({
   selector: 'app-gusers',
   templateUrl: './gusers.page.html',
@@ -61,7 +62,6 @@ export class GusersPage implements OnInit {
       return modal.onDidDismiss();
     })
   }
-
   removeUser(id_user:string, name:string){
     this.alertCtrl.create({
       header: 'Deshabilitar',

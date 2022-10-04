@@ -29,8 +29,8 @@
         </ion-text>
       </ion-label>
     </ion-item>
-    <ion-list>
-      <ion-item-sliding *ngFor="let user of users">
+    <ion-list *ngFor="let user of users">
+      <ion-item-sliding >
         <ion-item>
           <ion-avatar slot="start">
             <div class="avatar">{{user.name.substring(0,1).toUpperCase()}}</div>
