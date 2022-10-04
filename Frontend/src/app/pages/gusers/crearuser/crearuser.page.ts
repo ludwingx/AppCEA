@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { ConexionService } from '../../../servicios/conexion/conexion.service';
 import { Cargos } from '../../../interfaces/cargo';
 import SignaturePad from 'signature_pad';
@@ -29,7 +29,8 @@ export class CrearuserPage implements AfterViewInit {
   passwordToggleIcon = 'eye';
   constructor(private conexion  : ConexionService,
               private modalCtrl : ModalController,
-              private toastCtrl : ToastController) { 
+              private toastCtrl : ToastController,
+              public loadingController: LoadingController) { 
   }
   ngOnInit() { 
     this.ListCargo()
@@ -52,6 +53,7 @@ export class CrearuserPage implements AfterViewInit {
   }
 
   RegisterUser(){
+    this.presentLoadingWithOptions();
     const body = {
       name: this.users.name,
       email: this.users.email,
@@ -62,10 +64,12 @@ export class CrearuserPage implements AfterViewInit {
     }
     this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
       if (data.success) {
+        this.loadingController.dismiss();
         this.closeModal();
         console.log(body)
         this.mensaje(data.msg)
       } else {
+        this.loadingController.dismiss();
         this.mensaje(data.msg)
       }
     })
@@ -101,5 +105,15 @@ export class CrearuserPage implements AfterViewInit {
     const base64Data = this.signaturePad.toDataURL();
     this.users.firma = base64Data;
   }
-  
+  async presentLoadingWithOptions(){
+    const loading = await this.loadingController.create({
+      //spinner: null,
+      //duration: 5000,
+      message: 'Registrando Usuario...',
+      //translucent: true,
+      //cssClass: 'custom-class custom-loading'
+      cssClass: 'custom-loading',
+    });
+    return await loading.present();
+  }
 }

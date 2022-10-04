@@ -12,30 +12,31 @@
 <ion-content>
   <ion-list class="boxregister">
     <ion-item>
-      <ion-label position="floating">Nombre completo</ion-label>
+      <ion-label position="floating">Nombre completo*</ion-label>
       <ion-input type="text" [(ngModel)]="users.name" ></ion-input>
     </ion-item>
+
     <br>
     <ion-item>
-      <ion-label position="floating">Correo electronico</ion-label>
+      <ion-label position="floating">Correo electronico*</ion-label>
       <ion-input type="email" [(ngModel)]="users.email" name="email"></ion-input>
     </ion-item>
     <br>
     <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
+      <ion-label position="floating">Contraseña*</ion-label>
       <ion-input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="users.password" name="password" ></ion-input>
-      <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+      <ion-icon slot="end" class="passwordIcon" item-end [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
     </ion-item>
     <br>
     <ion-item >
-      <ion-label position="stacked">Cargo</ion-label>
+      <ion-label position="stacked">Cargo*</ion-label>
       <ion-select  placeholder="{{datos.ncargo}}" [(ngModel)]="users.id_cargo" >
         <ion-select-option *ngFor="let user of cargos"  value="{{user.id_cargo}}">{{user.ncargo}}</ion-select-option>
       </ion-select>
     </ion-item>
     <br>
     <ion-item>
-      <ion-label>Dibuja tu firma</ion-label>
+      <ion-label>Dibuja tu firma*</ion-label>
       <ion-button *ngIf="touchEvent" color="cea" (click)="savePad()">
         Declarar firma
       </ion-button>

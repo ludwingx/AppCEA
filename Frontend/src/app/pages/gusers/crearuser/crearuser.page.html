@@ -5,39 +5,55 @@
 </ion-header>
 <ion-content>
     <ion-list class="boxregister">
-      <ion-item fill="outline">
-        <ion-label position="floating">Nombre completo</ion-label>
+      <ion-item lines="none">
+        <h2>Ingresa tus datos*</h2>
+      </ion-item>
+      <ion-item fill="solid">
+        <ion-label position="floating">Nombre completo*</ion-label>
         <ion-input placeholder="Ingrese su nombre completo" type="text" [(ngModel)]="users.name" ></ion-input>
+        <ion-note slot="helper">Ingrese su Nombre/s y Apellidos</ion-note>
+        <ion-note slot="error">Invalid email</ion-note>
       </ion-item>
-      <ion-item  fill="outline">
-        <ion-label  position="floating">Correo electronico</ion-label>
-        <ion-input placeholder="Ingrese su correo electronico" type="email" [(ngModel)]="users.email" name="email"></ion-input>
+      <ion-item  fill="solid">
+        <ion-label  position="floating">Correo electronico*</ion-label>
+        <ion-input placeholder="Ingrese su correo electronico" type="email" [(ngModel)]="users.email" ngModel email name="email"></ion-input>
+        <ion-note slot="helper">Ingrese un correo electronico valido</ion-note>
+        <ion-note slot="error">Correo electronico invalido</ion-note>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Contraseña</ion-label>
+        <ion-label position="floating">Contraseña*</ion-label>
         <ion-input placeholder="Ingrese su contraseña" [type]="showPassword ? 'text' : 'password'" [(ngModel)]="users.password" name="password" ></ion-input>
-        <ion-icon slot="end" name="eye"></ion-icon>
+        <ion-icon slot="end" class="passwordIcon" item-end [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Cargo</ion-label>
+        <ion-label position="floating">Cargo*</ion-label>
         <ion-select  [(ngModel)]="users.id_cargo">
           <ion-select-option *ngFor="let user of cargos" value="{{user.id_cargo}}">{{user.ncargo}}</ion-select-option>
         </ion-select>
       </ion-item>
       <br />
-      <ion-item>
-        <ion-label>Dibuja tu firma</ion-label>
-        <ion-button *ngIf="touchEvent" color="cea" (click)="savePad()">
-          Declarar firma
-        </ion-button>
-        <ion-button *ngIf="touchEvent" color="warning" (click)="clearPad()"> 
-          Borrar firma
-        </ion-button>
+      <ion-item lines="none">
+        <h3 >Dibuja tu firma*</h3>
+        <ion-note slot="helper" color="cea">Una vez que termines de dibujar tú firma, declarala con el botón "Declarar Firma"</ion-note>
       </ion-item>
-      <br>
-      <ion-item>
-        <canvas  class="ion-text-center" #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
-      </ion-item>
+      <ion-item-group>
+        <ion-item lines="none" class="ion-text-center">
+          <ion-col>
+            <ion-button  color="cea" (click)="savePad()">
+              Declarar firma
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button  color="warning" (click)="clearPad()"> 
+              Borrar firma
+            </ion-button>
+          </ion-col>
+        </ion-item>
+        <ion-item lines="none">
+          <canvas  class="ion-text-center" #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
+        </ion-item>
+      </ion-item-group>
+
       <ion-item *ngIf="users.firma">
         <ion-label>Firma declarada:</ion-label>
       </ion-item>

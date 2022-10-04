@@ -46,3 +46,9 @@ ion-content {
 .refresher-ios .refresher-pulling-icon, .refresher-ios .refresher-pulling-text, .refresher-ios .refresher-refreshing-icon, .refresher-ios .refresher-refreshing-text {
   color: var(--ion-text-color,#FFF);
 }
+.custom-loading {
+  --background: #e3edff;
+  --spinner-color: var(--ion-color-cea);;
+
+  color: var(--ion-color-cea);;
+}

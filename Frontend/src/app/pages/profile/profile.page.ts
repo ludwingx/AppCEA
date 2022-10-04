@@ -28,7 +28,6 @@ export class ProfilePage implements OnInit {
     }
     this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
     this.dataUser = data.result;
-    console.log(this.dataUser)
     })
   }
 

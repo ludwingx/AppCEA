@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ModalController, NavParams, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, NavParams, ToastController } from '@ionic/angular';
 import { ConexionService } from '../../../servicios/conexion/conexion.service';
 import { Cargos } from '../../../interfaces/cargo';
 import SignaturePad from 'signature_pad';
@@ -29,7 +29,8 @@ export class ActualizaruserPage implements OnInit {
   constructor(private modalCtrl: ModalController,
               private conexion: ConexionService,
               private toastCtrl: ToastController,
-              private navParam: NavParams) { }
+              private navParam: NavParams,
+              public loadingController: LoadingController) { }
 
   ngOnInit() {
     this.datos = this.navParam.get("users");
@@ -61,6 +62,7 @@ export class ActualizaruserPage implements OnInit {
   }
   
   UpdateUser(){
+    this.presentLoadingWithOptions();
     const body = {
       id_user: this.users.id_user,
       name: this.users.name,
@@ -73,10 +75,12 @@ export class ActualizaruserPage implements OnInit {
     }
     this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
       if (data.success) {
+        this.loadingController.dismiss();
         console.log(body)
         this.mensaje(data.msg)
         this.closeModal()
       } else {
+        this.loadingController.dismiss();
         this.mensaje(data.msg)
       }
     })
@@ -103,5 +107,16 @@ export class ActualizaruserPage implements OnInit {
   savePad() {
     const base64Data = this.signaturePad.toDataURL();
     this.users.firma = base64Data;
+  }
+  async presentLoadingWithOptions(){
+    const loading = await this.loadingController.create({
+      //spinner: null,
+      //duration: 5000,
+      message: 'Registrando Usuario...',
+      //translucent: true,
+      //cssClass: 'custom-class custom-loading'
+      cssClass: 'custom-loading',
+    });
+    return await loading.present();
   }
 }

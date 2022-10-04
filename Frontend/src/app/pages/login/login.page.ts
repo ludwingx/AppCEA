@@ -11,6 +11,8 @@ export class LoginPage implements OnInit {
   tipo: string = "password";
   email: string;
   password: string; 
+  showPassword = false;
+  passwordToggleIcon = 'eye';
   constructor(private toastCtrl: ToastController,
      private navCtrl: NavController, 
      private conexion: ConexionService,
@@ -54,14 +56,23 @@ export class LoginPage implements OnInit {
       }
     })
   }
-async presentLoadingWithOptions(){
-  const loading = await this.loadingController.create({
-    //spinner: null,
-    //duration: 5000,
-    message: 'Iniciando sesión...',
-    //translucent: true,
-    //cssClass: 'custom-class custom-loading'
-  });
-  return await loading.present();
-}
+  togglePassword():void{
+    this.showPassword = !this.showPassword;
+    if(this.passwordToggleIcon == 'eye'){
+      this.passwordToggleIcon = 'eye-off'
+    }else{
+      this.passwordToggleIcon = 'eye';
+    }
+  }
+  async presentLoadingWithOptions(){
+    const loading = await this.loadingController.create({
+      //spinner: null,
+      //duration: 5000,
+      message: 'Iniciando sesión...',
+      //translucent: true,
+      //cssClass: 'custom-class custom-loading'
+      cssClass: 'custom-loading'
+    });
+    return await loading.present();
+  }
 }
