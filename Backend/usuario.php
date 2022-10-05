@@ -73,8 +73,9 @@ if ($postjson['aksi'] == "login") {
     $password = $postjson['password'];
     $id_cargo = $postjson['id_cargo'];
     $firma = $postjson['firma'];
+    $foto = $postjson['foto'];
 
-    $res = $mysqli->query("UPDATE tblusers SET name='$name', email='$email',password='$password', id_cargo='$id_cargo', firma='$firma'
+    $res = $mysqli->query("UPDATE tblusers SET name='$name', email='$email',password='$password', id_cargo='$id_cargo', firma='$firma', foto= '$foto'
     WHERE id_user=$id_user");
 
     if ($res) {
@@ -95,7 +96,7 @@ if ($postjson['aksi'] == "login") {
     echo $result;
 } else if ($postjson['aksi'] == "profile-user") {
     $id_user = $postjson["id_user"];
-    $res = $mysqli->query("SELECT C.ncargo, U.name, U.email, U.id_user,U.id_cargo, U.firma, U.foto
+    $res = $mysqli->query("SELECT C.ncargo, U.name, U.email, U.id_user,U.id_cargo, U.password, U.firma, U.foto
     FROM tblusers as U INNER JOIN tblcargos as C ON U.id_cargo=C.id_cargo WHERE id_user='$id_user'");
 
     $check = mysqli_num_rows($res);
@@ -106,6 +107,7 @@ if ($postjson['aksi'] == "login") {
             'name' => $data["name"],
             'ncargo' => $data["ncargo"],
             'email' => $data["email"],
+            'password' => $data["password"],
             'id_cargo' => $data["id_cargo"],
             'firma' => $data["firma"],
             'foto' => $data["foto"]
@@ -145,6 +147,19 @@ if ($postjson['aksi'] == "login") {
         $result = json_encode(array("success" => TRUE, "msg" => "Usuario Habilitado"));
     } else {
         $result = json_encode(array("success" => false, 'msg' => 'Hubo un error al habilitar al usuario'));
+    }
+    echo $result;
+}else if ($postjson['aksi'] == "updateFoto") {
+
+    $foto = $postjson['foto'];
+
+    $res = $mysqli->query("UPDATE tblusers SET foto= '$foto'
+    WHERE id_user=$id_user");
+
+    if ($res) {
+        $result = json_encode(array("success" => TRUE, "msg" => "Usuario Actualizado"));
+    } else {
+        $result = json_encode(array("success" => false, 'msg' => 'Hubo un error al actualizar al usuario'));
     }
     echo $result;
 }

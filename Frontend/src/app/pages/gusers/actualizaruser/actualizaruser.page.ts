@@ -112,7 +112,7 @@ export class ActualizaruserPage implements OnInit {
     const loading = await this.loadingController.create({
       //spinner: null,
       //duration: 5000,
-      message: 'Registrando Usuario...',
+      message: 'Actualizando Usuario...',
       //translucent: true,
       //cssClass: 'custom-class custom-loading'
       cssClass: 'custom-loading',
