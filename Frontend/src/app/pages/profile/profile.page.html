@@ -1,13 +1,24 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="cea">
     <ion-buttons class="ion-no-text" slot="start">
-      <ion-back-button text="" color="cea" defaultHref="login"></ion-back-button>
+      <ion-back-button text=""  defaultHref="login"></ion-back-button>
     </ion-buttons>
-    <ion-title color="cea"> Mi perfil </ion-title>
+    <ion-title > Mi perfil </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <br>
+  <ion-item>
+    <div class="container">
+      <div class="outer"
+        [ngStyle]=dataUser.foto>
+          <div class="inner" (click)="selectImageOptions()">
+             <ion-icon name="camera" class="camera-icon"></ion-icon>
+          </div>
+       </div>
+    </div>
+  </ion-item>
   <ion-item>
     <ion-label> Nombre Completo:
       <h3>{{dataUser.name}}</h3>
@@ -23,12 +34,12 @@
       <h3>{{dataUser.ncargo}}</h3>
     </ion-label>
   </ion-item>
-  <br>
-  <br>
-  <ion-item>
-    <ion-label align="center">Firma:</ion-label>
-  </ion-item>
-  <ion-item class="firma">
-    <img [src]='dataUser.firma' alt="firma">
-  </ion-item>
+  <ion-item-group class="firmaGroup">
+    <ion-item>
+      <ion-label align="center">Firma:</ion-label>
+    </ion-item>
+    <ion-item class="firma">
+      <img class="firmaImg" [src]='dataUser.firma' alt="firma">
+    </ion-item>
+  </ion-item-group>
 </ion-content>

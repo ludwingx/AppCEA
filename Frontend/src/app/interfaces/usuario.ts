@@ -6,4 +6,5 @@ export interface User{
     password:string;
     id_cargo:string;
     firma:string;
+    foto:string;
   }

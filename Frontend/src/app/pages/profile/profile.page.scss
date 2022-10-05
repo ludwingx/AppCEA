@@ -1,4 +1,46 @@
-img{
+.imgImg{
     margin:0px auto;
     border: 2px solid rgb(187, 178, 178);
 }
+.firmaGroup{
+    margin-top: 180px;
+}
+.fotoImg{
+    height: 100px;
+    width: 100px;
+    margin:0px auto;
+    border: 2px solid rgb(187, 178, 178);
+}
+.container {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin: 0 auto;
+  }
+.camera-icon {
+    height: 30px;
+    width: 30px;
+    color: white;
+  }
+  .inner {
+    background-color: #075E54;
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .outer {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 150px !important; /* any size */
+    max-height: 150px !important; /* any size */
+    margin: auto;
+    border-radius: 100%;
+    position: relative;
+    background-size: 150px 150px;
+  }

@@ -29,7 +29,7 @@ if ($postjson['aksi'] == "login") {
     echo $result;
 } else if ($_GET['aksi'] == "list-users") {
 
-    $res = $mysqli->query("SELECT C.ncargo, U.name, U.email, U.id_user, U.password, U.id_cargo, U.firma 
+    $res = $mysqli->query("SELECT C.ncargo, U.name, U.email, U.id_user, U.password, U.id_cargo, U.firma, U.foto 
     FROM tblusers as U INNER JOIN tblcargos as C ON U.id_cargo=C.id_cargo WHERE U.estado='1'");
     $cont = 0;
     $check = mysqli_num_rows($res);
@@ -44,6 +44,7 @@ if ($postjson['aksi'] == "login") {
                 'password' => $data["password"],
                 'id_cargo' => $data["id_cargo"],
                 'firma' => $data["firma"],
+                'foto' => $data["foto"]
             );
             $cont++;
         };
@@ -94,7 +95,7 @@ if ($postjson['aksi'] == "login") {
     echo $result;
 } else if ($postjson['aksi'] == "profile-user") {
     $id_user = $postjson["id_user"];
-    $res = $mysqli->query("SELECT C.ncargo, U.name, U.email, U.id_user,U.id_cargo, U.firma
+    $res = $mysqli->query("SELECT C.ncargo, U.name, U.email, U.id_user,U.id_cargo, U.firma, U.foto
     FROM tblusers as U INNER JOIN tblcargos as C ON U.id_cargo=C.id_cargo WHERE id_user='$id_user'");
 
     $check = mysqli_num_rows($res);
@@ -106,7 +107,8 @@ if ($postjson['aksi'] == "login") {
             'ncargo' => $data["ncargo"],
             'email' => $data["email"],
             'id_cargo' => $data["id_cargo"],
-            'firma' => $data["firma"]
+            'firma' => $data["firma"],
+            'foto' => $data["foto"]
         );
         $result = json_encode(array('success' => TRUE, "result" => $datauser));
     } else {
@@ -115,7 +117,7 @@ if ($postjson['aksi'] == "login") {
     echo $result;
 } else if ($_GET['aksi'] == "listDis-users") {
 
-    $res = $mysqli->query("SELECT C.ncargo, U.name, U.email, U.id_user 
+    $res = $mysqli->query("SELECT C.ncargo, U.name, U.email, U.id_user, U.foto,
     FROM tblusers as U INNER JOIN tblcargos as C ON U.id_cargo=C.id_cargo WHERE U.estado='0'");
     $cont = 0;
     $check = mysqli_num_rows($res);
