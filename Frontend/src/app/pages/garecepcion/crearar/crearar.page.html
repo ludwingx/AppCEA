@@ -19,10 +19,12 @@
     <ion-item>
       <ion-label>Fecha y hora</ion-label>
       <ion-datetime-button slot="end" datetime="datetime"></ion-datetime-button>
+      <!-- <ion-input  type="date"></ion-input>
+      <ion-input  type="time"></ion-input> -->
     </ion-item>
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
-        <ion-datetime id="datetime" [showDefaultButtons]="true"></ion-datetime>
+        <ion-datetime  id="datetime" [showDefaultButtons]="true"></ion-datetime>
       </ng-template>
     </ion-modal>
     <ion-item>

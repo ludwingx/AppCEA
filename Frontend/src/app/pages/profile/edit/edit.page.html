@@ -15,7 +15,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
+  <br>
+  <ion-item lines="none">
     <div class="container">
       <div class="outer" [ngStyle]="{'background-image': 'url(' + dataUser.foto + ')'}">
         <div class="inner" (click)="selectImageOptions()">
@@ -24,6 +25,7 @@
        </div>
     </div>
   </ion-item>
+  <br>
   <ion-list class="boxregister">
     <ion-item>
       <ion-label position="floating">Nombre completo*</ion-label>

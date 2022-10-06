@@ -31,6 +31,7 @@
     <ion-item >
       <ion-label position="stacked">Cargo*</ion-label>
       <ion-select  placeholder="{{datos.ncargo}}" [(ngModel)]="users.id_cargo" >
+        .
         <ion-select-option *ngFor="let user of cargos"  value="{{user.id_cargo}}">{{user.ncargo}}</ion-select-option>
       </ion-select>
     </ion-item>

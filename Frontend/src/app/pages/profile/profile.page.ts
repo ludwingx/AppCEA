@@ -2,7 +2,7 @@ import { EditPage } from './edit/edit.page';
 import { Component, OnInit } from '@angular/core';
 import { ConexionService } from '../../servicios/conexion/conexion.service';
 import { Storage } from "@capacitor/storage";
-import { ToastController, ModalController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -18,17 +18,19 @@ export class ProfilePage implements OnInit {
   dataStorage:any
   dataUser:any = []
   constructor(private conexion: ConexionService,
-              private toastCtrl: ToastController,
-              private modalCtrl: ModalController) { }
+              private modalCtrl: ModalController,
+              public loadingController: LoadingController) { }
 
   ngOnInit() { 
+    this.presentLoadingWithOptions();
     // Camera.requestPermissions({permissions:['photos']})
     Storage.get({key: "session_user"}).then((data:any)=>{
-      this.dataStorage = JSON.parse(data.value)
-      this.perfil(this.dataStorage.id)
-      console.log(this.dataStorage)
+      
+      this.dataStorage = JSON.parse(data.value);
+      this.perfil(this.dataStorage.id);
+
     })
-    console.log(this.perfil);
+    
   }
   perfil(id:string){
     const body = {
@@ -37,6 +39,7 @@ export class ProfilePage implements OnInit {
     }
     this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
     this.dataUser = data.result;
+    this.loadingController.dismiss();
     })
   }
   editProfile(dataUser:any){
@@ -49,5 +52,15 @@ export class ProfilePage implements OnInit {
       return modal.onDidDismiss();
     })
   }
-
+  async presentLoadingWithOptions(){
+    const loading = await this.loadingController.create({
+      //spinner: null,
+      //duration: 5000,
+      message: 'Cargando datos...',
+      //translucent: true,
+      //cssClass: 'custom-class custom-loading'
+      cssClass: 'custom-loading',
+    });
+    return await loading.present();
+  }
 }

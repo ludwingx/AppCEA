@@ -25,9 +25,6 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-.transparent-modal .modal-wrapper {
-    --background: rgba(44, 39, 45, 0.7);
-}
 ion-content {
     width: calc(100% + 15px);
   }
@@ -51,4 +48,11 @@ ion-content {
   --spinner-color: var(--ion-color-cea);;
 
   color: var(--ion-color-cea);;
+}
+
+ion-datetime {
+  color: black;
+    --background: #dddddd;
+    --background-rgb: var(--ion-color-light-rgb);
+    --title-color: var(--ion-color-step-600, #666666);
 }
