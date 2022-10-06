@@ -119,7 +119,7 @@ if ($postjson['aksi'] == "login") {
     echo $result;
 } else if ($_GET['aksi'] == "listDis-users") {
 
-    $res = $mysqli->query("SELECT C.ncargo, U.name, U.email, U.id_user, U.foto,
+    $res = $mysqli->query("SELECT C.ncargo, U.name, U.email, U.id_user, U.password, U.id_cargo, U.firma, U.foto 
     FROM tblusers as U INNER JOIN tblcargos as C ON U.id_cargo=C.id_cargo WHERE U.estado='0'");
     $cont = 0;
     $check = mysqli_num_rows($res);
@@ -130,13 +130,17 @@ if ($postjson['aksi'] == "login") {
                 'id_user' => $data["id_user"],
                 'ncargo' => $data["ncargo"],
                 'name' => $data["name"],
-                'email' => $data["email"]
+                'email' => $data["email"],
+                'password' => $data["password"],
+                'id_cargo' => $data["id_cargo"],
+                'firma' => $data["firma"],
+                'foto' => $data["foto"]
             );
             $cont++;
         };
         $result = json_encode(array('success' => TRUE, "listDisUsers" => $datauser));
     } else {
-        $result = json_encode(array('success' => false, 'msg' => 'No existen usuarios deshabilitados'));
+        $result = json_encode(array('success' => false, 'msg' => 'No existen usuarios registrados'));
     }
     echo $result;
 }else if ($postjson['aksi'] == "reactivate-user") {
@@ -149,11 +153,14 @@ if ($postjson['aksi'] == "login") {
         $result = json_encode(array("success" => false, 'msg' => 'Hubo un error al habilitar al usuario'));
     }
     echo $result;
-}else if ($postjson['aksi'] == "updateFoto") {
-
+}else if ($postjson['aksi'] == "updatePhoto") {
+    $id_user = $postjson['id_user'];
+    $name = $postjson['name'];
+    $email = $postjson['email'];
+    $password = $postjson['password'];
     $foto = $postjson['foto'];
 
-    $res = $mysqli->query("UPDATE tblusers SET foto= '$foto'
+    $res = $mysqli->query("UPDATE tblusers SET name='$name', email='$email',password='$password', foto= '$foto'
     WHERE id_user=$id_user");
 
     if ($res) {

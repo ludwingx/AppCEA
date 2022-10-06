@@ -26,6 +26,7 @@ export class ProfilePage implements OnInit {
     Storage.get({key: "session_user"}).then((data:any)=>{
       this.dataStorage = JSON.parse(data.value)
       this.perfil(this.dataStorage.id)
+      console.log(this.dataStorage)
     })
     console.log(this.perfil);
   }

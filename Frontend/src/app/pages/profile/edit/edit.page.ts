@@ -55,7 +55,7 @@ export class EditPage implements OnInit {
       email: this.dataUser.email,
       password: this.dataUser.password,
       foto: this.dataUser.foto,
-      aksi: "update-user"
+      aksi: "updatePhoto"
     }
     this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{        console.log(body)
       if (data.success) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { User } from 'src/app/interfaces/usuario';
 import { ConexionService } from 'src/app/servicios/conexion/conexion.service';
 
@@ -12,7 +12,6 @@ export class ListdisuserPage implements OnInit {
   users: User[];
   constructor(private conexion: ConexionService,
     private alertCtrl: AlertController,
-    private modalCtrl : ModalController,
     private toastCtrl: ToastController) { }
 
   ngOnInit() {
