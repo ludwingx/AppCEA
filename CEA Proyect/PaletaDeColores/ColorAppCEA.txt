@@ -1,0 +1,10 @@
+**LIGHT mode**
+Fondo - HEX: #
+TXT - HEX: #ffffff
+C1 - HEX: #00733a
+C2 - HEX: #8dbf44
+**DARK mode**
+Fondo - HEX: #03060b
+TXT - HEX: #000000
+C1 - HEX: #00733a
+C2 - HEX: #8dbf44
