@@ -73,9 +73,8 @@ if ($postjson['aksi'] == "login") {
     $password = $postjson['password'];
     $id_cargo = $postjson['id_cargo'];
     $firma = $postjson['firma'];
-    $foto = $postjson['foto'];
 
-    $res = $mysqli->query("UPDATE tblusers SET name='$name', email='$email',password='$password', id_cargo='$id_cargo', firma='$firma', foto= '$foto'
+    $res = $mysqli->query("UPDATE tblusers SET name='$name', email='$email',password='$password', id_cargo='$id_cargo', firma='$firma'
     WHERE id_user=$id_user");
 
     if ($res) {
