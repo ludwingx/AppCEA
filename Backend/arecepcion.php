@@ -6,32 +6,32 @@
     $postjson = json_decode(file_get_contents("php://input"), TRUE);
 
     if($postjson['aksi'] == "register-ar"){
-        $numacta = $postjson['numacta'];
-        $fecha = $postjson['fecha'];
-        $hora = $postjson['hora'];
-        $id_tatencion = $postjson['id_tatencion'];
-        $id_dfmunicipio = $postjson['id_dfmunicipio'];
-        $dfbarrio = $postjson['dfbarrio'];
-        $dfcalleavenida = $postjson['dfcalleavenida'];
-        $dfnumcasa = $postjson['dfnumcasa'];
-        $id_dpmunicipio = $postjson['id_dpmunicipio'];
-        $dpbarrio = $postjson['dpbarrio'];
-        $dpcalleavenida = $postjson['dpcalleavenida'];
-        $dpempreinsti = $postjson['dpempreinsti'];
-        $dparea = $postjson['dparea'];
-        $namerecep = $postjson['namerecep'];
-        $firmarecep = $postjson['firmarecep'];
-        $cirecep = $postjson['cirecep'];
-        $nameperson = $postjson['nameperson'];
-        $firmaperson = $postjson['firmaperson'];
-        $telfperson = $postjson['telfperson'];
-        $ciperson = $postjson['ciperson'];
+        $num_acta_ar = $postjson['num_acta_ar'];
+        $fecha_ar = $postjson['fecha_ar'];
+        $hora_ar = $postjson['hora_ar'];
+        $id_tipo_atencion = $postjson['id_tipo_atencion'];
+        $id_ldfe_municipio  = $postjson['id_ldfe_municipio '];
+        $nom_ldfe_barrio_ar = $postjson['nom_ldfe_barrio_ar'];
+        $nom_ldfecalle_ar = $postjson['nom_ldfecalle_ar'];
+        $num_ldfe_casa_ar = $postjson['num_ldfe_casa_ar'];
+        $id_ldp_municipio  = $postjson['id_ldp_municipio '];
+        $nom_ldp_barrio_ar = $postjson['nom_ldp_barrio_ar'];
+        $nom_ldp_calle_ar = $postjson['nom_ldp_calle_ar'];
+        $nom_ldp_empresa_ar = $postjson['nom_ldp_empresa_ar'];
+        $nom_ldp_area_ar = $postjson['nom_ldp_area_ar'];
+        $nom_funcionario_ar = $postjson['nom_funcionario_ar'];
+        $firma_funcionario_ar = $postjson['firma_funcionario_ar'];
+        $ci_funcionario_ar = $postjson['ci_funcionario_ar'];
+        $nom_persona_ar = $postjson['nom_persona_ar'];
+        $firma_persona_ar = $postjson['firma_persona_ar'];
+        $telf_persona_ar = $postjson['telf_persona_ar'];
+        $ci_persona_ar = $postjson['ci_persona_ar'];
 
-        $res = $mysqli ->query("INSERT INTO tblrcpt SET numacta='$numacta', fecha='$fecha', hora = '$hora', id_tatencion = '$id_tatencion',
-        id_dfmunicipio = '$id_dfmunicipio', dfbarrio = '$dfbarrio', dfcalleavenida = '$dfcalleavenida', dfnumcasa = '$dfnumcasa', id_dpmunicipio = '$id_dpmunicipio',
-        dpbarrio = '$dpbarrio', dpcalleavenida = '$dpcalleavenida', dpempreinsti = '$dpempreinsti', dparea = '$dparea', namerecep = '$namerecep',
-        firmarecep = '$firmarecep',cirecep = '$cirecep', nameperson = '$nameperson', firmaperson = '$firmaperson', telfperson = '$telfperson',
-        ciperson = '$ciperson'");
+        $res = $mysqli ->query("INSERT INTO tblrcpt SET num_acta_ar='$num_acta_ar', fecha_ar='$fecha_ar', hora = '$hora', id_tipo_atencion = '$id_tipo_atencion',
+        id_ldfe_municipio  = '$id_ldfe_municipio ', nom_ldfe_barrio_ar = '$nom_ldfe_barrio_ar', nom_ldfecalle_ar = '$nom_ldfecalle_ar', num_ldfe_casa_ar = '$num_ldfe_casa_ar', id_ldp_municipio  = '$id_ldp_municipio ',
+        nom_ldp_barrio_ar = '$nom_ldp_barrio_ar', nom_ldp_calle_ar = '$nom_ldp_calle_ar', nom_ldp_empresa_ar = '$nom_ldp_empresa_ar', nom_ldp_area_ar = '$nom_ldp_area_ar', nom_funcionario_ar = '$nom_funcionario_ar',
+        firma_funcionario_ar = '$firma_funcionario_ar',ci_funcionario_ar = '$ci_funcionario_ar', nom_persona_ar = '$nom_persona_ar', firma_persona_ar = '$firma_persona_ar', telf_persona_ar = '$telf_persona_ar',
+        ci_persona_ar = '$ci_persona_ar'");
         if($res){
             $result = json_encode(array("success" => TRUE, "msg" => "Acta de recepción registrada con exito"));
         }else{
@@ -45,7 +45,7 @@
         if($check > 0){
             while($data = mysqli_fetch_assoc($res)) {
                 $datarcpt[$cont] = array(
-                    'id_rcpt' => $data["id_rcpt"]
+                    'id_acta_recepcion' => $data["id_acta_recepcion"]
                 );
                 $cont++;
             };
@@ -55,33 +55,33 @@
         }
         echo $result;
     } else if($postjson['aksi'] == "update-ar"){
-        $id_rcpt = $postjson['id_rcpt'];
-        $numacta = $postjson['numacta'];
-        $fecha = $postjson['fecha'];
-        $hora = $postjson['hora'];
-        $id_tatencion = $postjson['id_tatencion'];
-        $id_dfmunicipio = $postjson['id_dfmunicipio'];
-        $dfbarrio = $postjson['dfbarrio'];
-        $dfcalleavenida = $postjson['dfcalleavenida'];
-        $dfnumcasa = $postjson['dfnumcasa'];
-        $id_dpmunicipio = $postjson['id_dpmunicipio'];
-        $dpbarrio = $postjson['dpbarrio'];
-        $dpcalleavenida = $postjson['dpcalleavenida'];
-        $dpempreinsti = $postjson['dpempreinsti'];
-        $dparea = $postjson['dparea'];
-        $namerecep = $postjson['namerecep'];
-        $firmarecep = $postjson['firmarecep'];
-        $cirecep = $postjson['cirecep'];
-        $nameperson = $postjson['nameperson'];
-        $firmaperson = $postjson['firmaperson'];
-        $telfperson = $postjson['telfperson'];
-        $ciperson = $postjson['ciperson'];
+        $id_acta_recepcion = $postjson['id_acta_recepcion'];
+        $num_acta_ar = $postjson['num_acta_ar'];
+        $fecha_ar = $postjson['fecha_ar'];
+        $hora_ar = $postjson['hora_ar'];
+        $id_tipo_atencion = $postjson['id_tipo_atencion'];
+        $id_ldfe_municipio  = $postjson['id_ldfe_municipio '];
+        $nom_ldfe_barrio_ar = $postjson['nom_ldfe_barrio_ar'];
+        $nom_ldfecalle_ar = $postjson['nom_ldfecalle_ar'];
+        $num_ldfe_casa_ar = $postjson['num_ldfe_casa_ar'];
+        $id_ldp_municipio  = $postjson['id_ldp_municipio '];
+        $nom_ldp_barrio_ar = $postjson['nom_ldp_barrio_ar'];
+        $nom_ldp_calle_ar = $postjson['nom_ldp_calle_ar'];
+        $nom_ldp_empresa_ar = $postjson['nom_ldp_empresa_ar'];
+        $nom_ldp_area_ar = $postjson['nom_ldp_area_ar'];
+        $nom_funcionario_ar = $postjson['nom_funcionario_ar'];
+        $firma_funcionario_ar = $postjson['firma_funcionario_ar'];
+        $ci_funcionario_ar = $postjson['ci_funcionario_ar'];
+        $nom_persona_ar = $postjson['nom_persona_ar'];
+        $firma_persona_ar = $postjson['firma_persona_ar'];
+        $telf_persona_ar = $postjson['telf_persona_ar'];
+        $ci_persona_ar = $postjson['ci_persona_ar'];
 
-        $res = $mysqli ->query("UPDATE tblrcpt SET numacta='$numacta', fecha='$fecha', hora = '$hora', id_tatencion = '$id_tatencion',
-        id_dfmunicipio = '$id_dfmunicipio', dfbarrio = '$dfbarrio', dfcalleavenida = '$dfcalleavenida', dfnumcasa = '$dfnumcasa', id_dpmunicipio = '$id_dpmunicipio',
-        dpbarrio = '$dpbarrio', dpcalleavenida = '$dpcalleavenida', dpempreinsti = '$dpempreinsti', dparea = '$dparea', namerecep = '$namerecep',
-        firmarecep = '$firmarecep',cirecep = '$cirecep', nameperson = '$nameperson', firmaperson = '$firmaperson', telfperson = '$telfperson',
-        ciperson = '$ciperson' WHERE id_rcpt=$id_rcpt");
+        $res = $mysqli ->query("UPDATE tblrcpt SET num_acta_ar='$num_acta_ar', fecha_ar='$fecha_ar', hora_ar = '$hora_ar', id_tipo_atencion = '$id_tipo_atencion',
+        id_ldfe_municipio  = '$id_ldfe_municipio ', nom_ldfe_barrio_ar = '$nom_ldfe_barrio_ar', nom_ldfecalle_ar = '$nom_ldfecalle_ar', num_ldfe_casa_ar = '$num_ldfe_casa_ar', id_ldp_municipio  = '$id_ldp_municipio ',
+        nom_ldp_barrio_ar = '$nom_ldp_barrio_ar', nom_ldp_calle_ar = '$nom_ldp_calle_ar', nom_ldp_empresa_ar = '$nom_ldp_empresa_ar', nom_ldp_area_ar = '$nom_ldp_area_ar', nom_funcionario_ar = '$nom_funcionario_ar',
+        firma_funcionario_ar = '$firma_funcionario_ar',ci_funcionario_ar = '$ci_funcionario_ar', nom_persona_ar = '$nom_persona_ar', firma_persona_ar = '$firma_persona_ar', telf_persona_ar = '$telf_persona_ar',
+        ci_persona_ar = '$ci_persona_ar' WHERE id_acta_recepcion=$id_acta_recepcion");
         if($res){
             $result = json_encode(array("success" => TRUE, "msg" => "Acta de recepción actualizada con exito"));
         }else{
@@ -90,8 +90,8 @@
         echo $result;
 
     }else if($postjson['aksi'] == "delete-ar"){
-        $id_rcpt = $postjson["id_rcpt"];
-        $res = $mysqli -> query("UPDATE tblrcpt SET estado = '0' WHERE id_rcpt = $id_rcpt");
+        $id_acta_recepcion = $postjson["id_acta_recepcion"];
+        $res = $mysqli -> query("UPDATE tblrcpt SET estado = '0' WHERE id_acta_recepcion = $id_acta_recepcion");
         if ($res) {
             $result = json_encode(array("success" => TRUE, "msg" => "Acta de recepción eliminada"));
         } else {
