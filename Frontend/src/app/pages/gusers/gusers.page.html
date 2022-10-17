@@ -1,12 +1,9 @@
 <ion-header>
-  <ion-toolbar class="ion-text-center" color="cea">
-    <ion-buttons class="ion-no-text" mode="ios" slot="start">
-      <ion-back-button
-        text=""
-        defaultHref="login"
-      ></ion-back-button>
+  <ion-toolbar color="cea">
+    <ion-buttons class="ion-no-text" slot="start">
+      <ion-back-button text="" defaultHref="login"></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-center"> Usuarios</ion-title>
+    <ion-title> Usuarios</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -33,12 +30,12 @@
       <ion-item-sliding >
         <ion-item>
           <ion-avatar slot="start">
-            <div class="avatar">{{user.name.substring(0,1).toUpperCase()}}</div>
+            <div class="avatar">{{user.nombre_u.substring(0,1).toUpperCase()}}</div>
           </ion-avatar>
           <ion-label>
-            <h3 class="title">{{user.name}}</h3>
+            <h3 class="title">{{user.nombre_u}}</h3>
             <p class="subtext">
-              {{ 'Cargo: ' + user.ncargo + ' | ' + user.email}}
+              {{ 'Cargo: ' + user.nom_cargo + ' | ' + user.email_u}}
             </p>
           </ion-label>
         </ion-item>
@@ -46,7 +43,7 @@
         <ion-item-option color="success" (click)="updateUser(user)">
           <ion-icon name="pencil-sharp"></ion-icon>
         </ion-item-option>
-        <ion-item-option color="danger" (click)="removeUser(user.id_user, user.name)">
+        <ion-item-option color="danger" (click)="removeUser(user.id_usuario, user.nombre_u)">
           <ion-icon name="trash-sharp"></ion-icon>
         </ion-item-option>
       </ion-item-options>

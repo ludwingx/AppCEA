@@ -1,9 +1,17 @@
 .firmaImg{
     margin:0px auto;
     border: 2px solid rgba(0, 151, 58, 0.233);
+    margin:0px auto;
 }
 .firmaGroup{
-    margin-top: 20%;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  position: fixed;
+  bottom: 0;
+  width:500px;
+  height:200px;
+  margin-bottom: 50px;
 }
 
 .fotoImg{

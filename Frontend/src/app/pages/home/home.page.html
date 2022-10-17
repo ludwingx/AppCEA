@@ -1,25 +1,16 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-item class="ion-no-padding">
-      <ion-fab-button mode="md" size="small" [routerLink]="['/profile']">
+  <ion-toolbar color="cea">
+      <ion-fab-button slot="start" mode="md" size="small" [routerLink]="['/profile']">
         <ion-avatar>
-          <img src="../../../assets/iconhome/iconuser.png" />
+          <ion-img [src]="dataUser.foto_u"></ion-img>
+          <!-- <img src="../../../assets/iconhome/iconuser.png" /> -->
         </ion-avatar>
       </ion-fab-button>
-
-      <ion-toggle
-        mode="ios"
-        class="icon-custom"
-        checked
-        (ionChange)="darkTheme()"
-      >
-      </ion-toggle>
-      <ion-fab-button size="small" (click)="cerrarSession()">
+      <ion-fab-button slot="end" size="small" (click)="cerrarSession()">
         <ion-avatar>
           <img src="../../../assets/iconhome/iconlogout.png" />
         </ion-avatar>
       </ion-fab-button>
-    </ion-item>
   </ion-toolbar>
 </ion-header>
 <ion-content>

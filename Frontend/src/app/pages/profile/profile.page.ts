@@ -12,7 +12,7 @@ import { ModalController, LoadingController } from '@ionic/angular';
 export class ProfilePage implements OnInit {
   users: any=[
     {
-      foto: ""
+      foto_u: ""
     }
   ];
   dataStorage:any
@@ -32,9 +32,9 @@ export class ProfilePage implements OnInit {
     })
     
   }
-  perfil(id:string){
+  perfil(id_usuario:string){
     const body = {
-      id_user: id,
+      id_usuario: id_usuario,
       aksi: "profile-user"
     }
     this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{

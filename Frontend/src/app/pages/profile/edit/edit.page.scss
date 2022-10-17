@@ -29,7 +29,9 @@
     margin: auto;
     border-radius: 100%;
     position: relative;
-    background-size: 150px 150px;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
   }
   .passwordIcon{
     font-size:1,5rem !important;

@@ -1,4 +1,4 @@
 export interface Municipios{
     id_municipio: string;
-    nmunicipio: string;
+    nom_mun: string;
 }

@@ -10,10 +10,10 @@ import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor
 export class EditPage implements OnInit {
   dataUser:any = [
     {
-      name: "",
-      email: "",
-      password:"",
-      foto:""
+      nombre_u: "",
+      email_u: "",
+      password_u:"",
+      foto_u:""
     }
   ]
   datos:any
@@ -50,11 +50,11 @@ export class EditPage implements OnInit {
   UpdateUser(){
     this.presentLoadingWithOptions();
     const body = {
-      id_user: this.dataUser.id_user,
-      name: this.dataUser.name,
-      email: this.dataUser.email,
-      password: this.dataUser.password,
-      foto: this.dataUser.foto,
+      id_usuario: this.dataUser.id_usuario,
+      nombre_u: this.dataUser.nombre_u,
+      email_u: this.dataUser.email_u,
+      password_u: this.dataUser.password_u,
+      foto_u: this.dataUser.foto_u,
       aksi: "updatePhoto"
     }
     this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{        console.log(body)
@@ -86,7 +86,7 @@ export class EditPage implements OnInit {
       resultType:CameraResultType.DataUrl
     }
     Camera.getPhoto(options).then((result)=>{
-      this.dataUser.foto = result.dataUrl;
+      this.dataUser.foto_u = result.dataUrl;
 
     },(err)=>{
       alert(err);

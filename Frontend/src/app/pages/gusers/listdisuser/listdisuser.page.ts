@@ -29,15 +29,15 @@ export class ListdisuserPage implements OnInit {
       this.users = data.listDisUsers
     })
   }
-  enableUser(id_user:string, name:string){
+  enableUser(id_usuario:string, nombre_u:string){
     this.alertCtrl.create({
       header: 'Habilitar',
-      message: '¿Estás seguro de que quieres habilitar la cuenta de ' + name + '?',
+      message: '¿Estás seguro de que quieres habilitar la cuenta de ' + nombre_u + '?',
       buttons: [{
         text: 'Si',
         handler: () => {
           const body = {
-            id_user: id_user,
+            id_usuario: id_usuario,
             aksi: "reactivate-user"
             
           }

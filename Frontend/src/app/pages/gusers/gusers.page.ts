@@ -62,15 +62,15 @@ export class GusersPage implements OnInit {
       return modal.onDidDismiss();
     })
   }
-  removeUser(id_user:string, name:string){
+  removeUser(id_usuario:string, nombre_u:string){
     this.alertCtrl.create({
       header: 'Deshabilitar',
-      message: '¿Estás seguro de que quieres deshabilitar la cuenta de ' + name + '?',
+      message: '¿Estás seguro de que quieres deshabilitar la cuenta de ' + nombre_u + '?',
       buttons: [{
         text: 'Si',
         handler: () => {
           const body = {
-            id_user: id_user,
+            id_usuario: id_usuario,
             aksi: "delete-user"
           }
           this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{

@@ -13,26 +13,26 @@
   <ion-list class="boxregister">
     <ion-item>
       <ion-label position="floating">Nombre completo*</ion-label>
-      <ion-input type="text" [(ngModel)]="users.name" ></ion-input>
+      <ion-input type="text" [(ngModel)]="users.nombre_u" ></ion-input>
     </ion-item>
 
     <br>
     <ion-item>
       <ion-label position="floating">Correo electronico*</ion-label>
-      <ion-input type="email" [(ngModel)]="users.email" name="email"></ion-input>
+      <ion-input type="email" [(ngModel)]="users.email_u" name="email"></ion-input>
     </ion-item>
     <br>
     <ion-item>
       <ion-label position="floating">Contraseña*</ion-label>
-      <ion-input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="users.password" name="password" ></ion-input>
+      <ion-input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="users.password_u" name="password" ></ion-input>
       <ion-icon slot="end" class="passwordIcon" item-end [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
     </ion-item>
     <br>
     <ion-item >
       <ion-label position="stacked">Cargo*</ion-label>
-      <ion-select  placeholder="{{datos.ncargo}}" [(ngModel)]="users.id_cargo" >
+      <ion-select  placeholder="{{datos.nom_cargo}}" [(ngModel)]="users.id_cargo" >
         .
-        <ion-select-option *ngFor="let user of cargos"  value="{{user.id_cargo}}">{{user.ncargo}}</ion-select-option>
+        <ion-select-option *ngFor="let user of cargos"  value="{{user.id_cargo}}">{{user.nom_cargo}}</ion-select-option>
       </ion-select>
     </ion-item>
     <br>
@@ -49,11 +49,11 @@
     <ion-item>
       <canvas  class="ion-text-center" #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
     </ion-item>
-    <ion-item *ngIf="users.firma">
+    <ion-item *ngIf="users.firma_u">
       <ion-label>Firma declarada actualmente:</ion-label>
     </ion-item>
-    <ion-item *ngIf="users.firma">
-      <img src='{{ users.firma }}' alt="No existe ninguna firma registrada" />
+    <ion-item *ngIf="users.firma_u">
+      <img src='{{ users.firma_u }}' alt="No existe ninguna firma registrada" />
     </ion-item>
     <ion-item>
       <ion-note *ngIf="users.firma" >La firma que se muestra, será la que se registrará junto a los datos del usuario</ion-note>

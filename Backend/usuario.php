@@ -7,15 +7,15 @@ $postjson = json_decode(file_get_contents("php://input"), TRUE);
 
 if ($postjson['aksi'] == "login") {
     $email_u = $postjson["email_u"];
-    $contrasena = $postjson["password_u"];
+    $password_u = $postjson["password_u"];
     $res = $mysqli->query("SELECT id_usuario, id_cargo FROM usuarios 
-    WHERE email_u='$email_u' AND password_u='$contrasena' AND estado_u='1'");
+    WHERE email_u='$email_u' AND password_u='$password_u' AND estado_u='1'");
     $check = mysqli_num_rows($res);
 
     if ($check > 0) {
         $data = mysqli_fetch_array($res);
         $datauser = array(
-            'id' => $data["id_usuario"],
+            'id_usuario' => $data["id_usuario"],
             'id_cargo' => $data["id_cargo"]
         );
         if ($res) {

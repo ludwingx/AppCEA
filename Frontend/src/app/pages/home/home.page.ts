@@ -1,18 +1,27 @@
+import { ConexionService } from 'src/app/servicios/conexion/conexion.service';
 import { Component, OnInit } from '@angular/core';
 import { Storage } from "@capacitor/storage";
 import { ToastController, NavController } from '@ionic/angular';
-
+import { User } from 'src/app/interfaces/usuario';
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  
+  dataStorage:any
+  dataUser:any = []
   constructor(private toastCtrl: ToastController,
+              private conexion: ConexionService,
               private navCtrl: NavController) { }
 
   ngOnInit() {
+    Storage.get({key: "session_user"}).then((data:any)=>{
+      
+      this.dataStorage = JSON.parse(data.value);
+      this.perfil(this.dataStorage.id);
+
+    })
   }
 
   async mensaje (m: string){
@@ -31,5 +40,13 @@ export class HomePage implements OnInit {
     this.navCtrl.navigateRoot(['/login'])
 
   }
-  
+  perfil(id_usuario:string){
+    const body = {
+      id_usuario: id_usuario,
+      aksi: "profile-user"
+    }
+    this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
+    this.dataUser = data.result;
+    })
+  }
 }

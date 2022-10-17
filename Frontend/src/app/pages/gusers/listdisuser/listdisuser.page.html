@@ -14,15 +14,15 @@
   <ion-list>
     <ion-item *ngFor="let user of users">
       <ion-avatar slot="start">
-        <div class="avatar">{{user.name.substring(0,1).toUpperCase()}}</div>
+        <div class="avatar">{{user.nombre_u.substring(0,1).toUpperCase()}}</div>
       </ion-avatar>
       <ion-label>
-        <h3 class="title">{{user.name}}</h3>
+        <h3 class="title">{{user.nombre_u}}</h3>
         <p class="subtext">
-          {{ 'Cargo: ' + user.ncargo + ' | ' + user.email}}
+          {{ 'Cargo: ' + user.nom_cargo + ' | ' + user.email_u}}
         </p>
       </ion-label>
-      <ion-button class="btn-enable" (click)="enableUser(user.id_user,user.name)" color="warning">
+      <ion-button class="btn-enable" (click)="enableUser(user.id_usuario,user.nombre_u)" color="warning">
         <ion-icon class="icon" size="large"  name="refresh-circle-outline"></ion-icon>
       </ion-button>
     </ion-item>
