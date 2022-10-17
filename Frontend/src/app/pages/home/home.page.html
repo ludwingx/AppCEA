@@ -1,103 +1,121 @@
-<ion-header>
-  <ion-toolbar color="cea">
-      <ion-fab-button slot="start" mode="md" size="small" [routerLink]="['/profile']">
+<ion-app>
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar color="cea">
+        <ion-title>Menú</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">This is the menu content.</ion-content>
+  </ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button color="cea"></ion-menu-button>
+      </ion-buttons>
+        <ion-fab-button slot="end" mode="md" size="small" [routerLink]="['/profile']">
+          <ion-avatar>
+            <ion-img *ngIf="photoCharge else noPhoto" [src]="dataUser.foto_u"></ion-img>
+            <ng-template #noPhoto>
+              <ion-img src="../../../assets/iconhome/iconuser.png"></ion-img>
+            </ng-template>
+          </ion-avatar>
+        </ion-fab-button>
+        <!-- <ion-fab-button slot="end" size="small" (click)="cerrarSession()">
+          <ion-avatar>
+            <img src="../../../assets/iconhome/iconlogout.png" />
+          </ion-avatar>
+        </ion-fab-button> -->
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list lines="full">
+      <ion-item mode="ios" class="item-gusers" [routerLink]="['/gusers']">
         <ion-avatar>
-          <ion-img [src]="dataUser.foto_u"></ion-img>
-          <!-- <img src="../../../assets/iconhome/iconuser.png" /> -->
+          <img src="../../../assets/iconhome/icongusers.png" />
         </ion-avatar>
-      </ion-fab-button>
-      <ion-fab-button slot="end" size="small" (click)="cerrarSession()">
+        <ion-label class="text">Usuarios</ion-label>
+        <ion-thumbnail>
+          <ion-icon
+            class="ion-no-opacity"
+            slot="start"
+            name="caret-forward-outline"
+          ></ion-icon>
+        </ion-thumbnail>
+      </ion-item>
+      <br />
+      <ion-item mode="ios" class="item-gusers" [routerLink]="['/garecepcion']">
         <ion-avatar>
-          <img src="../../../assets/iconhome/iconlogout.png" />
+          <img src="../../../assets/iconhome/icongar.png" />
         </ion-avatar>
-      </ion-fab-button>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
-  <ion-list lines="full">
-    <ion-item mode="ios" class="item-gusers" [routerLink]="['/gusers']">
-      <ion-avatar>
-        <img src="../../../assets/iconhome/icongusers.png" />
-      </ion-avatar>
-      <ion-label class="text">Usuarios</ion-label>
-      <ion-thumbnail>
-        <ion-icon
-          class="ion-no-opacity"
-          slot="start"
-          name="caret-forward-outline"
-        ></ion-icon>
-      </ion-thumbnail>
-    </ion-item>
-    <br />
-    <ion-item mode="ios" class="item-gusers" [routerLink]="['/garecepcion']">
-      <ion-avatar>
-        <img src="../../../assets/iconhome/icongar.png" />
-      </ion-avatar>
-      <ion-label class="text">Actas de Recepciones</ion-label>
-      <ion-thumbnail>
-        <ion-icon
-          class="ion-no-opacity"
-          slot="start"
-          name="caret-forward-outline"
-        ></ion-icon>
-      </ion-thumbnail>
-    </ion-item>
-    <br />
-    <ion-item mode="ios" class="item-gusers" [routerLink]="['/ghclinica']">
-      <ion-avatar>
-        <img src="../../../assets/iconhome/iconghc.png" />
-      </ion-avatar>
-      <ion-label class="text">Historias Clinicas</ion-label>
-      <ion-thumbnail>
-        <ion-icon
-          class="ion-no-opacity"
-          slot="start"
-          name="caret-forward-outline"
-        ></ion-icon>
-      </ion-thumbnail>
-    </ion-item>
-    <br />
-    <!-- <ion-item mode="ios" class="item-gusers" [routerLink]="['/gftranslocacion']">
-      <ion-avatar>
-        <img src="../../../assets/iconhome/icongftranslocacion.png" />
-      </ion-avatar>
-      <ion-label class="text">Fichas de Translocaciones</ion-label>
-      <ion-thumbnail>
-        <ion-icon
-          class="ion-no-opacity"
-          slot="start"
-          name="caret-forward-outline"
-        ></ion-icon>
-      </ion-thumbnail>
-    </ion-item>
-    <br />
-    <ion-item mode="ios" class="item-gusers" [routerLink]="['/gaderivacion']">
-      <ion-avatar>
-        <img src="../../../assets/iconhome/icongaderivacion.png" />
-      </ion-avatar>
-      <ion-label class="text">Actas de Derivaciones</ion-label>
-      <ion-thumbnail>
-        <ion-icon
-          class="ion-no-opacity"
-          slot="start"
-          name="caret-forward-outline"
-        ></ion-icon>
-      </ion-thumbnail>
-    </ion-item>
-    <br />
-    <ion-item mode="ios" class="item-gusers" [routerLink]="['/gfdeceso']">
-      <ion-avatar>
-        <img src="../../../assets/iconhome/icongfdeceso.png" />
-      </ion-avatar>
-      <ion-label class="text">Fichas de Decesos</ion-label>
-      <ion-thumbnail>
-        <ion-icon
-          class="ion-no-opacity"
-          slot="start"
-          name="caret-forward-outline"
-        ></ion-icon>
-      </ion-thumbnail>
-    </ion-item>
-    <br /> -->
-  </ion-list>
-</ion-content>
+        <ion-label class="text">Actas de Recepciones</ion-label>
+        <ion-thumbnail>
+          <ion-icon
+            class="ion-no-opacity"
+            slot="start"
+            name="caret-forward-outline"
+          ></ion-icon>
+        </ion-thumbnail>
+      </ion-item>
+      <br />
+      <ion-item mode="ios" class="item-gusers" [routerLink]="['/ghclinica']">
+        <ion-avatar>
+          <img src="../../../assets/iconhome/iconghc.png" />
+        </ion-avatar>
+        <ion-label class="text">Historias Clinicas</ion-label>
+        <ion-thumbnail>
+          <ion-icon
+            class="ion-no-opacity"
+            slot="start"
+            name="caret-forward-outline"
+          ></ion-icon>
+        </ion-thumbnail>
+      </ion-item>
+      <br />
+      <!-- <ion-item mode="ios" class="item-gusers" [routerLink]="['/gftranslocacion']">
+        <ion-avatar>
+          <img src="../../../assets/iconhome/icongftranslocacion.png" />
+        </ion-avatar>
+        <ion-label class="text">Fichas de Translocaciones</ion-label>
+        <ion-thumbnail>
+          <ion-icon
+            class="ion-no-opacity"
+            slot="start"
+            name="caret-forward-outline"
+          ></ion-icon>
+        </ion-thumbnail>
+      </ion-item>
+      <br />
+      <ion-item mode="ios" class="item-gusers" [routerLink]="['/gaderivacion']">
+        <ion-avatar>
+          <img src="../../../assets/iconhome/icongaderivacion.png" />
+        </ion-avatar>
+        <ion-label class="text">Actas de Derivaciones</ion-label>
+        <ion-thumbnail>
+          <ion-icon
+            class="ion-no-opacity"
+            slot="start"
+            name="caret-forward-outline"
+          ></ion-icon>
+        </ion-thumbnail>
+      </ion-item>
+      <br />
+      <ion-item mode="ios" class="item-gusers" [routerLink]="['/gfdeceso']">
+        <ion-avatar>
+          <img src="../../../assets/iconhome/icongfdeceso.png" />
+        </ion-avatar>
+        <ion-label class="text">Fichas de Decesos</ion-label>
+        <ion-thumbnail>
+          <ion-icon
+            class="ion-no-opacity"
+            slot="start"
+            name="caret-forward-outline"
+          ></ion-icon>
+        </ion-thumbnail>
+      </ion-item>
+      <br /> -->
+    </ion-list>
+  </ion-content>
+</div>
+</ion-app>

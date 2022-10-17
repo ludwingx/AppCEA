@@ -15,7 +15,7 @@
 
       <ion-item>
         <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password" name="password"></ion-input>
+        <ion-input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password" name="password"></ion-input>
         <ion-icon slot="end" class="passwordIcon" item-end [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
       </ion-item>
 

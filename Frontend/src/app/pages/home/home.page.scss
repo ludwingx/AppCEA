@@ -76,3 +76,13 @@ ion-avatar{
   width: 45px !important;
   height: 45px !important;
 }
+
+ion-menu::part(backdrop) {
+  background-color:  rgba(0, 94, 16, 0.5);
+}
+
+ion-menu::part(container) {
+  border-radius: 0 20px 20px 0;
+
+  box-shadow: 4px 0px 16px rgba(0, 94, 16, 0.315);
+}

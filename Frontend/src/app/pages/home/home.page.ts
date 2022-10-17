@@ -2,7 +2,7 @@ import { ConexionService } from 'src/app/servicios/conexion/conexion.service';
 import { Component, OnInit } from '@angular/core';
 import { Storage } from "@capacitor/storage";
 import { ToastController, NavController } from '@ionic/angular';
-import { User } from 'src/app/interfaces/usuario';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -11,11 +11,14 @@ import { User } from 'src/app/interfaces/usuario';
 export class HomePage implements OnInit {
   dataStorage:any
   dataUser:any = []
+  photoCharge=false;
+
   constructor(private toastCtrl: ToastController,
               private conexion: ConexionService,
               private navCtrl: NavController) { }
 
   ngOnInit() {
+
     Storage.get({key: "session_user"}).then((data:any)=>{
       
       this.dataStorage = JSON.parse(data.value);
@@ -47,6 +50,14 @@ export class HomePage implements OnInit {
     }
     this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
     this.dataUser = data.result;
+    this.photoUser();
     })
+  }
+  async photoUser(){
+    if(this.photoCharge == true){
+      this.photoCharge = false;
+    }else{
+      this.photoCharge = true;
+    }
   }
 }
