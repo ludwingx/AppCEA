@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="color-cea-fondo">
     <ion-title>Acta de Recepción</ion-title>
-    <ion-buttons class="ion-no-text" slot="start">
+    <ion-buttons mode="md" class="ion-no-text" slot="start">
       <ion-back-button text="" defaultHref=""></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
@@ -10,24 +10,32 @@
   <ion-list class="listForm">
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Numero de Acta*</b></ion-label>
-      <ion-input type="text" placeholder="Ingresa el numero del acta"></ion-input>
+      <ion-input type="text" [(ngModel)]="arecepcion.num_acta_ar" placeholder="Ingresa el numero del acta"></ion-input>
     </ion-item>
     <br>
     <ion-item>
-      <ion-label color="cea"><b>Fecha y hora:</b></ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-datetime-button slot="start" datetime="datetime">Fecha</ion-datetime-button>
+      <ion-label color="cea"><b>Fecha:</b></ion-label>
+      <ion-datetime-button  datetime="datetime">Fecha</ion-datetime-button>
     </ion-item>
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
-        <ion-datetime color="cea" id="datetime" [showDefaultButtons]="true"></ion-datetime>
+        <ion-datetime presentation="date"   color="cea" id="datetime" [showDefaultButtons]="true"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+    
+    <ion-item>
+      <ion-label color="cea"><b>Hora:</b></ion-label>
+      <ion-datetime-button datetime="time"></ion-datetime-button>
+    </ion-item>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime presentation="time"   color="cea" id="time" [showDefaultButtons]="true"></ion-datetime>
       </ng-template>
     </ion-modal>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Tipo de atención*</b></ion-label>
-      <ion-select>
-          <ion-select-option *ngFor="let tipo of tatencion">{{tipo.nom_tipo_atencion}}</ion-select-option>
+      <ion-select [(ngModel)]="arecepcion.id_tipo_atencion">
+          <ion-select-option *ngFor="let tipo of tatencion" value="{{arecepcion.id_tipo_atencion}}">{{tipo.nom_tipo_atencion}}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>

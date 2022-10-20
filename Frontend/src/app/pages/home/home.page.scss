@@ -104,14 +104,17 @@ ion-menu::part(container) {
   margin-right: 14px;
 }
 ion-card{
-  height: 23vh;
-  width: 18vh;
+  height: 21vh;
+  width: 16vh;
   box-shadow: rgba(1, 39, 0, 0.49) 0px 3px 1px -2px, rgba(0, 0, 0, 0.4) 0px 2px 2px 0px, rgba(0, 0, 0, 0.531) 0px 1px 5px 0px;
 }
 ion-avatar{
   display: flex;
   justify-content: center;
 }
+ion-card-title{
+  font-size: 1.3em;
+}
 .titleAr{
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
