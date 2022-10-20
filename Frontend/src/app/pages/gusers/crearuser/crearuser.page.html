@@ -1,35 +1,49 @@
 <ion-header>
-  <ion-toolbar class="color-cea-fondo">
-    <ion-title class="ion-text-center">Registrar Usuario</ion-title>
+  <ion-toolbar color="cea">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/gusers" ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ingresa tus datos personales</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-list class="boxregister">
-      <ion-item lines="none">
-        <h2>Ingresa tus datos*</h2>
-      </ion-item>
-      <ion-item fill="solid">
-        <ion-label position="floating">Nombre completo*</ion-label>
-        <ion-input placeholder="Ingrese su nombre completo" type="text" [(ngModel)]="users.name" ></ion-input>
+    <ion-list class="listForm">
+      <ion-item class="itemForm" fill="outline">
+        <ion-label position="floating" color="cea">Nombre completo*</ion-label>
+        <ion-input type="text" placeholder="Ingrese su Nombre/s y Apellidos" [(ngModel)]="users.nombre_u" ></ion-input>
         <ion-note slot="helper">Ingrese su Nombre/s y Apellidos</ion-note>
         <ion-note slot="error">Invalid email</ion-note>
       </ion-item>
-      <ion-item  fill="solid">
+      <br>
+      <ion-item class="itemForm" fill="outline">
         <ion-label  position="floating">Correo electronico*</ion-label>
-        <ion-input placeholder="Ingrese su correo electronico" type="email" [(ngModel)]="users.email" ngModel email name="email"></ion-input>
-        <ion-note slot="helper">Ingrese un correo electronico valido</ion-note>
+        <ion-input type="email" [(ngModel)]="users.email_u" ngModel email name="email"></ion-input>
+        <ion-note slot="helper">Ingrese su correo electronico</ion-note>
         <ion-note slot="error">Correo electronico invalido</ion-note>
       </ion-item>
-      <ion-item>
-        <ion-label position="floating">Contraseña*</ion-label>
-        <ion-input placeholder="Ingrese su contraseña" [type]="showPassword ? 'text' : 'password'" [(ngModel)]="users.password" name="password" ></ion-input>
-        <ion-icon slot="end" class="passwordIcon" item-end [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+      <br>
+      <ion-item class="itemForm" fill="outline">
+        <ion-label  position="floating">Celula de Identidad*</ion-label>
+        <ion-input type="number" [(ngModel)]="users.ci_u" ngModel number name="ci"></ion-input>
+        <ion-note slot="helper">Ingrese su celula de identidad</ion-note>
+        <ion-note slot="error">Celula de identidad invalida</ion-note>
       </ion-item>
-      <ion-item>
+      <br>
+      <ion-item class="itemForm" fill="outline">
+        <ion-label position="floating">Contraseña*</ion-label>
+        <ion-input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="users.password_u" name="password" ></ion-input>
+        <ion-icon slot="end" class="passwordIcon" item-end [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+        <ion-note slot="helper">Ingrese su contraseña</ion-note>
+        <ion-note slot="error">Contraseña invalida</ion-note>
+      </ion-item>
+      <br>
+      <ion-item class="itemForm" fill="outline">
         <ion-label position="floating">Cargo*</ion-label>
         <ion-select  [(ngModel)]="users.id_cargo">
-          <ion-select-option *ngFor="let user of cargos" value="{{user.id_cargo}}">{{user.ncargo}}</ion-select-option>
-        </ion-select> 
+          <ion-select-option *ngFor="let user of cargos" value="{{user.id_cargo}}">{{user.nom_cargo}}</ion-select-option>
+        </ion-select>
+        <ion-note slot="helper">Seleccione su cargo</ion-note>
+        <ion-note slot="error">Cargo no seleccionado</ion-note>
       </ion-item>
       <br />
       <ion-item lines="none">
@@ -54,22 +68,21 @@
         </ion-item>
       </ion-item-group>
 
-      <ion-item *ngIf="users.firma">
+      <ion-item *ngIf="users.firma_u">
         <ion-label>Firma declarada:</ion-label>
       </ion-item>
-      <ion-item *ngIf="users.firma">
-        <img src='{{ users.firma }}' alt="No existe ninguna firma registrada" />
+      <ion-item *ngIf="users.firma_u">
+        <img src='{{ users.firma_u }}' alt="No existe ninguna firma registrada" />
       </ion-item>
       <ion-item>
-        <ion-note *ngIf="users.firma" >La firma que se muestra, será la que se registrará junto a los datos del usuario</ion-note>
+        <ion-note *ngIf="users.firma_u" >La firma que se muestra, será la que se registrará junto a los datos del usuario</ion-note>
       </ion-item>
-      
+      <ion-button expand="block" type="submit"  color="cea" (click)="RegisterUser()">
+        Registrar Usuario
+      </ion-button>
     </ion-list> 
     <br>
-    <ion-button expand="block" type="submit"  color="cea" (click)="RegisterUser()">
-      Registrar Usuario
-    </ion-button>
-    <ion-button expand="block" color="danger" (click)="closeModal()">
-      Cancelar
-    </ion-button>
+    <br>
+    <br>
+    <br>
 </ion-content>

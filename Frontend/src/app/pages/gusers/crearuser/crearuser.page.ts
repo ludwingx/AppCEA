@@ -13,12 +13,13 @@ import SignaturePad from 'signature_pad';
 export class CrearuserPage implements AfterViewInit {
   users:any = [
     {
-      name: "",
-      email: "",
-      ncargo: "",
-      password: "",
+      nombre_u: "",
+      email_u: "",
+      nom_cargo: "",
+      password_u: "",
+      ci_u:"",
       id_cargo: "",
-      firma: ""
+      firma_u: ""
     }
   ]
   cargos: Cargos[]
@@ -55,11 +56,12 @@ export class CrearuserPage implements AfterViewInit {
   RegisterUser(){
     this.presentLoadingWithOptions();
     const body = {
-      name: this.users.name,
-      email: this.users.email,
-      password: this.users.password,
+      nombre_u: this.users.nombre_u,
+      email_u: this.users.email_u,
+      password_u: this.users.password_u,
+      ci_u: this.users.ci_u,
       id_cargo: this.users.id_cargo,
-      firma: this.users.firma,
+      firma_u: this.users.firma_u,
       aksi: "register-user"
     }
     this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
@@ -103,7 +105,7 @@ export class CrearuserPage implements AfterViewInit {
 
   savePad() {
     const base64Data = this.signaturePad.toDataURL();
-    this.users.firma = base64Data;
+    this.users.firma_u = base64Data;
   }
   async presentLoadingWithOptions(){
     const loading = await this.loadingController.create({

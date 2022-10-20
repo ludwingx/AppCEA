@@ -31,13 +31,16 @@
       <ion-label position="floating">Nombre completo*</ion-label>
       <ion-input type="text" [(ngModel)]="dataUser.nombre_u" ></ion-input>
     </ion-item>
-
     <br>
     <ion-item>
       <ion-label position="floating">Correo electronico*</ion-label>
       <ion-input type="email" [(ngModel)]="dataUser.email_u" name="email"></ion-input>
     </ion-item>
     <br>
+    <ion-item>
+      <ion-label position="floating">Celula de Identidad*</ion-label>
+      <ion-input type="number" [(ngModel)]="dataUser.ci_u"></ion-input>
+    </ion-item>
     <ion-item>
       <ion-label position="floating">Contraseña*</ion-label>
       <ion-input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="dataUser.password_u" name="password" ></ion-input>

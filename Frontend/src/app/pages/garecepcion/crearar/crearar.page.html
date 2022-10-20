@@ -1,54 +1,55 @@
 <ion-header>
   <ion-toolbar class="color-cea-fondo">
     <ion-title>Acta de Recepción</ion-title>
-    <ion-buttons class="ion-no-text" mode="ios" slot="start">
-      <ion-back-button
-        text=""
-        color="light"
-      ></ion-back-button>
+    <ion-buttons class="ion-no-text" slot="start">
+      <ion-back-button text="" defaultHref=""></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list>
+  <ion-list class="listForm">
+    <ion-item fill="outline">
+      <ion-label color="cea" position="floating"><b>Numero de Acta*</b></ion-label>
+      <ion-input type="text" placeholder="Ingresa el numero del acta"></ion-input>
+    </ion-item>
+    <br>
     <ion-item>
-      <ion-label>Numero de Acta:</ion-label>
-      <br>
-      <ion-input type="text" slot="end" ></ion-input>
+      <ion-label color="cea"><b>Fecha y hora:</b></ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Fecha y hora</ion-label>
-      <ion-datetime-button slot="end" datetime="datetime"></ion-datetime-button>
-      <!-- <ion-input  type="date"></ion-input>
-      <ion-input  type="time"></ion-input> -->
+      <ion-datetime-button slot="start" datetime="datetime">Fecha</ion-datetime-button>
     </ion-item>
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
-        <ion-datetime  id="datetime" [showDefaultButtons]="true"></ion-datetime>
+        <ion-datetime color="cea" id="datetime" [showDefaultButtons]="true"></ion-datetime>
       </ng-template>
     </ion-modal>
-    <ion-item>
-      <ion-label>Tipo de atención:</ion-label>
-      <br>
+    <ion-item fill="outline">
+      <ion-label color="cea" position="floating"><b>Tipo de atención*</b></ion-label>
       <ion-select>
-          <ion-select-option *ngFor="let tipo of tatencion">{{tipo.ntatencion}}</ion-select-option>
+          <ion-select-option *ngFor="let tipo of tatencion">{{tipo.nom_tipo_atencion}}</ion-select-option>
       </ion-select>
     </ion-item>
+  </ion-list>
+
     <ion-item>
-      <ion-note>La Autoridad Ambiental Competente Departamental, a través de la Dirección de Recursos
+      <ion-note color="black">La Autoridad Ambiental Competente Departamental, a través de la Dirección de Recursos
         Naturales, comunica a usted que dando cumplimiento al Marco Legal vigente: Constitución política del Estado,
         Código Penal, Ley 1333, Ley 700 y Ley 12301, D.S 25458, Decreto Supremo N° 4489, y la resolución Administrativa
         SDS Y MA /001/2012 Y Decreto Departamental N° 140/2011, realiza la atención en la dirección:
       </ion-note>
     </ion-item>
-    <ion-item>
-      <ion-note color="dark">Lugar donde fue la entrega, rescate o decomiso del animal:</ion-note>
-    </ion-item>
+    <br>
+    <ion-item-divider class="itemDivider">
+      <ion-text class="textDivider">Lugar donde fue la entrega, rescate o decomiso del animal:</ion-text>
+    </ion-item-divider>
+
+  <ion-list class="listForm">
     <ion-item>
       <ion-label>Municipio:</ion-label>
       <ion-select>
         <ion-select-option *ngFor="let municipio of municipios">
-          {{municipio.nmunicipio}}
+          {{municipio.nom_mun}}
         </ion-select-option>
       </ion-select>
     </ion-item>
@@ -64,14 +65,16 @@
       <ion-label>N°casa</ion-label>
       <ion-input slot="end" type="number"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-note color="black">Lugar de donde procede el animal(donde encontro al animal la persona que hace la denuncia o llamada):</ion-note>
-    </ion-item>
+  </ion-list>
+    <ion-item-divider class="itemDivider">
+      <ion-text class="textDivider">Lugar de donde procede el animal(donde encontro al animal la persona que hace la denuncia o llamada):</ion-text>
+    </ion-item-divider>
+  <ion-list class="listForm">
     <ion-item>
       <ion-label>Municipio:</ion-label>
       <ion-select>
         <ion-select-option *ngFor="let municipio of municipios" >
-          {{municipio.nmunicipio}}
+          {{municipio.nom_mun}}
         </ion-select-option>
       </ion-select>
     </ion-item>
@@ -110,7 +113,7 @@
       <ion-label>Edad:</ion-label>
       <ion-select>
         <ion-select-option *ngFor="let edad of edades" >
-          {{edad.nedad}}
+          {{edad.nom_edad}}
         </ion-select-option>
       </ion-select>
     </ion-item>
@@ -118,56 +121,55 @@
       <ion-label>Sexo:</ion-label>
       <ion-select>
         <ion-select-option *ngFor="let sexo of sexos" >
-          {{sexo.nsexo}}
+          {{sexo.nom_sexo}}
         </ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Observaciones</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-label position="stacked">Observaciones</ion-label>
+      <ion-textarea></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-note color="black">Las especies serán derivados a la SDS Y MA de la Gobernación
         de Santa Cruz, instalaciones del CAD
       </ion-note>
     </ion-item>
+    <ion-item-divider class="itemDivider">
+      <ion-text class="textDivider">Funcionario Recepcionante:</ion-text>
+    </ion-item-divider>
     <ion-item>
-      <ion-label>Funcionario Recepcionante:</ion-label>
+      <ion-label><b>Nombre:</b>{{dataUser.nombre_u}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Nombre</ion-label>
+      <ion-text><b>Firma:</b></ion-text>
+      <img class="firmaImg" [src]='dataUser.firma_u' alt="firma">
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Celula de Identidad:</b>{{dataUser.ci_u}}</ion-label>
+    </ion-item>
+    <ion-item-divider class="itemDivider">
+      <ion-text class="textDivider">Persona(Entidad) que efectúa la entrega:</ion-text>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label><b>Nombre:</b></ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>firma</ion-label>
+      <ion-label><b>Firma:</b></ion-label>
       <ion-button (click)="firmar()" expand="block" fill="clear" shape="round">
         firmar
       </ion-button>
     </ion-item>
     <ion-item>
-      <ion-label>CI</ion-label>
+      <ion-label><b>Telefono:</b></ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Persona(Entidad) que efectúa la entrega</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Nombre</ion-label>
+      <ion-label><b>Celula de Identidad:</b></ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label>firma</ion-label>
-      <ion-button (click)="firmar()" expand="block" fill="clear" shape="round">
-        firmar
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label>Telf</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>CI</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+    <ion-button color="cea" (click)="registrarAr()" expand="block">
+      Registrar Acta de Recepción
+    </ion-button>
   </ion-list>
 </ion-content>

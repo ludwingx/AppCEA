@@ -22,9 +22,8 @@
           {{ 'Cargo: ' + user.nom_cargo + ' | ' + user.email_u}}
         </p>
       </ion-label>
-      <ion-button class="btn-enable" (click)="enableUser(user.id_usuario,user.nombre_u)" color="warning">
-        <ion-icon class="icon" size="large"  name="refresh-circle-outline"></ion-icon>
-      </ion-button>
+      <ion-icon button class="icon" size="large" (click)="enableUser(user.id_usuario,user.nombre_u)" color="cea" name="refresh-circle"></ion-icon>
     </ion-item>
   </ion-list>
+  
 </ion-content>

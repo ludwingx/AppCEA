@@ -13,6 +13,7 @@ export class EditPage implements OnInit {
       nombre_u: "",
       email_u: "",
       password_u:"",
+      ci_u:"",
       foto_u:""
     }
   ]
@@ -54,6 +55,7 @@ export class EditPage implements OnInit {
       nombre_u: this.dataUser.nombre_u,
       email_u: this.dataUser.email_u,
       password_u: this.dataUser.password_u,
+      ci_u: this.dataUser.ci_u,
       foto_u: this.dataUser.foto_u,
       aksi: "updatePhoto"
     }

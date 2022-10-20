@@ -9,8 +9,8 @@ import { Storage } from "@capacitor/storage";
 })
 export class LoginPage implements OnInit {
   tipo: string = "password";
-  email: string;
-  password: string; 
+  email_u: string;
+  password_u: string; 
   showPassword = false;
   passwordToggleIcon = 'eye';
   constructor(private toastCtrl: ToastController,
@@ -38,8 +38,8 @@ export class LoginPage implements OnInit {
   login(){
     this.presentLoadingWithOptions();
     const body = {
-      email: this.email,
-      password: this.password,
+      email_u: this.email_u,
+      password_u: this.password_u,
       aksi: "login"
     }
     this.conexion.postdata(body,"usuario.php").subscribe((data:any) => {
@@ -49,6 +49,7 @@ export class LoginPage implements OnInit {
         this.loadingController.dismiss();
         this.navCtrl.navigateRoot(["/home"]);
         this.mensaje("Inicio de sesión correcto!");
+        console.log(data.result)
       }
       else{
         this.loadingController.dismiss();

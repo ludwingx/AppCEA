@@ -1,11 +1,37 @@
 <ion-app>
   <ion-menu contentId="main-content">
     <ion-header>
-      <ion-toolbar color="cea">
-        <ion-title>Menú</ion-title>
+      <ion-toolbar class="toolbarMenu">
+        <ion-item class="itemAvatarProfile" button  [routerLink]="['/profile']">
+          <ion-avatar slot="start" class="avatarProfile">
+            <ion-img *ngIf="photoCharge else noPhoto" [src]="dataUser.foto_u"></ion-img>
+            <ng-template #noPhoto>
+              <ion-img src="../../../assets/iconhome/iconuser.png"></ion-img>
+            </ng-template>
+          </ion-avatar>
+        </ion-item>
+        <ion-item class="itemNombre">
+          <ion-label>{{dataUser.nombre_u}}</ion-label>
+        </ion-item>
+        <ion-item >
+          <ion-note class="noteCargo" color="cea">{{dataUser.nom_cargo}}</ion-note>
+        </ion-item>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">This is the menu content.</ion-content>
+    <ion-content>
+      <ion-list>
+        <ion-item button [routerLink]="['/profile']">
+          <ion-icon class="iconMenu" slot="start" name="person-outline"></ion-icon>
+          <ion-label>Perfil</ion-label>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-item button (click)="cerrarSession()" >
+          <ion-icon class="iconMenu" slot="start" name="exit-outline"></ion-icon>
+          <ion-label >Cerrar Sesión</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
   </ion-menu>
 
 <div class="ion-page" id="main-content">
@@ -14,14 +40,7 @@
       <ion-buttons slot="start">
         <ion-menu-button color="cea"></ion-menu-button>
       </ion-buttons>
-        <ion-fab-button slot="end" mode="md" size="small" [routerLink]="['/profile']">
-          <ion-avatar>
-            <ion-img *ngIf="photoCharge else noPhoto" [src]="dataUser.foto_u"></ion-img>
-            <ng-template #noPhoto>
-              <ion-img src="../../../assets/iconhome/iconuser.png"></ion-img>
-            </ng-template>
-          </ion-avatar>
-        </ion-fab-button>
+
         <!-- <ion-fab-button slot="end" size="small" (click)="cerrarSession()">
           <ion-avatar>
             <img src="../../../assets/iconhome/iconlogout.png" />
@@ -30,7 +49,52 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-list lines="full">
+    <ion-item>
+      <ion-label color="cea">
+        <h1><b>Bienvenido!</b></h1>
+      </ion-label>
+    </ion-item>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col>
+          <ion-card button [routerLink]="['/gusers']">
+            <ion-card-header>
+              <ion-avatar>
+                <img src="../../../assets/iconhome/icongusers.png" />
+              </ion-avatar>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-card-title>Usuarios</ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card button  [routerLink]="['/garecepcion']">
+            <ion-card-header>
+              <ion-avatar>
+                <img src="../../../assets/iconhome/icongar.png" />
+              </ion-avatar>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-card-title class="titleAr" >Actas de Recepciones</ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card button [routerLink]="['/ghclinica']">
+            <ion-card-header>
+              <ion-avatar>
+                <img src="../../../assets/iconhome/iconghc.png" />
+              </ion-avatar>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-card-title>Historiales Clinicos</ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- <ion-list lines="full">
       <ion-item mode="ios" class="item-gusers" [routerLink]="['/gusers']">
         <ion-avatar>
           <img src="../../../assets/iconhome/icongusers.png" />
@@ -73,49 +137,7 @@
         </ion-thumbnail>
       </ion-item>
       <br />
-      <!-- <ion-item mode="ios" class="item-gusers" [routerLink]="['/gftranslocacion']">
-        <ion-avatar>
-          <img src="../../../assets/iconhome/icongftranslocacion.png" />
-        </ion-avatar>
-        <ion-label class="text">Fichas de Translocaciones</ion-label>
-        <ion-thumbnail>
-          <ion-icon
-            class="ion-no-opacity"
-            slot="start"
-            name="caret-forward-outline"
-          ></ion-icon>
-        </ion-thumbnail>
-      </ion-item>
-      <br />
-      <ion-item mode="ios" class="item-gusers" [routerLink]="['/gaderivacion']">
-        <ion-avatar>
-          <img src="../../../assets/iconhome/icongaderivacion.png" />
-        </ion-avatar>
-        <ion-label class="text">Actas de Derivaciones</ion-label>
-        <ion-thumbnail>
-          <ion-icon
-            class="ion-no-opacity"
-            slot="start"
-            name="caret-forward-outline"
-          ></ion-icon>
-        </ion-thumbnail>
-      </ion-item>
-      <br />
-      <ion-item mode="ios" class="item-gusers" [routerLink]="['/gfdeceso']">
-        <ion-avatar>
-          <img src="../../../assets/iconhome/icongfdeceso.png" />
-        </ion-avatar>
-        <ion-label class="text">Fichas de Decesos</ion-label>
-        <ion-thumbnail>
-          <ion-icon
-            class="ion-no-opacity"
-            slot="start"
-            name="caret-forward-outline"
-          ></ion-icon>
-        </ion-thumbnail>
-      </ion-item>
-      <br /> -->
-    </ion-list>
+    </ion-list> -->
   </ion-content>
 </div>
 </ion-app>

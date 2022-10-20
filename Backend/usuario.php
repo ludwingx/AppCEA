@@ -29,7 +29,7 @@ if ($postjson['aksi'] == "login") {
     echo $result;
 } else if ($_GET['aksi'] == "list-users") {
 
-    $res = $mysqli->query("SELECT C.nom_cargo, U.nombre_u, U.email_u, U.id_usuario, U.password_u, U.id_cargo, U.firma_u, U.foto_u 
+    $res = $mysqli->query("SELECT C.nom_cargo, U.nombre_u, U.email_u, U.id_usuario, U.password_u, U.ci_u, U.id_cargo, U.firma_u, U.foto_u 
     FROM usuarios as U INNER JOIN cargos as C ON U.id_cargo=C.id_cargo WHERE U.estado_u='1'");
     $cont = 0;
     $check = mysqli_num_rows($res);
@@ -42,6 +42,7 @@ if ($postjson['aksi'] == "login") {
                 'nombre_u' => $data["nombre_u"],
                 'email_u' => $data["email_u"],
                 'password_u' => $data["password_u"],
+                'ci_u' => $data["ci_u"],
                 'id_cargo' => $data["id_cargo"],
                 'firma_u' => $data["firma_u"],
                 'foto_u' => $data["foto_u"]
@@ -57,9 +58,10 @@ if ($postjson['aksi'] == "login") {
     $nombre_u = $postjson['nombre_u'];
     $email_u = $postjson['email_u'];
     $password_u = $postjson['password_u'];
+    $ci_u = $postjson['ci_u'];
     $id_cargo = $postjson['id_cargo'];
     $firma_u = $postjson['firma_u'];
-    $res = $mysqli->query("INSERT INTO usuarios SET nombre_u='$nombre_u', email_u='$email_u', password_u='$password_u', id_cargo=$id_cargo, firma_u='$firma_u'");
+    $res = $mysqli->query("INSERT INTO usuarios SET nombre_u='$nombre_u', email_u='$email_u', password_u='$password_u', ci_u='$ci_u', id_cargo=$id_cargo, firma_u='$firma_u'");
     if ($res) {
         $result = json_encode(array("success" => TRUE, "msg" => "Usuario Registrado con exito"));
     } else {
@@ -71,10 +73,11 @@ if ($postjson['aksi'] == "login") {
     $nombre_u = $postjson['nombre_u'];
     $email_u = $postjson['email_u'];
     $password_u = $postjson['password_u'];
+    $ci_u = $postjson['ci_u'];
     $id_cargo = $postjson['id_cargo'];
     $firma_u = $postjson['firma_u'];
 
-    $res = $mysqli->query("UPDATE usuarios SET nombre_u='$nombre_u', email_u='$email_u',password_u='$password_u', id_cargo='$id_cargo', firma_u='$firma_u'
+    $res = $mysqli->query("UPDATE usuarios SET nombre_u='$nombre_u', email_u='$email_u',password_u='$password_u',ci_u='$ci_u', id_cargo='$id_cargo', firma_u='$firma_u'
     WHERE id_usuario=$id_usuario");
 
     if ($res) {
@@ -95,7 +98,7 @@ if ($postjson['aksi'] == "login") {
     echo $result;
 } else if ($postjson['aksi'] == "profile-user") {
     $id_usuario = $postjson["id_usuario"];
-    $res = $mysqli->query("SELECT C.nom_cargo, U.nombre_u, U.email_u, U.id_usuario,U.id_cargo, U.password_u, U.firma_u, U.foto_u
+    $res = $mysqli->query("SELECT C.nom_cargo, U.nombre_u, U.email_u, U.id_usuario,U.id_cargo, U.password_u, U.ci_u, U.firma_u, U.foto_u
     FROM usuarios as U INNER JOIN cargos as C ON U.id_cargo=C.id_cargo WHERE id_usuario='$id_usuario'");
 
     $check = mysqli_num_rows($res);
@@ -103,10 +106,11 @@ if ($postjson['aksi'] == "login") {
         $data = mysqli_fetch_array($res);
         $datauser = array(
             'id_usuario' => $data["id_usuario"],
-            'nombre_u' => $data["nombre_u"],
             'nom_cargo' => $data["nom_cargo"],
+            'nombre_u' => $data["nombre_u"],
             'email_u' => $data["email_u"],
             'password_u' => $data["password_u"],
+            'ci_u' => $data["ci_u"],
             'id_cargo' => $data["id_cargo"],
             'firma_u' => $data["firma_u"],
             'foto_u' => $data["foto_u"]
@@ -118,7 +122,7 @@ if ($postjson['aksi'] == "login") {
     echo $result;
 } else if ($_GET['aksi'] == "listDis-users") {
 
-    $res = $mysqli->query("SELECT C.nom_cargo, U.nombre_u, U.email_u, U.id_usuario, U.password_u, U.id_cargo, U.firma_u, U.foto_u 
+    $res = $mysqli->query("SELECT C.nom_cargo, U.nombre_u, U.email_u, U.id_usuario, U.password_u, U.ci_u, U.id_cargo, U.firma_u, U.foto_u 
     FROM usuarios as U INNER JOIN cargos as C ON U.id_cargo=C.id_cargo WHERE U.estado_u='0'");
     $cont = 0;
     $check = mysqli_num_rows($res);
@@ -131,6 +135,7 @@ if ($postjson['aksi'] == "login") {
                 'nombre_u' => $data["nombre_u"],
                 'email_u' => $data["email_u"],
                 'password_u' => $data["password_u"],
+                'ci_u' => $data["ci_u"],
                 'id_cargo' => $data["id_cargo"],
                 'firma_u' => $data["firma_u"],
                 'foto_u' => $data["foto_u"]
@@ -157,9 +162,10 @@ if ($postjson['aksi'] == "login") {
     $nombre_u = $postjson['nombre_u'];
     $email_u = $postjson['email_u'];
     $password_u = $postjson['password_u'];
+    $ci_u = $postjson['ci_u'];
     $foto_u = $postjson['foto_u'];
 
-    $res = $mysqli->query("UPDATE usuarios SET nombre_u='$nombre_u', email_u='$email_u',password_u='$password_u', foto_u= '$foto_u'
+    $res = $mysqli->query("UPDATE usuarios SET nombre_u='$nombre_u', email_u='$email_u',password_u='$password_u',ci_u='$ci_u', foto_u= '$foto_u'
     WHERE id_usuario=$id_usuario");
 
     if ($res) {

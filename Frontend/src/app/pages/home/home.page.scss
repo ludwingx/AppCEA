@@ -2,7 +2,10 @@ ion-fab-button{
   outline: 0px; //quitar lineas que se generan al activar y desactivar dark mode
   justify-content: flex-start;
   --background:rgba(255, 255, 255, 0); //transparencia para quitar fondo color default ionic
-
+}
+.avatarProfile{
+  height: 80px;
+  width: 80px;
 }
 .input-wrapper{
   display: flex !important;
@@ -82,7 +85,33 @@ ion-menu::part(backdrop) {
 }
 
 ion-menu::part(container) {
-  border-radius: 0 20px 20px 0;
 
   box-shadow: 4px 0px 16px rgba(0, 94, 16, 0.315);
+}
+.noteCargo{
+  font-size: 0.9em;
+}
+.toolbarMenu{
+  margin-top: 20px;
+}
+.itemAvatarProfile{
+  height: 54px;
+}
+.itemNombre{
+  height: 37px;
+}
+.iconMenu{
+  margin-right: 14px;
+}
+ion-card{
+  height: 23vh;
+  width: 18vh;
+  box-shadow: rgba(1, 39, 0, 0.49) 0px 3px 1px -2px, rgba(0, 0, 0, 0.4) 0px 2px 2px 0px, rgba(0, 0, 0, 0.531) 0px 1px 5px 0px;
+}
+ion-avatar{
+  display: flex;
+  justify-content: center;
+}
+.titleAr{
+  font-size: 1.2em;
 }

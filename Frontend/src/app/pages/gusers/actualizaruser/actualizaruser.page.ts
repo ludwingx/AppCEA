@@ -11,12 +11,12 @@ import SignaturePad from 'signature_pad';
 export class ActualizaruserPage implements OnInit {
   users:any = [
     {
-      name: "",
-      email: "",
-      password:"",
+      nombre_u: "",
+      email_u: "",
+      password_u:"",
       id_cargo: "",
-      ncargo: "",
-      firma:""
+      nom_cargo: "",
+      firma_u:""
     }
   ]
   cargos: Cargos[]
@@ -64,13 +64,14 @@ export class ActualizaruserPage implements OnInit {
   UpdateUser(){
     this.presentLoadingWithOptions();
     const body = {
-      id_user: this.users.id_user,
-      name: this.users.name,
-      email: this.users.email,
-      password: this.users.password,
-      ncargo: this.users.ncargo,
+      id_usuario: this.users.id_usuario,
+      nombre_u: this.users.nombre_u,
+      email_u: this.users.email_u,
+      password_u: this.users.password_u,
+      ci_u: this.users.ci_u,
+      nom_cargo: this.users.nom_cargo,
       id_cargo: this.users.id_cargo,
-      firma: this.users.firma,
+      firma_u: this.users.firma_u,
       aksi: "update-user"
     }
     this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{

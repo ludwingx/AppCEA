@@ -433,3 +433,12 @@
 
   --ion-tab-bar-background: #1f1f1f;
 }
+
+
+//Fonts
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+$font-family-base: 'Open Sans', sans-serif !default;
+$font-family-ios-base:'Open Sans';
+$font-family-md-base:'Open Sans';
+$font-family-wp-base:'Open Sans';
+

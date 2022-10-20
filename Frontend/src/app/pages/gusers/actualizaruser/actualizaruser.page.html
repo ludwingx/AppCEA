@@ -28,6 +28,11 @@
       <ion-icon slot="end" class="passwordIcon" item-end [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
     </ion-item>
     <br>
+    <ion-item>
+      <ion-label position="floating">Celula de Identidad*</ion-label>
+      <ion-input type="number" [(ngModel)]="users.ci_u" name="ci"></ion-input>
+    </ion-item>
+    <br>
     <ion-item >
       <ion-label position="stacked">Cargo*</ion-label>
       <ion-select  placeholder="{{datos.nom_cargo}}" [(ngModel)]="users.id_cargo" >

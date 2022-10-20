@@ -7,13 +7,17 @@ img{
     margin:0px auto;
     border: 2px solid rgb(187, 178, 178);
 }
-ion-item{
-  --highlight-height: 0px;
-  --border-color: var(--ion-color-cea) !important;
-}
 .passwordIcon{
   font-size:1,5rem !important;
   position: relative !important;
-  top: 35px !important;
   margin: 0 auto !important;
+}
+ion-label{
+  color: var(--ion-color-cea) !important; //!important para forzar
+}
+.listForm{
+  padding: 20px 20px 0px 20px;
+}
+ion-input{
+  top: 10px;
 }

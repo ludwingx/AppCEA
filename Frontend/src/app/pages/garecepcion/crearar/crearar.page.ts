@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Municipios } from './../../../interfaces/municipios';
 import { Edades } from 'src/app/interfaces/edades';
 import { Sexos } from 'src/app/interfaces/sexos';
+import { Storage } from "@capacitor/storage";
 @Component({
   selector: 'app-crearar',
   templateUrl: './crearar.page.html',
@@ -16,6 +17,8 @@ export class CreararPage implements OnInit {
   municipios: Municipios[];
   edades: Edades[];
   sexos: Sexos[];
+  dataStorage:any
+  dataUser:any = []
   constructor(private conexion  : ConexionService, private modalCtrl: ModalController) { 
   }
 
@@ -24,7 +27,21 @@ export class CreararPage implements OnInit {
     this.ListSexos();
     this.ListAtencion();
     this.ListMunicipios();
+    Storage.get({key: "session_user"}).then((data:any)=>{
+      
+      this.dataStorage = JSON.parse(data.value);
+      this.perfil(this.dataStorage.id_usuario);
 
+    })
+  }
+  perfil(id_usuario:string){
+    const body = {
+      id_usuario: id_usuario,
+      aksi: "profile-user"
+    }
+    this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
+    this.dataUser = data.result;
+    })
   }
 
   ListAtencion(){
@@ -59,5 +76,10 @@ export class CreararPage implements OnInit {
       modal.present();
       return modal.onDidDismiss();
     })
+  }
+  registrarAr(){
+    const body ={
+      
+    }
   }
 }
