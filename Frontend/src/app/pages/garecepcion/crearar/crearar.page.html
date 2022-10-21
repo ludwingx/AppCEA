@@ -10,26 +10,37 @@
   <ion-list class="listForm">
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Numero de Acta*</b></ion-label>
-      <ion-input type="text" [(ngModel)]="arecepcion.num_acta_ar" placeholder="Ingresa el numero del acta"></ion-input>
+      <ion-input type="text" [(ngModel)]="arecepcion.num_acta_ar" placeholder="Ingresa el numero del acta" (ionChange)="updateDate($event)"></ion-input>
     </ion-item>
     <br>
+    <!-- <ion-item>
+      <ion-label>Fecha</ion-label>
+      <ion-icon id="click-trigger" slot="start" name="calendar-outline" size="large" color="cea"></ion-icon>
+      <ion-popover trigger="click-trigger" triggerAction="click" side="top" alignment="end" dismissOnSelect="true" id="popover-bottom">
+        <ng-template>
+          <ion-datetime doneText="Ok" presentation="time" [(ngModel)]="arecepcion.fecha_ar" cancelText="Cancelar" position="floating" (ionChange)="updateDate($event)" ></ion-datetime>
+        </ng-template>
+      </ion-popover>
+      <ion-label>{{arecepcion.fecha_ar}}</ion-label>
+    </ion-item> -->
     <ion-item>
       <ion-label color="cea"><b>Fecha:</b></ion-label>
-      <ion-datetime-button  datetime="datetime">Fecha</ion-datetime-button>
+      <ion-datetime-button  datetime="date"></ion-datetime-button>
     </ion-item>
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
-        <ion-datetime presentation="date"   color="cea" id="datetime" [showDefaultButtons]="true"></ion-datetime>
+        <ion-datetime presentation="date" color="cea" id="date" (ionChange)="updateDate($event)" [showDefaultButtons]="true"></ion-datetime>
       </ng-template>
-    </ion-modal>
-    
+    </ion-modal> 
+
+
     <ion-item>
       <ion-label color="cea"><b>Hora:</b></ion-label>
       <ion-datetime-button datetime="time"></ion-datetime-button>
     </ion-item>
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
-        <ion-datetime presentation="time"   color="cea" id="time" [showDefaultButtons]="true"></ion-datetime>
+        <ion-datetime presentation="time" (ionChange)="updateTime($event)" color="cea" id="time" [showDefaultButtons]="true"></ion-datetime>
       </ng-template>
     </ion-modal>
     <ion-item fill="outline">

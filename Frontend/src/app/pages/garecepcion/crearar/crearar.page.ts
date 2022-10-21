@@ -7,6 +7,7 @@ import { Municipios } from './../../../interfaces/municipios';
 import { Edades } from 'src/app/interfaces/edades';
 import { Sexos } from 'src/app/interfaces/sexos';
 import { Storage } from "@capacitor/storage";
+
 @Component({
   selector: 'app-crearar',
   templateUrl: './crearar.page.html',
@@ -53,6 +54,7 @@ export class CreararPage implements OnInit {
     nom_mun:"",
     nom_tipo_atencion:"",
   }]
+
   constructor(private conexion  : ConexionService,
               private modalCtrl: ModalController,
               private toastCtrl : ToastController,
@@ -70,6 +72,7 @@ export class CreararPage implements OnInit {
       this.perfil(this.dataStorage.id_usuario);
 
     })
+
   }
   perfil(id_usuario:string){
     const body = {
@@ -102,9 +105,8 @@ export class CreararPage implements OnInit {
     })
   }
 
-  change(event){ 
-    console.log(event.detail.value); //INTRODUCIR EL VALUE EN UN OBJETO "DATE" Y ENVIARLO
-  }
+
+
   firmar(){
     this.modalCtrl.create({
       component: FirmaPage
@@ -121,10 +123,22 @@ export class CreararPage implements OnInit {
     })
     t.present();
   }
+  updateDate(event){ 
+    console.log(event.detail.value); //INTRODUCIR EL VALUE EN UN OBJETO "DATE" Y ENVIARLO
+    const date = event.detail.value;
+    this.arecepcion.fecha_ar = date;
+    console.log(this.arecepcion.fecha_ar)
+  }
+  updateTime(event){
+    console.log(event.detail.value); //INTRODUCIR EL VALUE EN UN OBJETO "DATE" Y ENVIARLO
+    const date = event.detail.value;
+    this.arecepcion.hora_ar = date;
+    console.log(this.arecepcion.hora_ar)
+  }
   registrarAr(){
-    console.log(this.arecepcion.id_tipo_atencion);
+    
     const body ={
-
+      
       // num_acta_ar: this.arecepcion.num_acta_ar,
       // fecha_ar: this.arecepcion.fecha_ar,
       // hora_ar: this.arecepcion.hora_ar,

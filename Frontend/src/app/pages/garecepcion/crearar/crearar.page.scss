@@ -12,3 +12,10 @@
 ion-input{
     top: 8px;
 }
+ion-popover{
+    --width: 320px;
+}
+ion-popover#popover-bottom::part(content){
+    left: 5% !important;
+    top: 15% !important;
+}
