@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar color="cea">
-    <ion-buttons class="ion-no-text" slot="start">
-      <ion-back-button text="" defaultHref="login"></ion-back-button>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()" expand="block" fill="clear" shape="round">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title> Mi perfil </ion-title>
     <ion-buttons slot="end">

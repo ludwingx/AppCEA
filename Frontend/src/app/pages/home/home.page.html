@@ -2,12 +2,9 @@
   <ion-menu contentId="main-content">
     <ion-header>
       <ion-toolbar class="toolbarMenu">
-        <ion-item class="itemAvatarProfile" button  [routerLink]="['/profile']">
+        <ion-item class="itemAvatarProfile" button  (click)="openProfile(dataUser)">
           <ion-avatar slot="start" class="avatarProfile">
-            <ion-img *ngIf="photoCharge else noPhoto" [src]="dataUser.foto_u"></ion-img>
-            <ng-template #noPhoto>
-              <ion-img src="../../../assets/iconhome/iconuser.png"></ion-img>
-            </ng-template>
+            <ion-img  [src]="dataUser.foto_u"></ion-img>
           </ion-avatar>
         </ion-item>
         <ion-item class="itemNombre">
@@ -19,8 +16,13 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
+      <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          refreshingSpinner="crescent">
+        </ion-refresher-content>
+      </ion-refresher>
       <ion-list>
-        <ion-item button [routerLink]="['/profile']">
+        <ion-item button (click)="openProfile(dataUser)">
           <ion-icon class="iconMenu" slot="start" name="person-outline"></ion-icon>
           <ion-label>Perfil</ion-label>
         </ion-item>
@@ -49,6 +51,7 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
+
     <ion-item>
       <ion-label color="cea">
         <h1><b>Bienvenido!</b></h1>

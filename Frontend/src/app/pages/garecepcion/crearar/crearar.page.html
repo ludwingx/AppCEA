@@ -25,11 +25,12 @@
     </ion-item> -->
     <ion-item>
       <ion-label color="cea"><b>Fecha:</b></ion-label>
-      <ion-datetime-button  datetime="date"></ion-datetime-button>
+      <ion-icon id="openDate" slot="start" name="calendar-outline" size="large" color="cea"></ion-icon>
     </ion-item>
-    <ion-modal [keepContentsMounted]="true">
+
+    <ion-modal trigger="openDate" [keepContentsMounted]="true">
       <ng-template>
-        <ion-datetime presentation="date" color="cea" id="date" (ionChange)="updateDate($event)" [showDefaultButtons]="true"></ion-datetime>
+        <ion-datetime doneText="Confirmar" cancelText="Cancelar" presentation="date"  color="cea" id="date" (ionChange)="updateDate($event)" [showDefaultButtons]="true"></ion-datetime>
       </ng-template>
     </ion-modal> 
 
@@ -38,7 +39,7 @@
       <ion-label color="cea"><b>Hora:</b></ion-label>
       <ion-datetime-button datetime="time"></ion-datetime-button>
     </ion-item>
-    <ion-modal [keepContentsMounted]="true">
+    <ion-modal class="modalDate" [keepContentsMounted]="true">
       <ng-template>
         <ion-datetime presentation="time" (ionChange)="updateTime($event)" color="cea" id="time" [showDefaultButtons]="true"></ion-datetime>
       </ng-template>

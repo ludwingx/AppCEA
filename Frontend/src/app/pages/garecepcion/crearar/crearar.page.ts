@@ -72,7 +72,7 @@ export class CreararPage implements OnInit {
       this.perfil(this.dataStorage.id_usuario);
 
     })
-
+    console.log(this.arecepcion.fecha_ar)
   }
   perfil(id_usuario:string){
     const body = {

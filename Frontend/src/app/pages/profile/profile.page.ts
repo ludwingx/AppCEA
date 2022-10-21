@@ -25,12 +25,12 @@ export class ProfilePage implements OnInit {
     this.presentLoadingWithOptions();
     // Camera.requestPermissions({permissions:['photos']})
     Storage.get({key: "session_user"}).then((data:any)=>{
-      
       this.dataStorage = JSON.parse(data.value);
       this.perfil(this.dataStorage.id_usuario);
-
     })
-    
+  }
+  closeModal(){
+    this.modalCtrl.dismiss(null,'close');
   }
   perfil(id_usuario:string){
     const body = {
