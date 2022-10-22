@@ -29,8 +29,13 @@ export class HomePage implements OnInit {
               private loadingController: LoadingController) { }
 
   ngOnInit() {
-    this.presentLoadingWithOptions();
-    this.loadProfile();
+    Storage.get({key: "session_user"}).then((data:any)=>{
+      
+      this.dataStorage = JSON.parse(data.value);
+      this.perfil(this.dataStorage.id_usuario);
+
+    })
+
   }
   doRefresh(event){
     this.ngOnInit();
@@ -38,14 +43,6 @@ export class HomePage implements OnInit {
       event.target.complete();
     }, 1000);
 
-  }
-  loadProfile(){
-    Storage.get({key: "session_user"}).then((data:any)=>{
-      
-      this.dataStorage = JSON.parse(data.value);
-      this.perfil(this.dataStorage.id_usuario);
-
-    })
   }
   openProfile(dataUser:any){
     this.modalCtrl.create({
@@ -59,6 +56,7 @@ export class HomePage implements OnInit {
   }
   closeModal(){
     this.modalCtrl.dismiss(null,'close');
+
   }
   async mensaje (m: string){
     const t = await this.toastCtrl.create({
@@ -84,7 +82,7 @@ export class HomePage implements OnInit {
     this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
     this.dataUser = data.result;
     this.photoUser();
-    this.loadingController.dismiss();
+
     })
   }
   async photoUser(){

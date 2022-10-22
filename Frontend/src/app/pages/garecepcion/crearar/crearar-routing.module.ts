@@ -8,10 +8,6 @@ const routes: Routes = [
     path: '',
     component: CreararPage
   },
-  {
-    path: 'firma',
-    loadChildren: () => import('./firma/firma.module').then( m => m.FirmaPageModule)
-  }
 ];
 
 @NgModule({

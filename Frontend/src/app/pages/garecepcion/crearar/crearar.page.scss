@@ -1,36 +1,26 @@
-.itemDivider{
+.itemDivider {
     background-color: rgba(0, 101, 12, 0.185);
 }
-.textDivider{
+.textDivider {
     color: black;
     font-size: 1.2em;
     height: auto;
 }
-.listForm{
+.listForm {
     padding: 20px;
 }
-ion-input{
+ion-input {
     top: 8px;
 }
-ion-popover{
-    --width: 320px;
+ion-label {
+    color: var(--ion-color-cea) !important; //!important para forzar
 }
-ion-popover#popover-bottom::part(content){
-    left: 5% !important;
-    top: 15% !important;
+canvas {
+    margin: 0px auto;
+    border: 2px solid rgb(187, 178, 178);
+    background-color: #90b29b;
 }
-.modalDate{
-    --background: rgba(44,39,45, 0.2) !important;
-    &::part(content){
-        backdrop-filter: blur(6px) !important;
-    }
-    ion-content{
-        --background: transparent !important;
-        --padding-top: 25vh !important;
-        --padding-start: 20px !important;
-        --padding-end: 20px !important;
-    }
-    ion-datetime{
-        border-radius: 8px ;
-    }
+.img {
+    margin: 0px auto;
+    border: 2px solid rgb(187, 178, 178);
 }

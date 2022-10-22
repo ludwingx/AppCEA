@@ -31,6 +31,7 @@ export class ProfilePage implements OnInit {
   }
   closeModal(){
     this.modalCtrl.dismiss(null,'close');
+
   }
   perfil(id_usuario:string){
     const body = {

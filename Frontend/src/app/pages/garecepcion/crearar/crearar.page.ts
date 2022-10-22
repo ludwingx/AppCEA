@@ -1,13 +1,12 @@
-import { FirmaPage } from './firma/firma.page';
 import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { ConexionService } from 'src/app/servicios/conexion/conexion.service';
 import { Tatencion } from './../../../interfaces/atencion';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Municipios } from './../../../interfaces/municipios';
 import { Edades } from 'src/app/interfaces/edades';
 import { Sexos } from 'src/app/interfaces/sexos';
 import { Storage } from "@capacitor/storage";
-
+import SignaturePad from 'signature_pad';
 @Component({
   selector: 'app-crearar',
   templateUrl: './crearar.page.html',
@@ -54,7 +53,9 @@ export class CreararPage implements OnInit {
     nom_mun:"",
     nom_tipo_atencion:"",
   }]
-
+  signaturePad: SignaturePad;
+  @ViewChild('canvas') canvasEl : ElementRef;
+  touchEvent:string;
   constructor(private conexion  : ConexionService,
               private modalCtrl: ModalController,
               private toastCtrl : ToastController,
@@ -104,18 +105,6 @@ export class CreararPage implements OnInit {
       this.sexos = data.listSexos
     })
   }
-
-
-
-  firmar(){
-    this.modalCtrl.create({
-      component: FirmaPage
-    })
-    .then(modal => {
-      modal.present();
-      return modal.onDidDismiss();
-    })
-  }
   async mensaje (m: string){
     const t = await this.toastCtrl.create({
       message: m,
@@ -123,20 +112,8 @@ export class CreararPage implements OnInit {
     })
     t.present();
   }
-  updateDate(event){ 
-    console.log(event.detail.value); //INTRODUCIR EL VALUE EN UN OBJETO "DATE" Y ENVIARLO
-    const date = event.detail.value;
-    this.arecepcion.fecha_ar = date;
-    console.log(this.arecepcion.fecha_ar)
-  }
-  updateTime(event){
-    console.log(event.detail.value); //INTRODUCIR EL VALUE EN UN OBJETO "DATE" Y ENVIARLO
-    const date = event.detail.value;
-    this.arecepcion.hora_ar = date;
-    console.log(this.arecepcion.hora_ar)
-  }
   registrarAr(){
-    
+    console.log(this.arecepcion)
     const body ={
       
       // num_acta_ar: this.arecepcion.num_acta_ar,
@@ -193,5 +170,28 @@ export class CreararPage implements OnInit {
       cssClass: 'custom-loading',
     });
     return await loading.present();
+  }
+  ngAfterViewInit() {
+    this.signaturePad = new SignaturePad(this.canvasEl.nativeElement);
+  }
+
+  startDrawing(event: Event) {
+    this.touchEvent = this.signaturePad.toDataURL()
+    console.log(event);
+    // works in device not in browser
+
+  }
+
+  moved(event: Event) {
+    // works in device not in browser
+  }
+
+  clearPad() {
+    this.signaturePad.clear();
+  }
+
+  savePad() {
+    const base64Data = this.signaturePad.toDataURL();
+    this.arecepcion.firma_persona_ar = base64Data;
   }
 }
