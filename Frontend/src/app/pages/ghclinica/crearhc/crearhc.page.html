@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar class="color-cea-fondo">
+    <ion-title>Historia Clinica</ion-title>
+    <ion-buttons mode="md" class="ion-no-text" slot="start">
+      <ion-back-button text="" defaultHref=""></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="listForm">
+    <ion-item>
+      <ion-label><b>Fecha:</b></ion-label>
+      <ion-input slot="end" type="date"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Hora:</b></ion-label>
+      <ion-input slot="end" type="time"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="cea"><h3>Centro de Atención y Derivación</h3></ion-label>
+      <ion-label color="cea"><h4>SDMA-DIRENA</h4></ion-label>
+      <ion-note color="cea">Prog. Conservación de la Biodiversidad del Dpto. SC</ion-note>
+    </ion-item>
+    <ion-item class="itemForm" fill="outline">
+      <ion-label class="itemLabel" position="floating">Tipo de especies*</ion-label>
+      <ion-select>
+        <ion-select-option *ngFor="let tipo of especies" value="{{tipo.id_especies}}">{{tipo.nom_especies}}</ion-select-option>
+      </ion-select>
+      <ion-note slot="helper">Seleccione el tipo de especie</ion-note>
+      <ion-note slot="error">tipo de especie no seleccionada</ion-note>
+    </ion-item>
+    <ion-item fill="outline">
+      <ion-label color="cea" position="floating"><b>Nombre común*</b></ion-label>
+      <ion-input type="text" placeholder="Ingresa el nombre común" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Sexo:</ion-label>
+      <ion-select>
+        <ion-select-option *ngFor="let sexo of sexos" >
+          {{sexo.nom_sexo}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</ion-content>
