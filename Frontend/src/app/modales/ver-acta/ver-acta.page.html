@@ -1,0 +1,399 @@
+<ion-header>
+  <ion-toolbar class="color-cea-fondo">
+    <ion-title>Acta de Recepción</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="Cerrar()">
+        <ion-icon size="large" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-item>
+      <ion-label>Nro de Acta</ion-label>
+      <ion-input [(ngModel)]="nro_acta"></ion-input>
+      <ion-button (click)="VerActa()" color="cea" expand="block">
+        buscar
+      </ion-button>
+    </ion-item>
+<div *ngIf="mostrar">
+  <div class="logo-GAD">
+    <img src="assets/logoGAD.png">
+  </div>
+  
+  <div class="titulo">
+    <h3><strong>SECRETARIA DE DESARROLLO SOSTENIBLE 
+      Y MEDIO AMBIENTE</strong></h3>
+    <h3><strong>DIRECCION DE RECURSOS NATURALES</strong></h3>
+    <h5>PROGRAMA INTEGRAL DE CONSERVACION DE LA 
+      BIODIVERSIDAD DEL DEPARTAMENTO DE SANTA CRUZ</h5>
+      <h3><u>ACTA DE RECEPCIÓN</u></h3>
+  </div>
+  
+  <div>
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Numero de acta</ion-label>
+          <ion-input value="{{ dataActa.nro_acta }}"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Fecha</ion-label>
+          <ion-input value="{{ dataActa.fecha }}"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Hora</ion-label>
+          <ion-input value="{{ dataActa.hora }}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </div>
+  
+  <div>
+    <ion-item class="ion-text-center">
+      <ion-label>
+        <ion-text >
+          <strong>Tipo de Atención</strong>
+        </ion-text>
+        <br>
+        <ion-text>
+          {{ dataActa.tipo_atencion }}
+        </ion-text>
+      </ion-label>
+    </ion-item>
+  </div>
+  
+  <div class="comunicado">
+    <p>La Autoridad Ambiental Competente Departamental, a través de la Dirección de Recursos
+      Naturales, comunica a usted que dando cumplimiento al Marco Legal vigente: Constitución política del Estado,
+      Código Penal, Ley 1333, Ley 700 y Ley 12301, D.S 25458, Decreto Supremo N° 4489, y la resolución Administrativa
+      SDS Y MA /001/2012 Y Decreto Departamental N° 140/2011, realiza la atención en la dirección:</p>
+  <p><strong>Lugar donde fue la entrega, rescate o decomiso del animal:</strong></p>
+  </div>
+  
+  <div class="lugar-entrega">
+    <ion-row>
+      <ion-col size="12" >
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <h3>Municipio</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ dataActa.municipioE }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <h3>Barrio</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ dataActa.barrioE }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <h3>Calle/Avenida</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ dataActa.calleE }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <h3>Nº Casa</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ dataActa.nro_casaE }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </div>
+  
+  <div class="comunicado">
+    <p><strong>
+      Lugar de donde procede el animal (donde encontro al animal 
+      la persona que hace la denuncia o llamada):
+    </strong></p>
+  </div>
+  
+  <div class="lugar-entrega">
+    <ion-row>
+      <ion-col size="12" >
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <h3>Municipio</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ dataActa.municipioS }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <h3>Barrio</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ dataActa.barrioS }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <h3>Calle/Avenida</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ dataActa.calleS }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <h3>Empresa y/o Institución</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ dataActa.empresa }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <h3>Area Verde, Area protegida, otro</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ dataActa.area }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </div>
+  
+  <div class="comunicado">
+    <p><strong>
+      Especies procedentes de la atencion:
+    </strong></p>
+    <p>
+      *Sexo: Macho(M), Hembra(H), Indeterminado(I)
+    </p>
+    <p>
+      *Edad: Neonato o pichon(N), Infante juvenil(i - j), Juvenil(J), Adulto(A)
+      lo llenara la veterinaria que revise al animal
+    </p>
+  </div>
+  
+  <div class="lugar-entrega">
+    <ion-card *ngFor="let item of procedente; let i = index">
+      <ion-row >
+        <ion-col size="12" >
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h1>{{ i + 1 }}</h1>
+              </ion-text>
+              <br>
+              <ion-text>
+                <h3>Nombre Cientifico</h3>
+              </ion-text>
+              <ion-text>
+                <h4>{{ item.nombre_cientifico }}</h4>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h3>Nombre Comun</h3>
+              </ion-text>
+              <ion-text>
+                <h4>{{ item.nombre_comun }}</h4>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h3>Edad</h3>
+              </ion-text>
+              <ion-text>
+                <h4>{{ item.edad }}</h4>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h3>Sexo</h3>
+              </ion-text>
+              <ion-text>
+                <h4>{{ item.sexo }}</h4>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h3>Observaciones</h3>
+              </ion-text>
+              <ion-text>
+                <ion-note>{{ item.observacion }}</ion-note>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+  
+  <div class="comunicado">
+    <p>
+      Las especies serán derivados a la SDS Y MA de la Gobernación
+          de Santa Cruz, instalaciones del CAD
+    </p>
+  </div>
+  
+  <div class="lugar-entrega">
+    <ion-card>
+      <ion-row>
+        <ion-col size="12" >
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h2>Funcionario Recepcionante</h2>
+              </ion-text>
+              <br>
+              <ion-text>
+                <h3>Nombre</h3>
+              </ion-text>
+              <ion-text>
+                <h4>{{ dataActa.nombreFunc }}</h4>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h3>Cedula</h3>
+              </ion-text>
+              <ion-text>
+                <h4>{{ dataActa.cedulaFunc }}</h4>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h3>Firma</h3>
+              </ion-text>
+              <ion-text>
+                <img src="{{ dataActa.firmaFunc }}">
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  
+    <ion-card>
+      <ion-row>
+        <ion-col size="12" >
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h2>Persona(Entidad) que efectua la entrega</h2>
+              </ion-text>
+              <br>
+              <ion-text>
+                <h3>Nombre</h3>
+              </ion-text>
+              <ion-text>
+                <h4>{{ dataActa.nombreP }}</h4>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h3>Cedula</h3>
+              </ion-text>
+              <ion-text>
+                <h4>{{ dataActa.cedulaP }}</h4>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h3>Telefono</h3>
+              </ion-text>
+              <ion-text>
+                <h4>{{ dataActa.telefonoP }}</h4>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h3>Firma</h3>
+              </ion-text>
+              <ion-text>
+                <img src="{{ dataActa.firmaP }}">
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+</div>
+</ion-content>

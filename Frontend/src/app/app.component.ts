@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Storage } from "@capacitor/storage";
+import { Preferences } from '@capacitor/preferences';
+
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent {
     this.initializeApp()
   }
   initializeApp(){
-    Storage.get({key:"session_user"}).then((resp)=>{
+    Preferences.get({key:"session_user"}).then((resp)=>{
       if (resp.value == null) {
         this.router.navigate(["/login"])
       } else {

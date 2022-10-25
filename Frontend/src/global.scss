@@ -60,3 +60,11 @@ ion-item{
   --highlight-color-valid: var(--ion-color-cea);
   --highlight-color-focused: var(--ion-color-cea) !important;
 }
+.native-input[type=date]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+
+}
+.native-input[type=time]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+
+}

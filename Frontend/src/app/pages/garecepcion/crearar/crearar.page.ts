@@ -5,8 +5,9 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Municipios } from './../../../interfaces/municipios';
 import { Edades } from 'src/app/interfaces/edades';
 import { Sexos } from 'src/app/interfaces/sexos';
-import { Storage } from "@capacitor/storage";
 import SignaturePad from 'signature_pad';
+import { Preferences } from '@capacitor/preferences';
+import { VerActaPage } from '../../../modales/ver-acta/ver-acta.page';
 @Component({
   selector: 'app-crearar',
   templateUrl: './crearar.page.html',
@@ -19,45 +20,46 @@ export class CreararPage implements OnInit {
   sexos: Sexos[];
   dataStorage:any
   dataUser:any = []
-  arecepcion: any =[
-    {
-    num_acta_ar: "",
-    fecha_ar: "",
-    hora_ar: "",
-    id_tipo_atencion:"",
-    id_ldfe_municipio:"",
-    nom_ldfe_barrio_ar:"",
-    nom_ldfecalle_ar:"",
-    num_ldfe_casa_ar:"",
-    id_lpd_municipio:"",
-    nom_ldp_barrio_ar:"",
-    nom_ldp_calle_ar:"",
-    nom_ldp_empresa_ar:"",
-    nombre_ldp_area_ar:"",
-    nom_funcionario_ar:"",
-    firma_funcionario_ar:"",
-    ci_funcionario_ar:"",
-    nom_persona_ar:"",
-    firma_persona_ar:"",
-    telf_persona_ar:"",
-    ci_persona_ar:"",
-    id_procedente_atencion:"",
-    numero_rec:"",
-    nom_cientifico_rec:"",
-    nom_comun_rec:"",
-    id_edad:"",
-    id_sexo:"",
-    observaciones_rec:"",
-    nom_edad:"",
-    nom_sexo:"",
-    nom_mun:"",
-    nom_tipo_atencion:"",
-  }]
+  arecepcion ={
+    nro_acta: "",
+    fecha: "",
+    hora:"",
+    tipo_rescate: 0,
+
+    id_municipio_E: 0,
+    barrio: "",
+    calle: "",
+    nro_casa: "",
+
+    id_municipio_S: 0,
+    barrioS: "",
+    calleS: "",
+    empresa: "",
+    area: "",
+
+    especie_proc:[],
+
+    id_usuario: 0,
+
+    cedulaP: "",
+    nombreP: "",
+    telefonoP: "",
+    firmaP: ""
+
+  }
   signaturePad: SignaturePad;
+  especie_proc = []
+  nro = 1
+  especieData = {
+    nombreCi : "",
+    nombreCom : "",
+    edad : 0,
+    sexo : 0,
+    observacion: ""
+  }
   @ViewChild('canvas') canvasEl : ElementRef;
   touchEvent:string;
   constructor(private conexion  : ConexionService,
-              private modalCtrl: ModalController,
               private toastCtrl : ToastController,
               public loadingController: LoadingController) { 
   }
@@ -67,15 +69,33 @@ export class CreararPage implements OnInit {
     this.ListSexos();
     this.ListAtencion();
     this.ListMunicipios();
-    Storage.get({key: "session_user"}).then((data:any)=>{
-      
+    Preferences.get({key: "session_user"}).then((data:any)=>{
       this.dataStorage = JSON.parse(data.value);
       this.perfil(this.dataStorage.id_usuario);
 
     })
-    console.log(this.arecepcion.fecha_ar)
   }
-  perfil(id_usuario:string){
+
+  AgregarEspeciesProcedentes(){
+    this.nro++
+    this.especie_proc.push({
+      "nombreCi"  :this.especieData.nombreCi,
+      "nombreCom" : this.especieData.nombreCom,
+      "edad"      : this.especieData.edad,
+      "sexo"      : this.especieData.sexo,
+      "observacion" : this.especieData.observacion
+    })
+    this.especieData = {
+      nombreCi : "",
+      nombreCom : "",
+      edad : 0,
+      sexo : 0,
+      observacion: ""
+    }
+  }
+
+  perfil(id_usuario:number){
+    this.arecepcion.id_usuario = id_usuario
     const body = {
       id_usuario: id_usuario,
       aksi: "profile-user"
@@ -112,59 +132,54 @@ export class CreararPage implements OnInit {
     })
     t.present();
   }
+
   registrarAr(){
-    console.log(this.arecepcion)
     const body ={
-      
-      // num_acta_ar: this.arecepcion.num_acta_ar,
-      // fecha_ar: this.arecepcion.fecha_ar,
-      // hora_ar: this.arecepcion.hora_ar,
-      // id_tipo_atencion: this.arecepcion.id_tipo_atencion,
-      // id_ldfe_municipio: this.arecepcion.id_ldfe_municipio,
-      // nom_ldfe_barrio_ar: this.arecepcion.nom_ldfe_barrio_ar,
-      // nom_ldfecalle_ar: this.arecepcion.nom_ldfecalle_ar,
-      // num_ldfe_casa_ar: this.arecepcion.num_ldfe_casa_ar,
-      // id_lpd_municipio: this.arecepcion.id_lpd_municipio,
-      // nom_ldp_barrio_ar: this.arecepcion.nom_ldp_barrio_ar,
-      // nom_ldp_calle_ar: this.arecepcion.nom_ldp_calle_ar,
-      // nom_ldp_empresa_ar: this.arecepcion.nom_ldp_empresa_ar,
-      // nombre_ldp_area_ar: this.arecepcion.nombre_ldp_area_ar,
-      // nom_funcionario_ar: this.arecepcion.nom_funcionario_ar,
-      // firma_funcionario_ar: this.arecepcion.firma_funcionario_ar,
-      // ci_funcionario_ar: this.arecepcion.ci_funcionario_ar,
-      // nom_persona_ar: this.arecepcion.nom_persona_ar,
-      // firma_persona_ar: this.arecepcion.firma_persona_ar,
-      // telf_persona_ar: this.arecepcion.telf_persona_ar,
-      // ci_persona_ar: this.arecepcion.ci_persona_ar,
-      // id_procedente_atencion: this.arecepcion.id_procedente_atencion,
-      // numero_rec: this.arecepcion.numero_rec,
-      // nom_cientifico_rec: this.arecepcion.nom_cientifico_rec,
-      // nom_comun_rec: this.arecepcion.nom_comun_rec,
-      // id_edad: this.arecepcion.id_edad,
-      // id_sexo: this.arecepcion.id_sexo,
-      // observaciones_rec: this.arecepcion.observaciones_rec,
-      // nom_edad: this.arecepcion.nom_edad,
-      // nom_sexo: this.arecepcion.nom_sexo,
-      // nom_mun: this.arecepcion.nom_mun,
+      nro_acta: this.arecepcion.nro_acta,
+      fecha: this.arecepcion.fecha,
+      hora: this.arecepcion.hora,
+      tipo_rescate: this.arecepcion.tipo_rescate,
+
+      id_municipio_E: this.arecepcion.id_municipio_E,
+      barrio: this.arecepcion.barrio,
+      calle: this.arecepcion.calle,
+      nro_casa: this.arecepcion.nro_casa,
+
+      id_municipio_S: this.arecepcion.id_municipio_S,
+      barrioS: this.arecepcion.barrioS,
+      calleS: this.arecepcion.calleS,
+      empresa: this.arecepcion.empresa,
+      area: this.arecepcion.area,
+
+      especie_proc:this.especie_proc,
+
+      id_usuario: this.arecepcion.id_usuario,
+
+      cedulaP: this.arecepcion.cedulaP,
+      nombreP: this.arecepcion.nombreP,
+      telefonoP: this.arecepcion.telefonoP,
+      firmaP: this.arecepcion.firmaP,
+
       aksi:"registrar-ar"
     }
+    this.presentLoadingWithOptions()
     this.conexion.postdata(body,"arecepcion.php").subscribe((data:any)=>{
+      console.log(data)
       if (data.success) {
         this.loadingController.dismiss();
-        console.log(body)
         this.mensaje(data.msg)
       } else {
         this.loadingController.dismiss();
         this.mensaje(data.msg)
-        console.log(body)
       }
     })
+
   }
   async presentLoadingWithOptions(){
     const loading = await this.loadingController.create({
       //spinner: null,
       //duration: 5000,
-      message: 'Registrando Usuario...',
+      message: 'Registrando Acta...',
       //translucent: true,
       //cssClass: 'custom-class custom-loading'
       cssClass: 'custom-loading',
@@ -177,7 +192,6 @@ export class CreararPage implements OnInit {
 
   startDrawing(event: Event) {
     this.touchEvent = this.signaturePad.toDataURL()
-    console.log(event);
     // works in device not in browser
 
   }
@@ -192,6 +206,6 @@ export class CreararPage implements OnInit {
 
   savePad() {
     const base64Data = this.signaturePad.toDataURL();
-    this.arecepcion.firma_persona_ar = base64Data;
+    this.arecepcion.firmaP = base64Data;
   }
 }

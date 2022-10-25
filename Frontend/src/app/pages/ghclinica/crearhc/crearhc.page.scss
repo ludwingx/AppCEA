@@ -1,9 +1,23 @@
 .listForm {
     padding: 20px;
 }
-ion-input {
+.inputCenter{
     top: 8px;
 }
 ion-label {
     color: var(--ion-color-cea) !important; //!important para forzar
+}
+.grid{
+    background-color: rgba(161, 161, 161, 0.209);
+    ion-row{
+        ion-col{
+            color: black;
+            border: solid 1px #fff;
+        }
+        .colHead{
+            background-color: var(--ion-color-cea);
+            color: white;
+        }
+
+    }
 }

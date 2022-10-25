@@ -1,8 +1,8 @@
 import { ConexionService } from 'src/app/servicios/conexion/conexion.service';
 import { Component, OnInit } from '@angular/core';
-import { Storage } from "@capacitor/storage";
 import { ToastController, NavController, ModalController, LoadingController } from '@ionic/angular';
 import { ProfilePage } from '../profile/profile.page';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +29,7 @@ export class HomePage implements OnInit {
               private loadingController: LoadingController) { }
 
   ngOnInit() {
-    Storage.get({key: "session_user"}).then((data:any)=>{
+    Preferences.get({key: "session_user"}).then((data:any)=>{
       
       this.dataStorage = JSON.parse(data.value);
       this.perfil(this.dataStorage.id_usuario);
@@ -69,7 +69,7 @@ export class HomePage implements OnInit {
     document.body.classList.toggle('dark');
   }
   cerrarSession(){
-    Storage.remove({key:"session_user"})
+    Preferences.remove({key:"session_user"})
     this.mensaje("Sessión Cerrada")
     this.navCtrl.navigateRoot(['/login'])
 

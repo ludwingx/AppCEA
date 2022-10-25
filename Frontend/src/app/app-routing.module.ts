@@ -42,6 +42,10 @@ const routes: Routes = [
   {
     path: 'ghclinica',
     loadChildren: () => import('./pages/ghclinica/ghclinica.module').then( m => m.GhclinicaPageModule)
+  },
+  {
+    path: 'ver-acta',
+    loadChildren: () => import('./modales/ver-acta/ver-acta.module').then( m => m.VerActaPageModule)
   }
 
 

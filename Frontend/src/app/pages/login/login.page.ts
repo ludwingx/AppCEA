@@ -1,7 +1,7 @@
 import { ConexionService } from './../../servicios/conexion/conexion.service';
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, NavController, ToastController } from '@ionic/angular';
-import { Storage } from "@capacitor/storage";
+import { Preferences } from '@capacitor/preferences';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -45,11 +45,10 @@ export class LoginPage implements OnInit {
     this.conexion.postdata(body,"usuario.php").subscribe((data:any) => {
       const alerta = data.msg;
       if (data.success){
-        Storage.set({key:"session_user",value:JSON.stringify(data.result)})
+        Preferences.set({key:"session_user",value:JSON.stringify(data.result)})
         this.loadingController.dismiss();
         this.navCtrl.navigateRoot(["/home"]);
         this.mensaje("Inicio de sesión correcto!");
-        console.log(data.result)
       }
       else{
         this.loadingController.dismiss();

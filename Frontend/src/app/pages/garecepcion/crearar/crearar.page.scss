@@ -9,9 +9,6 @@
 .listForm {
     padding: 20px;
 }
-ion-input {
-    top: 8px;
-}
 ion-label {
     color: var(--ion-color-cea) !important; //!important para forzar
 }
@@ -23,4 +20,8 @@ canvas {
 .img {
     margin: 0px auto;
     border: 2px solid rgb(187, 178, 178);
+}
+
+.inputCenter{
+    top: 8px;
 }

@@ -4,18 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CreararPageRoutingModule } from './crearar-routing.module';
+import { VerActaPageRoutingModule } from './ver-acta-routing.module';
 
-import { CreararPage } from './crearar.page';
-
+import { VerActaPage } from './ver-acta.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CreararPageRoutingModule
+    VerActaPageRoutingModule
   ],
-  declarations: [CreararPage]
+  declarations: [VerActaPage]
 })
-export class CreararPageModule {}
+export class VerActaPageModule {}

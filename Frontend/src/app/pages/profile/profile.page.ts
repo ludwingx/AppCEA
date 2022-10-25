@@ -1,8 +1,8 @@
 import { EditPage } from './edit/edit.page';
 import { Component, OnInit } from '@angular/core';
 import { ConexionService } from '../../servicios/conexion/conexion.service';
-import { Storage } from "@capacitor/storage";
 import { ModalController, LoadingController } from '@ionic/angular';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +24,7 @@ export class ProfilePage implements OnInit {
   ngOnInit() { 
     this.presentLoadingWithOptions();
     // Camera.requestPermissions({permissions:['photos']})
-    Storage.get({key: "session_user"}).then((data:any)=>{
+    Preferences.get({key: "session_user"}).then((data:any)=>{
       this.dataStorage = JSON.parse(data.value);
       this.perfil(this.dataStorage.id_usuario);
     })

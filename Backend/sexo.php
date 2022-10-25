@@ -18,7 +18,7 @@ if($_GET['aksi']=="list-sexo"){
             $result = json_encode(array('success'=> TRUE,"listSexos"=>$datasexo));
        }
        else{
-        $result = json_encode(array('success'=> false, 'msg'=> 'No existen tipos de atención'));
+        $result = json_encode(array('success'=> false, 'msg'=> 'No existen tipos de sexo'));
     }
     echo $result;
 }

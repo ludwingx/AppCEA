@@ -6,39 +6,30 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <ion-list class="listForm">
     <ion-item fill="outline">
-      <ion-label color="cea" position="floating"><b>Numero de Acta*</b></ion-label>
-      <ion-input type="text" [(ngModel)]="arecepcion.num_acta_ar" placeholder="Ingresa el numero del acta" ></ion-input>
+      <ion-label color="cea" position="floating"><b>Número de Acta*</b></ion-label>
+      <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.nro_acta" placeholder="Ingresa el numero del acta" ></ion-input>
     </ion-item>
     <br>
-    <ion-item>
+    <ion-item fill="outline">
       <ion-label><b>Fecha:</b></ion-label>
-      <ion-input slot="end" [(ngModel)]="arecepcion.fecha_ar" type="date"></ion-input>
+      <ion-input class="datetime" slot="end" [(ngModel)]="arecepcion.fecha" type="date"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item fill="outline">
       <ion-label><b>Hora:</b></ion-label>
-      <ion-input slot="end" [(ngModel)]="arecepcion.hora_ar" type="time"></ion-input>
+      <ion-input class="datetime"  slot="end" [(ngModel)]="arecepcion.hora" type="time"></ion-input>
     </ion-item>
+    <br>
     <ion-item class="itemForm" fill="outline">
       <ion-label class="itemLabel" position="floating">Tipo de atención*</ion-label>
-      <ion-select  [(ngModel)]="arecepcion.id_tipo_atencion">
+      <ion-select placeholder="Selecciona el tipo de atención" [(ngModel)]="arecepcion.tipo_rescate">
         <ion-select-option *ngFor="let tipo of tatencion" value="{{tipo.id_tipo_atencion}}">{{tipo.nom_tipo_atencion}}</ion-select-option>
       </ion-select>
-      <ion-note slot="helper">Seleccione el tipo de atencion</ion-note>
-      <ion-note slot="error">tipo de atención no seleccionado</ion-note>
     </ion-item>
   </ion-list>
-
-    <ion-item>
-      <ion-note color="black">La Autoridad Ambiental Competente Departamental, a través de la Dirección de Recursos
-        Naturales, comunica a usted que dando cumplimiento al Marco Legal vigente: Constitución política del Estado,
-        Código Penal, Ley 1333, Ley 700 y Ley 12301, D.S 25458, Decreto Supremo N° 4489, y la resolución Administrativa
-        SDS Y MA /001/2012 Y Decreto Departamental N° 140/2011, realiza la atención en la dirección:
-      </ion-note>
-    </ion-item>
-    <br>
     <ion-item-divider class="itemDivider">
       <ion-text class="textDivider">Lugar donde fue la entrega, rescate o decomiso del animal:</ion-text>
     </ion-item-divider>
@@ -46,23 +37,24 @@
   <ion-list class="listForm">
     <ion-item class="itemForm" fill="outline">
       <ion-label class="itemLabel" position="floating">Municipio*</ion-label>
-      <ion-select  [(ngModel)]="arecepcion.id_ldfe_municipio">
+      <ion-select placeholder="Selecciona el Municipio"  [(ngModel)]="arecepcion.id_municipio_E">
         <ion-select-option *ngFor="let nombre of municipios" value="{{nombre.id_municipio}}">{{nombre.nom_mun}}</ion-select-option>
       </ion-select>
-      <ion-note slot="helper">Seleccione el municipio</ion-note>
-      <ion-note slot="error">municipio no seleccionado</ion-note>
     </ion-item>
+    <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Barrio*</b></ion-label>
-      <ion-input type="text" [(ngModel)]="arecepcion.nom_ldfe_barrio_ar" placeholder="Ingresa el nombre del barrio" ></ion-input>
+      <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.barrio" placeholder="Ingresa el nombre del barrio" ></ion-input>
     </ion-item>
+    <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Calle/Avenida*</b></ion-label>
-      <ion-input type="text" [(ngModel)]="arecepcion.nom_ldfecalle_ar" placeholder="Ingresa el nombre de la calle/avenida" ></ion-input>
+      <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.calle" placeholder="Ingresa el nombre de la calle/avenida" ></ion-input>
     </ion-item>
+    <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>N° Casa*</b></ion-label>
-      <ion-input type="number" [(ngModel)]="arecepcion.num_ldfe_casa_ar" placeholder="Ingresa el numero de la casa" ></ion-input>
+      <ion-input class="inputCenter" type="number" [(ngModel)]="arecepcion.nro_casa" placeholder="Ingresa el numero de la casa" ></ion-input>
     </ion-item>
   </ion-list>
     <ion-item-divider class="itemDivider">
@@ -71,70 +63,73 @@
   <ion-list class="listForm">
     <ion-item class="itemForm" fill="outline">
       <ion-label class="itemLabel" position="floating">Municipio*</ion-label>
-      <ion-select  [(ngModel)]="arecepcion.id_ldp_municipio">
+      <ion-select placeholder="Selecciona el Municipio" [(ngModel)]="arecepcion.id_municipio_S">
         <ion-select-option *ngFor="let nombre of municipios" value="{{nombre.id_municipio}}">{{nombre.nom_mun}}</ion-select-option>
       </ion-select>
-      <ion-note slot="helper">Seleccione el municipio</ion-note>
-      <ion-note slot="error">municipio no seleccionado</ion-note>
     </ion-item>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Barrio*</b></ion-label>
-      <ion-input type="text" [(ngModel)]="arecepcion.nom_ldp_barrio_ar" placeholder="Ingresa el nombre del barrio" ></ion-input>
+      <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.barrioS" placeholder="Ingresa el nombre del barrio" ></ion-input>
     </ion-item>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Calle/Avenida*</b></ion-label>
-      <ion-input type="text" [(ngModel)]="arecepcion.nom_ldp_calle_ar" placeholder="Ingresa el nombre de la calle/avenida" ></ion-input>
+      <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.calleS" placeholder="Ingresa el nombre de la calle/avenida" ></ion-input>
     </ion-item>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Empresa y/o Institución*</b></ion-label>
-      <ion-input type="text" [(ngModel)]="arecepcion.nom_ldp_empresa_ar" placeholder="Ingresa el numero de la casa" ></ion-input>
+      <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.empresa" placeholder="Ingresa el numero de la casa" ></ion-input>
     </ion-item>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Área Verde, Área protegida, otros*</b></ion-label>
-      <ion-input type="text" [(ngModel)]="arecepcion.nom_ldp_empresa_ar" placeholder="Ingresa el numero de la casa" ></ion-input>
+      <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.area" placeholder="Ingresa el numero de la casa" ></ion-input>
     </ion-item>
     </ion-list>
       <ion-item-divider class="itemDivider">
         <ion-text class="textDivider">Especies procedentes de la atención:</ion-text>
       </ion-item-divider>
+
     <ion-list class="listForm">
     <ion-item>
       <ion-label>N°</ion-label>
-      <ion-label slot="end">1</ion-label>
+      <ion-label slot="end">{{ nro }}</ion-label>
     </ion-item>
     <ion-item>
       <ion-label>Nombre Científico</ion-label>
-      <ion-input slot="end" type="text"></ion-input>
+      <ion-input slot="end" [(ngModel)]="especieData.nombreCi" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Nombre Común</ion-label>
-      <ion-input slot="end" type="text"></ion-input>
+      <ion-input slot="end" [(ngModel)]="especieData.nombreCom" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Edad:</ion-label>
-      <ion-select>
-        <ion-select-option *ngFor="let edad of edades" >
+      <ion-select [(ngModel)]="especieData.edad">
+        <ion-select-option value="{{ edad.id_edad }}" *ngFor="let edad of edades" >
           {{edad.nom_edad}}
         </ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Sexo:</ion-label>
-      <ion-select>
-        <ion-select-option *ngFor="let sexo of sexos" >
+      <ion-select [(ngModel)]="especieData.sexo">
+        <ion-select-option value="{{ sexo.id_sexo }}" *ngFor="let sexo of sexos" >
           {{sexo.nom_sexo}}
         </ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Observaciones</ion-label>
-      <ion-textarea></ion-textarea>
+    <ion-item fill="outline">
+      <ion-label color="cea" position="floating">Observaciones</ion-label>
+      <ion-textarea [(ngModel)]="especieData.observacion"></ion-textarea>
     </ion-item>
-    <ion-item>
-      <ion-note color="black">Las especies serán derivados a la SDS Y MA de la Gobernación
-        de Santa Cruz, instalaciones del CAD
-      </ion-note>
+    <ion-item class="ion-text-center">
+      <ion-col>
+        <ion-button  color="cea" (click)="AgregarEspeciesProcedentes()">
+          Agregar
+        </ion-button>
+      </ion-col>
     </ion-item>
+
+
     <ion-item-divider class="itemDivider">
       <ion-text class="textDivider">Funcionario Recepcionante:</ion-text>
     </ion-item-divider>
@@ -153,8 +148,16 @@
     </ion-item-divider>
     <br>
     <ion-item fill="outline">
+      <ion-label color="cea" position="floating"><b>Celula de identidad*</b></ion-label>
+      <ion-input class="inputCenter" type="tel" [(ngModel)]="arecepcion.cedulaP" placeholder="Ingresa el numero de la casa" ></ion-input>
+    </ion-item>
+    <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Nombre*</b></ion-label>
-      <ion-input type="text" [(ngModel)]="arecepcion.nom_persona_ar" placeholder="Ingresa el nombre del barrio" ></ion-input>
+      <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.nombreP" placeholder="Ingresa el nombre del barrio" ></ion-input>
+    </ion-item>
+    <ion-item fill="outline">
+      <ion-label color="cea" position="floating"><b>Telefono*</b></ion-label>
+      <ion-input class="inputCenter" type="tel" [(ngModel)]="arecepcion.telefonoP" placeholder="Ingresa el numero de la casa" ></ion-input>
     </ion-item>
     <ion-item lines="none">
       <h3 >Dibuja tu firma*</h3>
@@ -182,22 +185,14 @@
       </ion-item>
     </ion-item-group>
 
-    <ion-item *ngIf="arecepcion.firma_persona_ar">
+    <ion-item *ngIf="arecepcion.firmaP">
       <ion-label>Firma declarada:</ion-label>
     </ion-item>
-    <ion-item *ngIf="arecepcion.firma_persona_ar">
-      <img src='{{ arecepcion.firma_persona_ar }}' alt="No existe ninguna firma registrada" />
+    <ion-item *ngIf="arecepcion.firmaP">
+      <img src='{{ arecepcion.firmaP }}' alt="No existe ninguna firma registrada" />
     </ion-item>
     <ion-item>
-      <ion-note *ngIf="arecepcion.firma_persona_ar" >La firma que se muestra, será la que se registrará junto a los datos del usuario</ion-note>
-    </ion-item>
-    <ion-item fill="outline">
-      <ion-label color="cea" position="floating"><b>Telefono*</b></ion-label>
-      <ion-input type="number" [(ngModel)]="arecepcion.telf_persona_ar" placeholder="Ingresa el numero de la casa" ></ion-input>
-    </ion-item>
-    <ion-item fill="outline">
-      <ion-label color="cea" position="floating"><b>Celula de identidad*</b></ion-label>
-      <ion-input type="number" [(ngModel)]="arecepcion.ci_persona_ar" placeholder="Ingresa el numero de la casa" ></ion-input>
+      <ion-note *ngIf="arecepcion.firmaP" >La firma que se muestra, será la que se registrará junto a los datos del usuario</ion-note>
     </ion-item>
     <ion-button color="cea" (click)="registrarAr()" expand="block">
       Registrar Acta de Recepción
