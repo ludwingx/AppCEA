@@ -186,6 +186,7 @@
     </ion-grid> -->
     <h2><ion-label>TRATAMIENTO</ion-label></h2>
     <h3><ion-label>Diagnostico</ion-label></h3>
+    <ion-label slot="end">Fila: {{ nro }}</ion-label>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Farmaco</b></ion-label>
       <ion-input [(ngModel)]="tratdiagnData.farmaco_td" class="inputCenter" type="text" placeholder="Ingresa el dato del farmaco" ></ion-input>
@@ -210,5 +211,11 @@
       <ion-label><b>Hora:</b></ion-label>
       <ion-input [(ngModel)]="tratdiagnData.hora_td" class="datetime"  slot="end" type="time"></ion-input>
     </ion-item>
+    <ion-button (click)="agregarTratamientoDiagnostico()" color="cea">
+      Agregar
+    </ion-button>
+    <ion-button (click)="registrarHc()" color="cea" expand="block">
+      Registrar Historia Clinica
+    </ion-button>
   </ion-list> 
 </ion-content>

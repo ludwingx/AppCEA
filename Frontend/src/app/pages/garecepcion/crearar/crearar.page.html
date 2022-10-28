@@ -93,6 +93,14 @@
       <ion-label>N°</ion-label>
       <ion-label slot="end">{{ nro }}</ion-label>
     </ion-item>
+        <ion-item>
+      <ion-label>Especie:</ion-label>
+      <ion-select [(ngModel)]="especieData.especies">
+        <ion-select-option value="{{ especie.id_especies }}" *ngFor="let especie of especies" >
+          {{especie.nom_especies}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
     <ion-item>
       <ion-label>Nombre Científico</ion-label>
       <ion-input slot="end" [(ngModel)]="especieData.nombreCi" type="text"></ion-input>

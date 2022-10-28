@@ -8,7 +8,6 @@
     if($postjson['aksi'] == "registrar-hc"){
         $fecha_hc = $postjson['fecha_hc'];
         $hora_hc = $postjson['hora_hc'];
-        $hora_hc  = $postjson['hora_hc']; 
         $id_especies  = $postjson['id_especies'];
         $nom_comun_hc  = $postjson['nom_comun_hc'];
         $id_sexo = $postjson['id_sexo'];
@@ -43,19 +42,18 @@
         $hora_td;
         //registro de persona
 
-        $res2 = $mysqli->query("INSERT INTO historia_clinica SET             
-
+        $res = $mysqli->query("INSERT INTO historia_clinica SET
         fecha_hc= '$fecha_hc',
         hora_hc= '$hora_hc',
-        id_especies: '$id_especies',
+        id_especies: $id_especies,
         nom_comun_hc= '$nom_comun_hc',
-        id_sexo: '$id_sexo',
-        id_edad: '$id_edad',
+        id_sexo: $id_sexo,
+        id_edad: $id_edad,
 
         anamnesis_hc= '$anamnesis_hc',
-        id_mucosas= '$id_mucosas',
+        id_mucosas= $id_mucosas,
         observaciones_hc= '$observaciones_hc',
-        id_revext= '$id_revext',
+        id_revext= $id_revext,
         sis_nervioso_hc= '$sis_nervioso_hc',
         sis_respiratorio_hc= '$sis_respiratorio_hc',
         temperatura_hc= '$temperatura_hc',
@@ -89,8 +87,8 @@
             $res2 = $mysqli->query("INSERT INTO tratamiento_diagnostico SET id_historia_clinica=$id_hcli,
                 farmaco_td='$farmaco_td[$i]',
                 accion_td='$accion_td[$i]',
-                dosis_td=$dosis_td[$i],
-                via_td=$via_td[$i],
+                dosis_td='$dosis_td[$i]',
+                via_td='$via_td[$i]',
                 hora_td='$hora_td[$i]'");
         }
         

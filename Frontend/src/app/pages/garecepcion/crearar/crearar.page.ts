@@ -8,6 +8,7 @@ import { Sexos } from 'src/app/interfaces/sexos';
 import SignaturePad from 'signature_pad';
 import { Preferences } from '@capacitor/preferences';
 import { VerActaPage } from '../../../modales/ver-acta/ver-acta.page';
+import { Especies } from 'src/app/interfaces/especies';
 @Component({
   selector: 'app-crearar',
   templateUrl: './crearar.page.html',
@@ -18,6 +19,7 @@ export class CreararPage implements OnInit {
   municipios: Municipios[];
   edades: Edades[];
   sexos: Sexos[];
+  especies: Especies[];
   dataStorage:any
   dataUser:any = []
   arecepcion ={
@@ -51,6 +53,7 @@ export class CreararPage implements OnInit {
   especie_proc = []
   nro = 1
   especieData = {
+    especies:0,
     nombreCi : "",
     nombreCom : "",
     edad : 0,
@@ -61,14 +64,14 @@ export class CreararPage implements OnInit {
   touchEvent:string;
   constructor(private conexion  : ConexionService,
               private toastCtrl : ToastController,
-              public loadingController: LoadingController) { 
-  }
+              public loadingController: LoadingController) {}
 
   ngOnInit() { 
     this.ListEdades();
     this.ListSexos();
     this.ListAtencion();
     this.ListMunicipios();
+    this.ListEspecies();
     Preferences.get({key: "session_user"}).then((data:any)=>{
       this.dataStorage = JSON.parse(data.value);
       this.perfil(this.dataStorage.id_usuario);
@@ -79,6 +82,7 @@ export class CreararPage implements OnInit {
   AgregarEspeciesProcedentes(){
     this.nro++
     this.especie_proc.push({
+      "especies"      : this.especieData.especies,
       "nombreCi"  :this.especieData.nombreCi,
       "nombreCom" : this.especieData.nombreCom,
       "edad"      : this.especieData.edad,
@@ -86,6 +90,7 @@ export class CreararPage implements OnInit {
       "observacion" : this.especieData.observacion
     })
     this.especieData = {
+      especies: 0,
       nombreCi : "",
       nombreCom : "",
       edad : 0,
@@ -123,6 +128,11 @@ export class CreararPage implements OnInit {
   ListSexos(){
     this.conexion.getdata("sexo.php/?aksi=list-sexo").subscribe((data:any)=>{
       this.sexos = data.listSexos
+    })
+  }
+  ListEspecies(){
+    this.conexion.getdata("especie.php/?aksi=list-especie").subscribe((data:any)=>{
+      this.especies = data.listEspecies
     })
   }
   async mensaje (m: string){

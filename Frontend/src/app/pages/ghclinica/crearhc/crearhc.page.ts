@@ -2,7 +2,6 @@ import { Hclinica } from './../../../interfaces/hclinica';
 import { Revext } from './../../../interfaces/revext';
 import { ConexionService } from './../../../servicios/conexion/conexion.service';
 import { Component, OnInit } from '@angular/core';
-import { Subscriber } from 'rxjs';
 import { Especies } from 'src/app/interfaces/especies';
 import { Sexos } from 'src/app/interfaces/sexos';
 import { Mucosas } from 'src/app/interfaces/mucosas';
@@ -52,7 +51,7 @@ export class CrearhcPage implements OnInit {
 
   }
   tratamiento_diagnostico = []
-  fila=1
+  nro = 1
   tratdiagnData = {
     farmaco_td:"",
     accion_td: "",
@@ -68,6 +67,7 @@ export class CrearhcPage implements OnInit {
     this.ListEspecies();
     this.ListSexo();
     this.ListMucosa();
+    this.ListRevext();
     Preferences.get({key: "session_user"}).then((data:any)=>{
       this.dataStorage = JSON.parse(data.value);
       this.perfil(this.dataStorage.id_usuario);
@@ -75,21 +75,22 @@ export class CrearhcPage implements OnInit {
     })
   }
   agregarTratamientoDiagnostico(){
-    this.fila++
+    this.nro++
     this.tratamiento_diagnostico.push({
       "farmaco_td": this.tratdiagnData.farmaco_td,
       "accion_td": this.tratdiagnData.accion_td,
-      "dosis": this.tratdiagnData.dosis_td,
+      "dosis_td": this.tratdiagnData.dosis_td,
       "via_td":this.tratdiagnData.via_td,
       "hora_td": this.tratdiagnData.hora_td
     })
-    this.tratdiagnData ={
+    this.tratdiagnData = {
       farmaco_td:"",
       accion_td: "",
       dosis_td:"",
       via_td:"",
-      hora_td:"",
+      hora_td:""
     }
+    console.log(this.tratdiagnData)
   }
   ListEspecies(){
     this.conexion.getdata("especie.php/?aksi=list-especie").subscribe((data:any)=>{
@@ -159,6 +160,7 @@ export class CrearhcPage implements OnInit {
 
       aksi: "registrar-hc"
     }
+    console.log(body)
     this.presentLoadingWithOptions()
     this.conexion.postdata(body,"hclinica.php").subscribe((data:any)=>{
       console.log(data)

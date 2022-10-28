@@ -29,6 +29,7 @@
         $nombreP = $postjson['nombreP'];
         $telefonoP = $postjson['telefonoP'];
         $firmaP = $postjson['firmaP'];
+        $especies;
         $nombreCi;
         $nombreCom;
         $edad;
@@ -65,6 +66,7 @@
         
         
         for($i = 0; $i < count($especie_proc); $i++){
+            $especies[$i]= $especie_proc[$i]['especies'];
             $nombreCi[$i] = $especie_proc[$i]['nombreCi'];
             $nombreCom[$i]= $especie_proc[$i]['nombreCom'];
             $edad[$i]= $especie_proc[$i]['edad'];
@@ -74,6 +76,7 @@
         
         for($i = 0; $i < count($especie_proc); $i++){
             $res3 = $mysqli->query("INSERT INTO procedente_atencion SET id_acta_recepcion=$id_acta,
+                id_especies=$especies[$i],
                 nombre_cientifico='$nombreCi[$i]',
                 nombre_comun='$nombreCom[$i]',
                 id_edad=$edad[$i],
@@ -118,10 +121,12 @@
         $nombreMuS = mysqli_fetch_array($res2);
         $nombreMuS = $nombreMuS["nom_mun"];
         
-        $res3 = $mysqli->query("SELECT PA.nombre_cientifico, PA.nombre_comun, E.nom_edad, S.nom_sexo, PA.observaciones_rec
+        $res3 = $mysqli->query("SELECT ES.nom_especies, PA.nombre_cientifico, PA.nombre_comun, E.nom_edad, S.nom_sexo, PA.observaciones_rec
             FROM acta_recepcion as AR
             INNER JOIN procedente_atencion as PA
             ON AR.id_acta_recepcion=PA.id_acta_recepcion
+            INNER JOIN especies as ES
+            ON PA.id_especies = ES.id_especies
             INNER JOIN edad as E
             ON PA.id_edad=E.id_edad
             INNER JOIN sexo as S
@@ -161,6 +166,7 @@
         
         while ($data=mysqli_fetch_assoc($res3)) {
                 $procedente[$cont]= array(
+                    "especies" => $data["nom_especies"],
                     "nombre_cientifico" => $data["nombre_cientifico"],
                     "nombre_comun"=> $data["nombre_comun"],
                     "edad" => $data["nom_edad"],
