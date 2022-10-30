@@ -24,18 +24,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
-    path: 'gftranslocacion',
-    loadChildren: () => import('./pages/gftranslocacion/gftranslocacion.module').then( m => m.GftranslocacionPageModule)
-  },
-  {
-    path: 'gaderivacion',
-    loadChildren: () => import('./pages/gaderivacion/gaderivacion.module').then( m => m.GaderivacionPageModule)
-  },
-  {
-    path: 'gfdeceso',
-    loadChildren: () => import('./pages/gfdeceso/gfdeceso.module').then( m => m.GfdecesoPageModule)
-  },
-  {
     path: 'garecepcion',
     loadChildren: () => import('./pages/garecepcion/garecepcion.module').then( m => m.GarecepcionPageModule)
   },
@@ -46,6 +34,10 @@ const routes: Routes = [
   {
     path: 'ver-acta',
     loadChildren: () => import('./modales/ver-acta/ver-acta.module').then( m => m.VerActaPageModule)
+  },
+  {
+    path: 'gasilvestre',
+    loadChildren: () => import('./pages/gasilvestre/gasilvestre.module').then( m => m.GasilvestrePageModule)
   }
 
 

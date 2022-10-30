@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Asilvestre } from 'src/app/interfaces/asilvestre';
+import { Animalsilvestre } from 'src/app/interfaces/animalsilvestre';
+
 import { ConexionService } from 'src/app/servicios/conexion/conexion.service';
 
 @Component({
@@ -8,19 +9,19 @@ import { ConexionService } from 'src/app/servicios/conexion/conexion.service';
   styleUrls: ['./ghclinica.page.scss'],
 })
 export class GhclinicaPage implements OnInit {
-  asilvestresin : Asilvestre[];
-  asilvestrecon : Asilvestre[];
+  asilvestresin : Animalsilvestre[];
+  asilvestrecon : Animalsilvestre[];
   constructor(private conexion: ConexionService) { }
 
   ngOnInit() {
-    this.ListAnimalesSilvestresCon();
+    // this.ListAnimalesSilvestresCon();
     this.ListAnimalesSilvestresSin();
   }
-  ListAnimalesSilvestresCon(){
-    this.conexion.getdata("asilvestre.php/?aksi=list-AsilvestreCon").subscribe((data:any)=>{
-      this.asilvestrecon = data.listAsilvestreCon
-    })
-  }
+  // ListAnimalesSilvestresCon(){
+  //   this.conexion.getdata("asilvestre.php/?aksi=list-AsilvestreCon").subscribe((data:any)=>{
+  //     this.asilvestrecon = data.listAsilvestreCon
+  //   })
+  // }
   ListAnimalesSilvestresSin(){
     this.conexion.getdata("asilvestre.php/?aksi=list-AsilvestreSin").subscribe((data:any)=>{
       this.asilvestresin = data.listAsilvestreSin

@@ -29,11 +29,7 @@
         $nombreP = $postjson['nombreP'];
         $telefonoP = $postjson['telefonoP'];
         $firmaP = $postjson['firmaP'];
-        $especies;
-        $nombreCi;
-        $nombreCom;
-        $edad;
-        $sexo;
+        $id_animal_silvestre;
         $observaciones;
         
         //registro de persona
@@ -42,7 +38,8 @@
         $repPersona = $mysqli->query("SELECT id_persona FROM tblpersonas WHERE cedula='$cedulaP'");
         $id_person = mysqli_fetch_array($repPersona);
         $id_person = $id_person["id_persona"];
-
+        
+        //registro de acta de recepcion
         $res2 = $mysqli->query("INSERT INTO acta_recepcion SET 
         num_acta_ar='$nro_acta',
         fecha_ar='$fecha',
@@ -66,25 +63,32 @@
         
         
         for($i = 0; $i < count($especie_proc); $i++){
-            $especies[$i]= $especie_proc[$i]['especies'];
-            $nombreCi[$i] = $especie_proc[$i]['nombreCi'];
-            $nombreCom[$i]= $especie_proc[$i]['nombreCom'];
-            $edad[$i]= $especie_proc[$i]['edad'];
-            $sexo[$i]= $especie_proc[$i]['sexo'];
+
+            $id_animal_silvestre[$i]= $especie_proc[$i]['id_animal_silvestre'];
             $observaciones[$i]= $especie_proc[$i]['observacion'];
         }
         
+        //registro de procedente de atencion
         for($i = 0; $i < count($especie_proc); $i++){
             $res3 = $mysqli->query("INSERT INTO procedente_atencion SET id_acta_recepcion=$id_acta,
-                id_especies=$especies[$i],
-                nombre_cientifico='$nombreCi[$i]',
-                nombre_comun='$nombreCom[$i]',
-                id_edad=$edad[$i],
-                id_sexo=$sexo[$i],
+
+                id_animal_silvestre=$id_animal_silvestre[$i],
                 observaciones_rec='$observaciones[$i]'");
         }
         
-        if($res && $res2 && $res3){
+        //registro de animal silvestre
+        $id_procedente;
+        $cont=0;
+        $repProcedente_atencion = $mysqli->query("SELECT id_procedente_atencion FROM procedente_atencion WHERE id_acta_recepcion=$id_acta");
+        while ($data=mysqli_fetch_assoc($repProcedente_atencion)) {
+            $id_procedente[$cont] = $data["id_procedente_atencion"];
+            $cont++;
+        }
+        for($i = 0; $i < count($id_procedente); $i++){
+            $res4 =$mysqli->query("INSERT INTO animal_silvestre SET id_procedente_atencion=$id_procedente[$i]");
+        }
+        
+        if($res && $res2 && $res3 && $res4){
             $result = json_encode(array("success" => TRUE, "msg" => "Acta de recepción registrada con exito"));
         }else{
             $result = json_encode(array("success" => FALSE, "msg" => "Hubo un error al registrar el Acta de recepción"));
@@ -121,16 +125,18 @@
         $nombreMuS = mysqli_fetch_array($res2);
         $nombreMuS = $nombreMuS["nom_mun"];
         
-        $res3 = $mysqli->query("SELECT ES.nom_especies, PA.nombre_cientifico, PA.nombre_comun, E.nom_edad, S.nom_sexo, PA.observaciones_rec
+        $res3 = $mysqli->query("SELECT ES.nom_especies, A.nom_cientifico, A.nom_comun, E.nom_edad, S.nom_sexo, PA.observaciones_rec
             FROM acta_recepcion as AR
             INNER JOIN procedente_atencion as PA
             ON AR.id_acta_recepcion=PA.id_acta_recepcion
             INNER JOIN especies as ES
-            ON PA.id_especies = ES.id_especies
+            ON A.id_especies = ES.id_especies
             INNER JOIN edad as E
-            ON PA.id_edad=E.id_edad
+            ON A.id_edad=E.id_edad
             INNER JOIN sexo as S
-            ON PA.id_sexo=S.id_sexo
+            ON A.id_sexo=S.id_sexo
+            INNER JOIN animal_silvestre as A
+            ON PA.id_animal_silvestre = A.animal_silvestre
             WHERE AR.num_acta_ar='$nro_acta'");
             
         
@@ -166,11 +172,11 @@
         
         while ($data=mysqli_fetch_assoc($res3)) {
                 $procedente[$cont]= array(
-                    "especies" => $data["nom_especies"],
-                    "nombre_cientifico" => $data["nombre_cientifico"],
-                    "nombre_comun"=> $data["nombre_comun"],
-                    "edad" => $data["nom_edad"],
-                    "sexo"=> $data["nom_sexo"],
+                    "nom_especies" => $data["nom_especies"],
+                    "nom_cientifico" => $data["nom_cientifico"],
+                    "nom_comun"=> $data["nom_comun"],
+                    "nom_edad" => $data["nom_edad"],
+                    "nom_sexo"=> $data["nom_sexo"],
                     "observacion"=> $data["observaciones_rec"]
                 );
                 $cont++;

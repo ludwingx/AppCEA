@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { GaderivacionPageRoutingModule } from './gaderivacion-routing.module';
+import { CrearasPageRoutingModule } from './crearas-routing.module';
 
-import { GaderivacionPage } from './gaderivacion.page';
+import { CrearasPage } from './crearas.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GaderivacionPageRoutingModule
+    CrearasPageRoutingModule
   ],
-  declarations: [GaderivacionPage]
+  declarations: [CrearasPage]
 })
-export class GaderivacionPageModule {}
+export class CrearasPageModule {}

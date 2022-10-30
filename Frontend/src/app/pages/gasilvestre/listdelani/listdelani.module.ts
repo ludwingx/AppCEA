@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { GfdecesoPageRoutingModule } from './gfdeceso-routing.module';
+import { ListdelaniPageRoutingModule } from './listdelani-routing.module';
 
-import { GfdecesoPage } from './gfdeceso.page';
+import { ListdelaniPage } from './listdelani.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GfdecesoPageRoutingModule
+    ListdelaniPageRoutingModule
   ],
-  declarations: [GfdecesoPage]
+  declarations: [ListdelaniPage]
 })
-export class GfdecesoPageModule {}
+export class ListdelaniPageModule {}

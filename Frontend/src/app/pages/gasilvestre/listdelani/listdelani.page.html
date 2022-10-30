@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="arrow-back-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Eliminados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item class="ion-text-center">
+    <ion-label  color="cea">-Lista de animales silvestres eliminados-</ion-label>
+  </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let animals of animalsilvestre">
+      <ion-label>
+        <h2>{{animals.nom_comun}}</h2>
+        <p>{{animals.nom_cientifico}} #{{animals.id_animal_silvestre}}</p> 
+      </ion-label>
+      <ion-icon button class="icon" size="large" (click)="enableAnimal(animals.id_animal_silvestre,animals.nom_comun)" color="cea" name="refresh-circle"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

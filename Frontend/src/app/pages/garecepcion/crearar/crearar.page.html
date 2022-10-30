@@ -11,7 +11,7 @@
   <ion-list class="listForm">
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Número de Acta*</b></ion-label>
-      <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.nro_acta" placeholder="Ingresa el numero del acta" ></ion-input>
+      <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.nro_acta" placeholder="Ingresa el número del acta" ></ion-input>
     </ion-item>
     <br>
     <ion-item fill="outline">
@@ -54,7 +54,7 @@
     <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>N° Casa*</b></ion-label>
-      <ion-input class="inputCenter" type="number" [(ngModel)]="arecepcion.nro_casa" placeholder="Ingresa el numero de la casa" ></ion-input>
+      <ion-input class="inputCenter" type="number" [(ngModel)]="arecepcion.nro_casa" placeholder="Ingresa el número de la casa" ></ion-input>
     </ion-item>
   </ion-list>
     <ion-item-divider class="itemDivider">
@@ -77,11 +77,11 @@
     </ion-item>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Empresa y/o Institución*</b></ion-label>
-      <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.empresa" placeholder="Ingresa el numero de la casa" ></ion-input>
+      <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.empresa" placeholder="Ingresa el número de la casa" ></ion-input>
     </ion-item>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Área Verde, Área protegida, otros*</b></ion-label>
-      <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.area" placeholder="Ingresa el numero de la casa" ></ion-input>
+      <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.area" placeholder="Ingresa el número de la casa" ></ion-input>
     </ion-item>
     </ion-list>
       <ion-item-divider class="itemDivider">
@@ -93,38 +93,15 @@
       <ion-label>N°</ion-label>
       <ion-label slot="end">{{ nro }}</ion-label>
     </ion-item>
-        <ion-item>
-      <ion-label>Especie:</ion-label>
-      <ion-select [(ngModel)]="especieData.especies">
-        <ion-select-option value="{{ especie.id_especies }}" *ngFor="let especie of especies" >
-          {{especie.nom_especies}}
-        </ion-select-option>
+    <ion-item class="itemForm" fill="outline">
+      <ion-label position="floating">Animal Silvestre*</ion-label>
+      <ion-select [(ngModel)]="especieData.id_animal_silvestre" [interfaceOptions]="customAlertOptions" interface="alert" placeholder="Seleccione un animal silvestre">
+        <ion-select-option *ngFor="let animals of animalsilvestre" value="{{animals.id_animal_silvestre}}"> #{{animals.id_animal_silvestre}} - {{animals.nom_comun}}</ion-select-option>
       </ion-select>
+      <ion-note slot="helper">Seleccione el animal silvestre</ion-note>
+      <ion-note slot="error">Animal silvestre no seleccionado</ion-note>
     </ion-item>
-    <ion-item>
-      <ion-label>Nombre Científico</ion-label>
-      <ion-input slot="end" [(ngModel)]="especieData.nombreCi" type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Nombre Común</ion-label>
-      <ion-input slot="end" [(ngModel)]="especieData.nombreCom" type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Edad:</ion-label>
-      <ion-select [(ngModel)]="especieData.edad">
-        <ion-select-option value="{{ edad.id_edad }}" *ngFor="let edad of edades" >
-          {{edad.nom_edad}}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>Sexo:</ion-label>
-      <ion-select [(ngModel)]="especieData.sexo">
-        <ion-select-option value="{{ sexo.id_sexo }}" *ngFor="let sexo of sexos" >
-          {{sexo.nom_sexo}}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
+    <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating">Observaciones</ion-label>
       <ion-textarea [(ngModel)]="especieData.observacion"></ion-textarea>
@@ -149,23 +126,23 @@
       <img class="firmaImg" [src]='dataUser.firma_u' alt="firma">
     </ion-item>
     <ion-item>
-      <ion-label><b>Celula de Identidad: </b>{{dataUser.ci_u}}</ion-label>
+      <ion-label><b>Cédula de Identidad: </b>{{dataUser.ci_u}}</ion-label>
     </ion-item>
     <ion-item-divider class="itemDivider">
       <ion-text class="textDivider">Persona(Entidad) que efectúa la entrega:</ion-text>
     </ion-item-divider>
     <br>
     <ion-item fill="outline">
-      <ion-label color="cea" position="floating"><b>Celula de identidad*</b></ion-label>
-      <ion-input class="inputCenter" type="tel" [(ngModel)]="arecepcion.cedulaP" placeholder="Ingresa el numero de la casa" ></ion-input>
+      <ion-label color="cea" position="floating"><b>Cédula de identidad*</b></ion-label>
+      <ion-input class="inputCenter" type="tel" [(ngModel)]="arecepcion.cedulaP" placeholder="Ingresa su Cédula de identidad" ></ion-input>
     </ion-item>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Nombre*</b></ion-label>
-      <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.nombreP" placeholder="Ingresa el nombre del barrio" ></ion-input>
+      <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.nombreP" placeholder="Ingresa el nombre" ></ion-input>
     </ion-item>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Telefono*</b></ion-label>
-      <ion-input class="inputCenter" type="tel" [(ngModel)]="arecepcion.telefonoP" placeholder="Ingresa el numero de la casa" ></ion-input>
+      <ion-input class="inputCenter" type="tel" [(ngModel)]="arecepcion.telefonoP" placeholder="Ingresa el telefono" ></ion-input>
     </ion-item>
     <ion-item lines="none">
       <h3 >Dibuja tu firma*</h3>

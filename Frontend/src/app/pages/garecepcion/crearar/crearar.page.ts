@@ -9,12 +9,20 @@ import SignaturePad from 'signature_pad';
 import { Preferences } from '@capacitor/preferences';
 import { VerActaPage } from '../../../modales/ver-acta/ver-acta.page';
 import { Especies } from 'src/app/interfaces/especies';
+import { Animalsilvestre } from 'src/app/interfaces/animalsilvestre';
 @Component({
   selector: 'app-crearar',
   templateUrl: './crearar.page.html',
   styleUrls: ['./crearar.page.scss'],
 })
 export class CreararPage implements OnInit {
+  customAlertOptions = {
+    header: 'Animal Silvestre',
+    subHeader: 'procedente de la atención',
+    // message: 'Selecciona el animal silvestre',
+    translucent: true,
+  };
+  animalsilvestre: Animalsilvestre[];
   tatencion: Tatencion[];
   municipios: Municipios[];
   edades: Edades[];
@@ -53,11 +61,7 @@ export class CreararPage implements OnInit {
   especie_proc = []
   nro = 1
   especieData = {
-    especies:0,
-    nombreCi : "",
-    nombreCom : "",
-    edad : 0,
-    sexo : 0,
+    id_animal_silvestre:0,
     observacion: ""
   }
   @ViewChild('canvas') canvasEl : ElementRef;
@@ -67,6 +71,7 @@ export class CreararPage implements OnInit {
               public loadingController: LoadingController) {}
 
   ngOnInit() { 
+    this.ListAnimals();
     this.ListEdades();
     this.ListSexos();
     this.ListAtencion();
@@ -82,19 +87,11 @@ export class CreararPage implements OnInit {
   AgregarEspeciesProcedentes(){
     this.nro++
     this.especie_proc.push({
-      "especies"      : this.especieData.especies,
-      "nombreCi"  :this.especieData.nombreCi,
-      "nombreCom" : this.especieData.nombreCom,
-      "edad"      : this.especieData.edad,
-      "sexo"      : this.especieData.sexo,
+      "id_animal_silvestre"      : this.especieData.id_animal_silvestre,
       "observacion" : this.especieData.observacion
     })
     this.especieData = {
-      especies: 0,
-      nombreCi : "",
-      nombreCom : "",
-      edad : 0,
-      sexo : 0,
+      id_animal_silvestre: 0,
       observacion: ""
     }
   }
@@ -109,7 +106,11 @@ export class CreararPage implements OnInit {
     this.dataUser = data.result;
     })
   }
-
+  ListAnimals(){
+    this.conexion.getdata("animals.php/?aksi=list-animals").subscribe((data:any)=>{
+      this.animalsilvestre = data.listAnimals
+    })
+  }
   ListAtencion(){
     this.conexion.getdata("atencion.php/?aksi=list-tatencion").subscribe((data:any)=>{
       this.tatencion = data.listTatencion
@@ -179,6 +180,7 @@ export class CreararPage implements OnInit {
         this.loadingController.dismiss();
         this.mensaje(data.msg)
       } else {
+        console.log(body)
         this.loadingController.dismiss();
         this.mensaje(data.msg)
       }

@@ -8,9 +8,9 @@ if ($postjson['aksi'] == "reactivate-user") {
     $res = $mysqli->query("UPDATE tblusers SET estado='1' WHERE id_user=$id_user");
 
     if ($res) {
-        $result = json_encode(array("success" => TRUE, "msg" => "Usuario Habilitado"));
+        $result = json_encode(array("success" => TRUE, "msg" => "Usuario Actualizado"));
     } else {
-        $result = json_encode(array("success" => false, 'msg' => 'Hubo un error al habilitar al usuario'));
+        $result = json_encode(array("success" => false, 'msg' => 'Hubo un error al actualizar al usuario'));
     }
     echo $result;
 }

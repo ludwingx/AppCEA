@@ -34,7 +34,7 @@ export class VerActaPage implements OnInit {
         this.procedente = data.procedente
         this.mostrar = true
       } else {
-        
+        console.log(body);
       }
     })
   }

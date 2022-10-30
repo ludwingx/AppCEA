@@ -8,10 +8,6 @@
     if($postjson['aksi'] == "registrar-hc"){
         $fecha_hc = $postjson['fecha_hc'];
         $hora_hc = $postjson['hora_hc'];
-        $id_especies  = $postjson['id_especies'];
-        $nom_comun_hc  = $postjson['nom_comun_hc'];
-        $id_sexo = $postjson['id_sexo'];
-        $id_edad  = $postjson['id_edad'];
     
         $anamnesis_hc  = $postjson['anamnesis_hc'];
         $id_mucosas  = $postjson['id_mucosas'];
@@ -22,7 +18,7 @@
         $temperatura_hc  = $postjson['temperatura_hc'];
         $frec_cardiaca_hc  = $postjson['frec_cardiaca_hc'];
         $peso_hc  = $postjson['peso_hc'];
-        
+
         $pruebas_complementarias_hc  = $postjson['pruebas_complementarias_hc'];
         $diagn_presuntivo_hc  = $postjson['diagn_presuntivo_hc'];
         $diagn_confirmado_hc  = $postjson['diagn_confirmado_hc'];
@@ -32,7 +28,7 @@
         $hperdidas_hc  = $postjson['hperdidas_hc'];
     
         $tratamiento_diagnostico = $postjson['tratamiento_diagnostico'];
-
+        $id_procedente_atencion = $postjson['id_procedente_atencion'];
         $id_usuario = $postjson['id_usuario'];
 
         $farmaco_td;
@@ -45,10 +41,6 @@
         $res = $mysqli->query("INSERT INTO historia_clinica SET
         fecha_hc= '$fecha_hc',
         hora_hc= '$hora_hc',
-        id_especies: $id_especies,
-        nom_comun_hc= '$nom_comun_hc',
-        id_sexo: $id_sexo,
-        id_edad: $id_edad,
 
         anamnesis_hc= '$anamnesis_hc',
         id_mucosas= $id_mucosas,
@@ -67,7 +59,7 @@
         hreposicion_hc= '$hreposicion_hc',
         hmantenimiento_hc= '$hmantenimiento_hc',
         hperdidas_hc= '$hperdidas_hc',
-
+        id_procedente_atencion = $id_procedente_atencion,
         id_usuario = $id_usuario");
         
         $repHcli = $mysqli->query("SELECT id_historia_clinica FROM historia_clinica WHERE nom_comun_hc='$nom_comun_hc' AND fecha_hc='$fecha_hc' AND hora_hc='$hora_hc'");

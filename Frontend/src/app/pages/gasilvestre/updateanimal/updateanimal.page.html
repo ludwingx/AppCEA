@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="cea">
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="arrow-back-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Crear Animales Silvestres</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="updateAnimal()"  slot="end" fill="clear" shape="round">
+        <ion-icon name="checkmark-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="listForm">
+    <ion-item>
+      <ion-label>Especie:</ion-label>
+      <ion-select  placeholder="{{datos.nom_especies}}" [(ngModel)]="animalsilvestre.id_especies">
+        <ion-select-option value="{{ especie.id_especies }}" *ngFor="let especie of especies" >
+          {{especie.nom_especies}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nombre Científico</ion-label>
+      <ion-input slot="end" [(ngModel)]="animalsilvestre.nom_cientifico" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nombre Común</ion-label>
+      <ion-input slot="end" [(ngModel)]="animalsilvestre.nom_comun" type="text"></ion-input>
+    </ion-item>
+    <ion-item >
+      <ion-label position="stacked">Edad*</ion-label>
+      <ion-select  placeholder="{{datos.nom_edad}}" [(ngModel)]="animalsilvestre.id_edad" >
+        .
+        <ion-select-option *ngFor="let edad of edades"  value="{{animalsilvestre.id_edad}}">{{animalsilvestre.nom_edad}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Sexo:</ion-label>
+      <ion-select  placeholder="{{datos.nom_sexo}}" [(ngModel)]="animalsilvestre.id_sexo">
+        <ion-select-option value="{{ sexo.id_sexo }}" *ngFor="let sexo of sexos" >
+          {{sexo.nom_sexo}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+</ion-content>
+

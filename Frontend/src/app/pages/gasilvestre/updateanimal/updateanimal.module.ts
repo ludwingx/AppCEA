@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { GftranslocacionPageRoutingModule } from './gftranslocacion-routing.module';
+import { UpdateanimalPageRoutingModule } from './updateanimal-routing.module';
 
-import { GftranslocacionPage } from './gftranslocacion.page';
+import { UpdateanimalPage } from './updateanimal.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GftranslocacionPageRoutingModule
+    UpdateanimalPageRoutingModule
   ],
-  declarations: [GftranslocacionPage]
+  declarations: [UpdateanimalPage]
 })
-export class GftranslocacionPageModule {}
+export class UpdateanimalPageModule {}
