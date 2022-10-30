@@ -10,6 +10,7 @@ import { Preferences } from '@capacitor/preferences';
 import { VerActaPage } from '../../../modales/ver-acta/ver-acta.page';
 import { Especies } from 'src/app/interfaces/especies';
 import { Animalsilvestre } from 'src/app/interfaces/animalsilvestre';
+import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-crearar',
   templateUrl: './crearar.page.html',
@@ -66,9 +67,19 @@ export class CreararPage implements OnInit {
   }
   @ViewChild('canvas') canvasEl : ElementRef;
   touchEvent:string;
+
+  get num_acta(){
+    return this.formulario.get("num_acta")
+  }
+  formulario = this.formbuilder.group({
+    num_acta: ['',[Validators.required,Validators.minLength(1),Validators.maxLength(11)],]
+  });
+  
   constructor(private conexion  : ConexionService,
               private toastCtrl : ToastController,
-              public loadingController: LoadingController) {}
+              private modalCtrl: ModalController,
+              public loadingController: LoadingController,
+              private formbuilder: FormBuilder) {}
 
   ngOnInit() { 
     this.ListAnimals();
@@ -83,7 +94,9 @@ export class CreararPage implements OnInit {
 
     })
   }
-
+  closeModal(){
+    this.modalCtrl.dismiss(null,'close');
+  }
   AgregarEspeciesProcedentes(){
     this.nro++
     this.especie_proc.push({
@@ -177,6 +190,7 @@ export class CreararPage implements OnInit {
     this.conexion.postdata(body,"arecepcion.php").subscribe((data:any)=>{
       console.log(data)
       if (data.success) {
+        this.closeModal()
         this.loadingController.dismiss();
         this.mensaje(data.msg)
       } else {
@@ -219,5 +233,13 @@ export class CreararPage implements OnInit {
   savePad() {
     const base64Data = this.signaturePad.toDataURL();
     this.arecepcion.firmaP = base64Data;
+  }
+  public errormensaje= {
+    num_acta : [
+      {type:"required",message:"Número de acta requerido"},
+      {type:"minLenght",message:"Cantidad minima de caracteres 1"},
+      {type:"maxLength",message:"Cantidad maxima de caracteres 11"}
+    ],
+    
   }
 }

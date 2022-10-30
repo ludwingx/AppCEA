@@ -71,24 +71,11 @@
         //registro de procedente de atencion
         for($i = 0; $i < count($especie_proc); $i++){
             $res3 = $mysqli->query("INSERT INTO procedente_atencion SET id_acta_recepcion=$id_acta,
-
                 id_animal_silvestre=$id_animal_silvestre[$i],
                 observaciones_rec='$observaciones[$i]'");
         }
         
-        //registro de animal silvestre
-        $id_procedente;
-        $cont=0;
-        $repProcedente_atencion = $mysqli->query("SELECT id_procedente_atencion FROM procedente_atencion WHERE id_acta_recepcion=$id_acta");
-        while ($data=mysqli_fetch_assoc($repProcedente_atencion)) {
-            $id_procedente[$cont] = $data["id_procedente_atencion"];
-            $cont++;
-        }
-        for($i = 0; $i < count($id_procedente); $i++){
-            $res4 =$mysqli->query("INSERT INTO animal_silvestre SET id_procedente_atencion=$id_procedente[$i]");
-        }
-        
-        if($res && $res2 && $res3 && $res4){
+        if($res && $res2 && $res3){
             $result = json_encode(array("success" => TRUE, "msg" => "Acta de recepción registrada con exito"));
         }else{
             $result = json_encode(array("success" => FALSE, "msg" => "Hubo un error al registrar el Acta de recepción"));
