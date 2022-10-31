@@ -8,196 +8,290 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<!-- [(ngModel)]="arecepcion.nro_acta" -->
 <ion-content>
 
-  
-  <form [formGroup]="formulario">
+  <form [formGroup]="formulario" class="listForm">
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Número de Acta*</b></ion-label>
-      <ion-input class="inputCenter" type="text" formControlName="num_acta"    placeholder="Ingresa el número del acta" ></ion-input>
+      <ion-input formControlName="num_acta" 
+      type="text" placeholder="Ingresa el numero del acta" ></ion-input>
     </ion-item>
-    <div *ngFor="let error of errormensaje.num_acta" class="ion-text-center">
+    <div *ngFor="let error of errormensaje.num_acta" class="ion-text-center ion-margin-bottom">
       <ng-container *ngIf="num_acta.hasError(error.type) && 
       (num_acta.dirty || num_acta.touched)">
       <small class="error-message">{{ error.message }}</small>
       </ng-container>
-    </div>
-  </form>
+  </div>
+  <ion-item-divider class="itemDivider">
+    <ion-text class="textDivider">Lugar donde fue la entrega, rescate o decomiso del animal:</ion-text>
+  </ion-item-divider>
 
+  <ion-item fill="outline" class="ion-margin-top">
+    <ion-label><b>Fecha:</b></ion-label>
+    <ion-input class="datetime" slot="end" formControlName="fecha"
+     type="date"></ion-input>
+  </ion-item>
+  <div *ngFor="let error of errormensaje.fecha" class="ion-text-center ion-margin-bottom">
+    <ng-container *ngIf="fecha.hasError(error.type) && 
+    (fecha.dirty || fecha.touched)">
+    <small class="error-message">{{ error.message }}</small>
+    </ng-container>
+</div>
 
-    <ion-list class="listForm">
-      
-      <br>
-      <ion-item fill="outline">
-        <ion-label><b>Fecha:</b></ion-label>
-        <ion-input class="datetime" slot="end" [(ngModel)]="arecepcion.fecha" type="date"></ion-input>
-      </ion-item>
-      <ion-item fill="outline">
-        <ion-label><b>Hora:</b></ion-label>
-        <ion-input class="datetime"  slot="end" [(ngModel)]="arecepcion.hora" type="time"></ion-input>
-      </ion-item>
-      <br>
-      <ion-item class="itemForm" fill="outline">
-        <ion-label class="itemLabel" position="floating">Tipo de atención*</ion-label>
-        <ion-select placeholder="Selecciona el tipo de atención" [(ngModel)]="arecepcion.tipo_rescate">
-          <ion-select-option *ngFor="let tipo of tatencion" value="{{tipo.id_tipo_atencion}}">{{tipo.nom_tipo_atencion}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
+  <ion-item fill="outline">
+    <ion-label><b>Hora:</b></ion-label>
+    <ion-input class="datetime"  slot="end" formControlName="hora"
+     type="time"></ion-input>
+  </ion-item>
+  <div *ngFor="let error of errormensaje.hora" class="ion-text-center ion-margin-bottom">
+    <ng-container *ngIf="hora.hasError(error.type) && 
+    (hora.dirty || hora.touched)">
+    <small class="error-message">{{ error.message }}</small>
+    </ng-container>
+</div>
 
-      <ion-item-divider class="itemDivider">
-        <ion-text class="textDivider">Lugar donde fue la entrega, rescate o decomiso del animal:</ion-text>
-      </ion-item-divider>
+  <ion-item class="itemForm" fill="outline">
+    <ion-label class="itemLabel" position="floating">Tipo de atención*</ion-label>
+    <ion-select placeholder="Selecciona el tipo de atención" formControlName="tipo_rescate">
+      <ion-select-option *ngFor="let tipo of tatencion" value="{{tipo.id_tipo_atencion}}">{{tipo.nom_tipo_atencion}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <div *ngFor="let error of errormensaje.tipo_rescate" class="ion-text-center ion-margin-bottom">
+    <ng-container *ngIf="tipo_rescate.hasError(error.type) && 
+    (tipo_rescate.dirty || tipo_rescate.touched)">
+    <small class="error-message">{{ error.message }}</small>
+    </ng-container>
+</div>
+<ion-item-divider class="itemDivider">
+  <ion-text class="textDivider">Lugar donde fue la entrega, rescate o decomiso del animal:</ion-text>
+</ion-item-divider>
 
-    <ion-list class="listForm">
-      <ion-item class="itemForm" fill="outline">
-        <ion-label class="itemLabel" position="floating">Municipio*</ion-label>
-        <ion-select placeholder="Selecciona el Municipio"  [(ngModel)]="arecepcion.id_municipio_E">
-          <ion-select-option *ngFor="let nombre of municipios" value="{{nombre.id_municipio}}">{{nombre.nom_mun}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <br>
-      <ion-item fill="outline">
-        <ion-label color="cea" position="floating"><b>Barrio*</b></ion-label>
-        <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.barrio" placeholder="Ingresa el nombre del barrio" ></ion-input>
-      </ion-item>
-      <br>
-      <ion-item fill="outline">
-        <ion-label color="cea" position="floating"><b>Calle/Avenida*</b></ion-label>
-        <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.calle" placeholder="Ingresa el nombre de la calle/avenida" ></ion-input>
-      </ion-item>
-      <br>
-      <ion-item fill="outline">
-        <ion-label color="cea" position="floating"><b>N° Casa*</b></ion-label>
-        <ion-input class="inputCenter" type="number" [(ngModel)]="arecepcion.nro_casa" placeholder="Ingresa el número de la casa" ></ion-input>
-      </ion-item>
-    </ion-list>
-      <ion-item-divider class="itemDivider">
-        <ion-text class="textDivider">Lugar de donde procede el animal(donde encontro al animal la persona que hace la denuncia o llamada):</ion-text>
-      </ion-item-divider>
-    <ion-list class="listForm">
-      <ion-item class="itemForm" fill="outline">
-        <ion-label class="itemLabel" position="floating">Municipio*</ion-label>
-        <ion-select placeholder="Selecciona el Municipio" [(ngModel)]="arecepcion.id_municipio_S">
-          <ion-select-option *ngFor="let nombre of municipios" value="{{nombre.id_municipio}}">{{nombre.nom_mun}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item fill="outline">
-        <ion-label color="cea" position="floating"><b>Barrio*</b></ion-label>
-        <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.barrioS" placeholder="Ingresa el nombre del barrio" ></ion-input>
-      </ion-item>
-      <ion-item fill="outline">
-        <ion-label color="cea" position="floating"><b>Calle/Avenida*</b></ion-label>
-        <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.calleS" placeholder="Ingresa el nombre de la calle/avenida" ></ion-input>
-      </ion-item>
-      <ion-item fill="outline">
-        <ion-label color="cea" position="floating"><b>Empresa y/o Institución*</b></ion-label>
-        <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.empresa" placeholder="Ingresa el número de la casa" ></ion-input>
-      </ion-item>
-      <ion-item fill="outline">
-        <ion-label color="cea" position="floating"><b>Área Verde, Área protegida, otros*</b></ion-label>
-        <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.area" placeholder="Ingresa el número de la casa" ></ion-input>
-      </ion-item>
-      </ion-list>
-        <ion-item-divider class="itemDivider">
-          <ion-text class="textDivider">Especies procedentes de la atención:</ion-text>
-        </ion-item-divider>
+<ion-item class="itemForm ion-margin-top" fill="outline">
+  <ion-label class="itemLabel" position="floating">Municipio*</ion-label>
+  <ion-select placeholder="Selecciona el Municipio" formControlName="municipio_E">
+    <ion-select-option *ngFor="let nombre of municipios" value="{{nombre.id_municipio}}">{{nombre.nom_mun}}</ion-select-option>
+  </ion-select>
+</ion-item>
+<div *ngFor="let error of errormensaje.municipio_E" class="ion-text-center ion-margin-bottom">
+  <ng-container *ngIf="municipio_E.hasError(error.type) && 
+  (municipio_E.dirty || municipio_E.touched)">
+  <small class="error-message">{{ error.message }}</small>
+  </ng-container>
+</div>
 
-      <ion-list class="listForm">
-      <ion-item>
-        <ion-label>N°</ion-label>
-        <ion-label slot="end">{{ nro }}</ion-label>
-      </ion-item>
-      <ion-item class="itemForm" fill="outline">
-        <ion-label position="floating">Animal Silvestre*</ion-label>
-        <ion-select [(ngModel)]="especieData.id_animal_silvestre" [interfaceOptions]="customAlertOptions" interface="alert" placeholder="Seleccione un animal silvestre">
-          <ion-select-option *ngFor="let animals of animalsilvestre" value="{{animals.id_animal_silvestre}}"> #{{animals.id_animal_silvestre}} - {{animals.nom_comun}}</ion-select-option>
-        </ion-select>
-        <ion-note slot="helper">Seleccione el animal silvestre</ion-note>
-        <ion-note slot="error">Animal silvestre no seleccionado</ion-note>
-      </ion-item>
-      <br>
-      <ion-item fill="outline">
-        <ion-label color="cea" position="floating">Observaciones</ion-label>
-        <ion-textarea [(ngModel)]="especieData.observacion"></ion-textarea>
-      </ion-item>
-      <ion-item class="ion-text-center">
+<ion-item fill="outline">
+  <ion-label color="cea" position="floating"><b>Barrio*</b></ion-label>
+  <ion-input class="inputCenter" type="text" formControlName="barrio" placeholder="Ingresa el nombre del barrio" ></ion-input>
+</ion-item>
+<div *ngFor="let error of errormensaje.barrio" class="ion-text-center ion-margin-bottom">
+  <ng-container *ngIf="barrio.hasError(error.type) && 
+  (barrio.dirty || barrio.touched)">
+  <small class="error-message">{{ error.message }}</small>
+  </ng-container>
+</div>
+
+<ion-item fill="outline">
+  <ion-label color="cea" position="floating"><b>Calle/Avenida*</b></ion-label>
+  <ion-input class="inputCenter" type="text" formControlName="calle" placeholder="Ingresa el nombre de la calle/avenida" ></ion-input>
+</ion-item>
+<div *ngFor="let error of errormensaje.calle" class="ion-text-center ion-margin-bottom">
+  <ng-container *ngIf="calle.hasError(error.type) && 
+  (calle.dirty || calle.touched)">
+  <small class="error-message">{{ error.message }}</small>
+  </ng-container>
+</div>
+
+<ion-item fill="outline">
+  <ion-label color="cea" position="floating"><b>N° Casa*</b></ion-label>
+  <ion-input class="inputCenter" type="number" formControlName="nrocasa" placeholder="Ingresa el número de la casa" ></ion-input>
+</ion-item>
+<div *ngFor="let error of errormensaje.nrocasa" class="ion-text-center ion-margin-bottom">
+  <ng-container *ngIf="nrocasa.hasError(error.type) && 
+  (nrocasa.dirty || nrocasa.touched)">
+  <small class="error-message">{{ error.message }}</small>
+  </ng-container>
+</div>
+
+<ion-item-divider class="itemDivider">
+  <ion-text class="textDivider">Lugar de donde procede el animal(donde encontro al animal la persona que hace la denuncia o llamada):</ion-text>
+</ion-item-divider>
+
+<ion-item class="itemForm ion-margin-top" fill="outline">
+  <ion-label class="itemLabel" position="floating">Municipio*</ion-label>
+  <ion-select placeholder="Selecciona el Municipio" formControlName="municipio_S">
+    <ion-select-option *ngFor="let nombre of municipios" value="{{nombre.id_municipio}}">{{nombre.nom_mun}}</ion-select-option>
+  </ion-select>
+</ion-item>
+<div *ngFor="let error of errormensaje.municipio_S" class="ion-text-center ion-margin-bottom">
+  <ng-container *ngIf="municipio_S.hasError(error.type) && 
+  (municipio_S.dirty || municipio_S.touched)">
+  <small class="error-message">{{ error.message }}</small>
+  </ng-container>
+</div>
+
+<ion-item fill="outline">
+  <ion-label color="cea" position="floating"><b>Barrio*</b></ion-label>
+  <ion-input class="inputCenter" type="text" formControlName="barrio_S" placeholder="Ingresa el nombre del barrio" ></ion-input>
+</ion-item>
+<div *ngFor="let error of errormensaje.barrio_S" class="ion-text-center ion-margin-bottom">
+  <ng-container *ngIf="barrio_S.hasError(error.type) && 
+  (barrio_S.dirty || barrio_S.touched)">
+  <small class="error-message">{{ error.message }}</small>
+  </ng-container>
+</div>
+
+<ion-item fill="outline">
+  <ion-label color="cea" position="floating"><b>Calle/Avenida*</b></ion-label>
+  <ion-input class="inputCenter" type="text" formControlName="calle_S" placeholder="Ingresa el nombre de la calle/avenida" ></ion-input>
+</ion-item>
+<div *ngFor="let error of errormensaje.calle_S" class="ion-text-center ion-margin-bottom">
+  <ng-container *ngIf="calle_S.hasError(error.type) && 
+  (calle_S.dirty || calle_S.touched)">
+  <small class="error-message">{{ error.message }}</small>
+  </ng-container>
+</div>
+
+<ion-item fill="outline">
+  <ion-label color="cea" position="floating"><b>Empresa y/o Institución*</b></ion-label>
+  <ion-input class="inputCenter" type="text" formControlName="empresa" placeholder="Ingresa el número de la casa" ></ion-input>
+</ion-item>
+<div *ngFor="let error of errormensaje.empresa" class="ion-text-center ion-margin-bottom">
+  <ng-container *ngIf="empresa.hasError(error.type) && 
+  (empresa.dirty || empresa.touched)">
+  <small class="error-message">{{ error.message }}</small>
+  </ng-container>
+</div>
+
+<ion-item fill="outline">
+  <ion-label color="cea" position="floating"><b>Área Verde, Área protegida, otros*</b></ion-label>
+  <ion-input class="inputCenter" type="text" formControlName="area" placeholder="Ingresa el número de la casa" ></ion-input>
+</ion-item>
+<div *ngFor="let error of errormensaje.area" class="ion-text-center ion-margin-bottom">
+  <ng-container *ngIf="area.hasError(error.type) && 
+  (area.dirty || area.touched)">
+  <small class="error-message">{{ error.message }}</small>
+  </ng-container>
+</div>
+
+<ion-item-divider class="itemDivider">
+  <ion-text class="textDivider">Especies procedentes de la atención:</ion-text>
+</ion-item-divider>
+
+<ion-item>
+  <ion-label>N°</ion-label>
+  <ion-label slot="end">{{ nro }}</ion-label>
+</ion-item>
+
+<ion-item class="itemForm ion-margin-bottom" fill="outline">
+  <ion-label position="floating">Animal Silvestre*</ion-label>
+  <ion-select formControlName="animal_silvestre" [interfaceOptions]="customAlertOptions" interface="alert" placeholder="Seleccione un animal silvestre">
+    <ion-select-option *ngFor="let animals of animalsilvestre" value="{{animals.id_animal_silvestre}}"> #{{animals.id_animal_silvestre}} - {{animals.nom_comun}}</ion-select-option>
+  </ion-select>
+</ion-item>
+
+<ion-item fill="outline">
+  <ion-label color="cea" position="floating">Observaciones</ion-label>
+  <ion-textarea formControlName="observaciones"></ion-textarea>
+</ion-item>
+
+<ion-item class="ion-text-center ion-margin-bottom">
+  <ion-col>
+    <ion-button  color="cea" (click)="AgregarEspeciesProcedentes()">
+      Agregar
+    </ion-button>
+  </ion-col>
+</ion-item>
+
+<ion-item-divider class="itemDivider">
+  <ion-text class="textDivider">Funcionario Recepcionante:</ion-text>
+</ion-item-divider>
+
+<ion-item class="ion-margin-top ion-margin-bottom">
+  <ion-label><b>Nombre: </b>{{dataUser.nombre_u}}</ion-label>
+</ion-item>
+<ion-item>
+  <ion-text><b>Firma:</b></ion-text>
+  <img class="firmaImg" [src]='dataUser.firma_u' alt="firma">
+</ion-item>
+<ion-item>
+  <ion-label><b>Cédula de Identidad: </b>{{dataUser.ci_u}}</ion-label>
+</ion-item>
+
+<ion-item-divider class="itemDivider">
+  <ion-text class="textDivider">Persona(Entidad) que efectúa la entrega:</ion-text>
+</ion-item-divider>
+
+<ion-item fill="outline" class="ion-margin-top">
+  <ion-label color="cea" position="floating"><b>Cédula de identidad*</b></ion-label>
+  <ion-input class="inputCenter" type="tel" formControlName="cedula" placeholder="Ingresa su Cédula de identidad" ></ion-input>
+</ion-item>
+<div *ngFor="let error of errormensaje.cedula" class="ion-text-center ion-margin-bottom">
+  <ng-container *ngIf="cedula.hasError(error.type) && 
+  (cedula.dirty || cedula.touched)">
+  <small class="error-message">{{ error.message }}</small>
+  </ng-container>
+</div>
+
+<ion-item fill="outline">
+  <ion-label color="cea" position="floating"><b>Nombre*</b></ion-label>
+  <ion-input class="inputCenter" type="text" formControlName="nombre" placeholder="Ingresa el nombre" ></ion-input>
+</ion-item>
+<div *ngFor="let error of errormensaje.nombre" class="ion-text-center ion-margin-bottom">
+  <ng-container *ngIf="nombre.hasError(error.type) && 
+  (nombre.dirty || nombre.touched)">
+  <small class="error-message">{{ error.message }}</small>
+  </ng-container>
+</div>
+
+<ion-item fill="outline">
+  <ion-label color="cea" position="floating"><b>Telefono*</b></ion-label>
+  <ion-input class="inputCenter" type="tel" formControlName="telefono" placeholder="Ingresa el telefono" ></ion-input>
+</ion-item>
+<div *ngFor="let error of errormensaje.telefono" class="ion-text-center ion-margin-bottom">
+  <ng-container *ngIf="telefono.hasError(error.type) && 
+  (telefono.dirty || telefono.touched)">
+  <small class="error-message">{{ error.message }}</small>
+  </ng-container>
+</div>
+
+<ion-item lines="none">
+  <h3 >Dibuja tu firma*</h3>
+  <ion-note slot="helper" color="cea">Una vez que termines de dibujar tú firma, declarala con el botón "Declarar Firma"</ion-note>
+</ion-item>
+<ion-item-group>
+  <ion-item lines="none" class="ion-text-center">
+    <ion-grid fixed>
+      <ion-row>
         <ion-col>
-          <ion-button  color="cea" (click)="AgregarEspeciesProcedentes()">
-            Agregar
+          <ion-button  color="cea" (click)="savePad()">
+            Declarar firma
           </ion-button>
         </ion-col>
-      </ion-item>
+        <ion-col>
+          <ion-button  color="warning" (click)="clearPad()"> 
+            Borrar firma
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <ion-item lines="none">
+    <canvas  class="ion-text-center" #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
+  </ion-item>
+</ion-item-group>
 
-
-      <ion-item-divider class="itemDivider">
-        <ion-text class="textDivider">Funcionario Recepcionante:</ion-text>
-      </ion-item-divider>
-      <ion-item>
-        <ion-label><b>Nombre: </b>{{dataUser.nombre_u}}</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-text><b>Firma:</b></ion-text>
-        <img class="firmaImg" [src]='dataUser.firma_u' alt="firma">
-      </ion-item>
-      <ion-item>
-        <ion-label><b>Cédula de Identidad: </b>{{dataUser.ci_u}}</ion-label>
-      </ion-item>
-      <ion-item-divider class="itemDivider">
-        <ion-text class="textDivider">Persona(Entidad) que efectúa la entrega:</ion-text>
-      </ion-item-divider>
-      <br>
-      <ion-item fill="outline">
-        <ion-label color="cea" position="floating"><b>Cédula de identidad*</b></ion-label>
-        <ion-input class="inputCenter" type="tel" [(ngModel)]="arecepcion.cedulaP" placeholder="Ingresa su Cédula de identidad" ></ion-input>
-      </ion-item>
-      <ion-item fill="outline">
-        <ion-label color="cea" position="floating"><b>Nombre*</b></ion-label>
-        <ion-input class="inputCenter" type="text" [(ngModel)]="arecepcion.nombreP" placeholder="Ingresa el nombre" ></ion-input>
-      </ion-item>
-      <ion-item fill="outline">
-        <ion-label color="cea" position="floating"><b>Telefono*</b></ion-label>
-        <ion-input class="inputCenter" type="tel" [(ngModel)]="arecepcion.telefonoP" placeholder="Ingresa el telefono" ></ion-input>
-      </ion-item>
-      <ion-item lines="none">
-        <h3 >Dibuja tu firma*</h3>
-        <ion-note slot="helper" color="cea">Una vez que termines de dibujar tú firma, declarala con el botón "Declarar Firma"</ion-note>
-      </ion-item>
-      <ion-item-group>
-        <ion-item lines="none" class="ion-text-center">
-          <ion-grid fixed>
-            <ion-row>
-              <ion-col>
-                <ion-button  color="cea" (click)="savePad()">
-                  Declarar firma
-                </ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button  color="warning" (click)="clearPad()"> 
-                  Borrar firma
-                </ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-        <ion-item lines="none">
-          <canvas  class="ion-text-center" #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
-        </ion-item>
-      </ion-item-group>
-
-      <ion-item *ngIf="arecepcion.firmaP">
-        <ion-label>Firma declarada:</ion-label>
-      </ion-item>
-      <ion-item *ngIf="arecepcion.firmaP">
-        <img src='{{ arecepcion.firmaP }}' alt="No existe ninguna firma registrada" />
-      </ion-item>
-      <ion-item>
-        <ion-note *ngIf="arecepcion.firmaP" >La firma que se muestra, será la que se registrará junto a los datos del usuario</ion-note>
-      </ion-item>
-      <ion-button color="cea" (click)="registrarAr()" expand="block">
-        Registrar Acta de Recepción
-      </ion-button>
-    </ion-list>
+<ion-item *ngIf="arecepcion.firmaP">
+  <ion-label>Firma declarada:</ion-label>
+</ion-item>
+<ion-item *ngIf="arecepcion.firmaP">
+  <img src='{{ arecepcion.firmaP }}' alt="No existe ninguna firma registrada" />
+</ion-item>
+<ion-item>
+  <ion-note *ngIf="arecepcion.firmaP" >La firma que se muestra, será la que se registrará junto a los datos del usuario</ion-note>
+</ion-item>
+<ion-button color="cea" (click)="registrarAr(formulario.value)" [disabled]="!formulario.valid" expand="block">
+  Registrar Acta de Recepción
+</ion-button>
+</form>
 
 </ion-content>

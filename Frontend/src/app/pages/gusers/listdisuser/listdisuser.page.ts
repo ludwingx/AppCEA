@@ -24,7 +24,6 @@ export class ListdisuserPage implements OnInit {
     })
     t.present();
   }
-  
   ListDisUser(){
     this.conexion.getdata("usuario.php/?aksi=listDis-users").subscribe((data:any)=>{
       this.users = data.listDisUsers

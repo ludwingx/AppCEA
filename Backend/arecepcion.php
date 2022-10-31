@@ -178,13 +178,40 @@
     }
     
     else if ($_GET['aksi'] == "list-ar"){
-        $res = $mysqli -> query("SELECT  FROM acta_recepcion");
+        $res = $mysqli -> query("SELECT AR.num_acta_ar as nro_acta, AR.fecha_ar as fecha, AR.hora_ar as hora,
+        A.nom_tipo_atencion, MS.nom_mun, 
+        AR.nom_ldfe_barrio_ar as barrioE, AR.nom_ldfecalle_ar as calleE, AR.num_ldfe_casa_ar as nro_casaE,
+        AR.nom_ldp_barrio_ar as barrioS, AR.nom_ldp_calle_ar as calleS, 
+        AR.nom_ldp_empresa_ar as empresa, AR.nom_ldp_area_ar as area
+        FROM acta_recepcion as AR
+        INNER JOIN tatencion as A
+        ON AR.id_tipo_atencion=A.id_tipo_atencion
+        INNER JOIN municipios as MS
+        ON AR.id_ldfe_municipio=MS.id_municipio
+        INNER JOIN usuarios as U
+        ON AR.id_usuario=U.id_usuario
+        INNER JOIN tblpersonas as P
+        ON AR.id_persona=P.id_persona
+        WHERE AR.num_acta_ar='$nro_acta'");
         $cont = 0;
         $check = mysqli_num_rows($res);
         if($check > 0){
             while($data = mysqli_fetch_assoc($res)) {
                 $datarcpt[$cont] = array(
-                    'id_acta_recepcion' => $data["id_acta_recepcion"]
+                    'id_acta_recepcion' => $data["id_acta_recepcion"],
+                    'nro_acta' => $data["nro_acta"],
+                    'fecha_ar' => $data["fecha_ar"],
+                    'hora_ar' => $data["hora_ar"],
+                    'nom_tipo_atencion' => $data["nom_tipo_atencion"],
+                    'nom_mun' => $data["nom_mun"],
+                    'nom_ldfe_barrio_ar' => $data["nom_ldfe_barrio_ar"],
+                    'nom_ldfecalle_ar' => $data["nom_ldfecalle_ar"],
+                    'num_ldfe_casa_ar' => $data["num_ldfe_casa_ar"],
+                    'nom_ldp_barrio_ar' => $data["nom_ldp_barrio_ar"],
+                    'nom_ldp_calle_ar' => $data["nom_ldp_calle_ar"],
+                    'nom_ldp_empresa_ar' => $data["nom_ldp_empresa_ar"],
+                    'nom_ldp_area_ar' => $data["nom_ldp_area_ar"],
+
                 );
                 $cont++;
             };

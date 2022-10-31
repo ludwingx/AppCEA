@@ -12,8 +12,8 @@ import { CreararPage } from './crearar.page';
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     CreararPageRoutingModule
   ],

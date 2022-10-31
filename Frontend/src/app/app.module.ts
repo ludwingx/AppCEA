@@ -13,7 +13,7 @@ import { PipesModule } from './pages/pipes/pipes.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule,HttpClientModule, PipesModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
+  imports: [BrowserModule,HttpClientModule,PipesModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },DatePipe],
   bootstrap: [AppComponent],
 })

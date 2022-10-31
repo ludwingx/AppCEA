@@ -1,7 +1,8 @@
+import { ConexionService } from 'src/app/servicios/conexion/conexion.service';
+import { Arecepcion } from './../../interfaces/arecepcion';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { VerActaPage } from '../../modales/ver-acta/ver-acta.page';
-import { CreararPage } from './crearar/crearar.page';
 
 @Component({
   selector: 'app-garecepcion',
@@ -9,21 +10,14 @@ import { CreararPage } from './crearar/crearar.page';
   styleUrls: ['./garecepcion.page.scss'],
 })
 export class GarecepcionPage implements OnInit {
-
-  constructor(private modalCtrl: ModalController) { }
+arecepcion: Arecepcion[];
+  constructor(private modalCtrl: ModalController,
+    private conexion: ConexionService) { }
 
   ngOnInit() {
+    this.ListActa();
   }
-  openCrearar(){
-    this.modalCtrl.create({
-      component: CreararPage,
-      // componentProps: { dataUser }
-    })
-    .then(modal => {
-      modal.present();
-      return modal.onDidDismiss();
-    })
-  }
+
   async ModalVerActa(){
     const modal = await this.modalCtrl.create({
       component: VerActaPage,
@@ -32,6 +26,11 @@ export class GarecepcionPage implements OnInit {
     modal.onDidDismiss().then(rest =>{
     })
     return await modal.present()
+  }
+  ListActa(){
+    this.conexion.getdata("animals.php/?aksi=list-ar").subscribe((data:any)=>{
+      this.arecepcion = data.listAr
+    })
   }
 
 }

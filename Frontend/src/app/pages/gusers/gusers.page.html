@@ -4,13 +4,7 @@
       <ion-back-button text="" defaultHref="login"></ion-back-button>
     </ion-buttons>
     <ion-title> Usuarios</ion-title>
-    <ion-buttons slot="end">
-      <ion-button [routerLink]="['listdisuser']">
-        <ion-icon name="trash-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
-
 </ion-header>
 
 <ion-content class="no-scroll">
@@ -22,6 +16,8 @@
   <br />
   <ion-button expand="block" 
   color="cea" [routerLink]="['crearuser']">Crear Usuario</ion-button>
+  <ion-button expand="block" 
+  color="cea" [routerLink]="['listdisuser']" >Cuentas Deshabilitadas</ion-button>
   <br />
     <ion-item class="ion-text-center">
       <ion-label>
