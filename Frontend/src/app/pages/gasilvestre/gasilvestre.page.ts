@@ -64,10 +64,10 @@ textoBuscar = '';
       return modal.onDidDismiss();
     })
   }
-  updateAnimal(animalsilvestre:any){
+  updateAnimal(animals:any){
     this.modalCtrl.create({
       component: UpdateanimalPage,
-      componentProps: { animalsilvestre }
+      componentProps: { animals }
     })
     .then(modal => {
       modal.present();

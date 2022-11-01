@@ -3,6 +3,7 @@ import { Arecepcion } from './../../interfaces/arecepcion';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { VerActaPage } from '../../modales/ver-acta/ver-acta.page';
+import { ViewactaPage } from './viewacta/viewacta.page';
 
 @Component({
   selector: 'app-garecepcion',
@@ -10,12 +11,13 @@ import { VerActaPage } from '../../modales/ver-acta/ver-acta.page';
   styleUrls: ['./garecepcion.page.scss'],
 })
 export class GarecepcionPage implements OnInit {
-arecepcion: Arecepcion[];
+  arecepcion : Arecepcion [];
   constructor(private modalCtrl: ModalController,
     private conexion: ConexionService) { }
 
   ngOnInit() {
     this.ListActa();
+    console.log(this.arecepcion)
   }
 
   async ModalVerActa(){
@@ -28,8 +30,18 @@ arecepcion: Arecepcion[];
     return await modal.present()
   }
   ListActa(){
-    this.conexion.getdata("animals.php/?aksi=list-ar").subscribe((data:any)=>{
-      this.arecepcion = data.listAr
+    this.conexion.getdata("arecepcion.php/?aksi=list-arecepcion").subscribe((data:any)=>{
+      this.arecepcion = data.listArecepcion
+    })
+  }
+  verActa(arecepcion:any){
+    this.modalCtrl.create({
+      component: ViewactaPage,
+      componentProps: { arecepcion }
+    })
+    .then(modal => {
+      modal.present();
+      return modal.onDidDismiss();
     })
   }
 

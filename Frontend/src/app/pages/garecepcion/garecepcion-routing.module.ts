@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'crearar',
     loadChildren: () => import('./crearar/crearar.module').then( m => m.CreararPageModule)
+  },  {
+    path: 'viewacta',
+    loadChildren: () => import('./viewacta/viewacta.module').then( m => m.ViewactaPageModule)
   }
+
 ];
 
 @NgModule({
