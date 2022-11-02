@@ -180,8 +180,8 @@ export class CreararPage implements OnInit {
     })
   }
   ListAnimals(){
-    this.conexion.getdata("animals.php/?aksi=list-animals").subscribe((data:any)=>{
-      this.animalsilvestre = data.listAnimals
+    this.conexion.getdata("animals.php/?aksi=list-animals-sinplanilla").subscribe((data:any)=>{
+      this.animalsilvestre = data.listAnimalsSinPlanilla
     })
   }
   ListAtencion(){

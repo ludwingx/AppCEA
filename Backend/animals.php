@@ -19,9 +19,9 @@ if ($postjson['aksi'] == "registrar-as") {
     }
     echo $result;
 }
-else if ($_GET['aksi'] == "list-animals") {
+else if ($_GET['aksi'] == "list-animals-sinplanilla") {
 
-    $res = $mysqli->query("SELECT A.id_animal_silvestre, E.nom_especies, A.nom_cientifico, A.nom_comun, ED.nom_edad, S.nom_sexo
+    $res = $mysqli->query("SELECT A.id_animal_silvestre, E.nom_especies, A.nom_cientifico, A.nom_comun, ED.nom_edad, S.nom_sexo, A.e_planilla
     FROM animal_silvestre as A 
     INNER JOIN especies as E 
     ON A.id_especies=E.id_especies
@@ -29,7 +29,7 @@ else if ($_GET['aksi'] == "list-animals") {
     ON A.id_edad = ED.id_edad
     INNER JOIN sexo as S
     ON A.id_sexo = S.id_sexo 
-    WHERE A.estado_as ='1'");
+    WHERE A.estado_as ='1' AND A.e_planilla='0'");
     $cont = 0;
     $check = mysqli_num_rows($res);
 
@@ -46,12 +46,46 @@ else if ($_GET['aksi'] == "list-animals") {
             );
             $cont++;
         };
-        $result = json_encode(array('success' => TRUE, "listAnimals" => $datauser));
+        $result = json_encode(array('success' => TRUE, "listAnimalsSinPlanilla" => $datauser));
     } else {
         $result = json_encode(array('success' => false, 'msg' => 'No existen animales registrados'));
     }
     echo $result;
-}else if ($postjson['aksi'] == "update-as") {
+    
+}else if ($_GET['aksi'] == "list-animals-conplanilla") {
+
+    $res = $mysqli->query("SELECT A.id_animal_silvestre, E.nom_especies, A.nom_cientifico, A.nom_comun, ED.nom_edad, S.nom_sexo, A.e_planilla
+    FROM animal_silvestre as A 
+    INNER JOIN especies as E 
+    ON A.id_especies=E.id_especies
+    INNER JOIN edad as ED
+    ON A.id_edad = ED.id_edad
+    INNER JOIN sexo as S
+    ON A.id_sexo = S.id_sexo 
+    WHERE A.estado_as ='1' AND A.e_planilla='1'");
+    $cont = 0;
+    $check = mysqli_num_rows($res);
+
+    if ($check > 0) {
+        while ($data = mysqli_fetch_assoc($res)) {
+            $datauser[$cont] = array(
+                'id_animal_silvestre' => $data["id_animal_silvestre"],
+                'nom_especies' => $data["nom_especies"],
+                'nom_cientifico' => $data["nom_cientifico"],
+                'nom_comun' => $data["nom_comun"],
+                'nom_edad' => $data["nom_edad"],
+                'nom_sexo' => $data["nom_sexo"],
+
+            );
+            $cont++;
+        };
+        $result = json_encode(array('success' => TRUE, "listAnimalsConPlanilla" => $datauser));
+    } else {
+        $result = json_encode(array('success' => false, 'msg' => 'No existen animales registrados'));
+    }
+    echo $result;
+}
+else if ($postjson['aksi'] == "update-as") {
     $id_animal_silvestre = $postjson['id_animal_silvestre'];
     $id_especies = $postjson['id_especies'];
     $nom_cientifico = $postjson['nom_cientifico'];

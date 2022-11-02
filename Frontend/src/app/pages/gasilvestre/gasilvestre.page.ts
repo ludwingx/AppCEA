@@ -12,7 +12,8 @@ import { ListdelaniPage } from './listdelani/listdelani.page';
   styleUrls: ['./gasilvestre.page.scss'],
 })
 export class GasilvestrePage implements OnInit {
-animalsilvestre : any = [];
+animalsilvestresin : any = [];
+animalsilvestrecon: any = [];
 textoBuscar = '';
   constructor(private conexion: ConexionService,
               private modalCtrl: ModalController,
@@ -20,8 +21,8 @@ textoBuscar = '';
               private toastCtrl: ToastController) { }
 
   ngOnInit() {
-    console.log(this.ListAnimals())
-    this.ListAnimals();
+    this.ListAnimalsSinPlanilla();
+    this.ListAnimalsConPlanilla();
   }
   async mensaje (m: string){
     const t = await this.toastCtrl.create({
@@ -30,13 +31,18 @@ textoBuscar = '';
     })
     t.present();
   }
-  ListAnimals(){
-    this.conexion.getdata("animals.php/?aksi=list-animals").subscribe((data:any)=>{
-      this.animalsilvestre = data.listAnimals
+  ListAnimalsSinPlanilla(){
+    this.conexion.getdata("animals.php/?aksi=list-animals-sinplanilla").subscribe((data:any)=>{
+      this.animalsilvestresin = data.listAnimalsSinPlanilla
+    })
+  }
+  ListAnimalsConPlanilla(){
+    this.conexion.getdata("animals.php/?aksi=list-animals-conplanilla").subscribe((data:any)=>{
+      this.animalsilvestrecon = data.listAnimalsConPlanilla
     })
   }
   doRefresh(event){
-    this.ListAnimals();
+    this.ListAnimalsSinPlanilla();
     setTimeout(() => {
       event.target.complete();
     }, 1000);
@@ -90,7 +96,7 @@ textoBuscar = '';
               this.mensaje(data.msg)
             } else {
               this.mensaje(data.msg)
-            }this.ListAnimals()
+            }this.ListAnimalsSinPlanilla()
           })
         }
       },
