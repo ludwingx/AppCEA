@@ -68,8 +68,8 @@ export class CreararPage implements OnInit {
     return this.formulario.get("area");
   }
 
-  get animal_silvestre(){
-    return this.formulario.get("animal_silvestre");
+  get animales_silvestres(){
+    return this.formulario.get("animales_silvestres");
   }
 
   get observaciones(){
@@ -102,7 +102,7 @@ export class CreararPage implements OnInit {
     calle_S:["",[Validators.required]],
     empresa:["",[Validators.required]],
     area:["",[Validators.required]],
-    animal_silvestre:[""],
+    animales_silvestres:[""],
     observaciones:[""],
     cedula:["",[Validators.required]],
     nombre:["",[Validators.required]],
@@ -162,10 +162,10 @@ export class CreararPage implements OnInit {
   AgregarEspeciesProcedentes(){
     this.nro++
     this.especie_proc.push({
-      "id_animal_silvestre" : this.formulario.get("animal_silvestre").value,
+      "animal_silvestre" : this.formulario.get("animales_silvestres").value,
       "observacion" : this.formulario.get("observaciones").value
     })
-    this.formulario.get(["animal_silvestre"]).setValue([""])
+    this.formulario.get(["animales_silvestres"]).setValue([""])
     this.formulario.get(["observaciones"]).setValue([""])
   }
 
@@ -254,6 +254,7 @@ export class CreararPage implements OnInit {
         this.loadingController.dismiss();
         this.mensaje(data.msg)
       } else {
+        console.log(body)
         this.loadingController.dismiss();
         this.mensaje(data.msg)
       }

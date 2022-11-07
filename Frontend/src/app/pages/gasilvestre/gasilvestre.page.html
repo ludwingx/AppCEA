@@ -25,20 +25,20 @@
     <ion-label  color="cea"><b>-Lista de animales sin Acta de Recepción-</b></ion-label>
   </ion-item>
   <ion-list >
-    <ion-item *ngFor="let animals of animalsilvestresin | filtro: textoBuscar: 'nom_comun'"  >
+    <ion-item *ngFor="let animalc of animalsilvestresin | filtro: textoBuscar: 'nom_comun'"  >
       <ion-item-sliding>
         <ion-item>
           <ion-label>
-            <h2>{{animals.nom_comun}}</h2>
-            <p>{{animals.nom_cientifico}}</p>
+            <h2>{{animalc.nom_comun}}</h2>
+            <p>{{animalc.nom_cientifico}}</p>
           </ion-label>
-          <ion-text>#{{animals.id_animal_silvestre}}</ion-text>
+          <ion-text>#{{animalc.id_animal_silvestre}}</ion-text>
         </ion-item>
         <ion-item-options>
-          <ion-item-option color="success" (click)="updateAnimal(animals)">
+          <ion-item-option color="success" (click)="updateAnimal(animalc)">
             <ion-icon slot="start" name="pencil-sharp"></ion-icon>
           </ion-item-option>
-          <ion-item-option color="danger" (click)="removeAnimal(animals.id_animal_silvestre, animals.nom_comun)">
+          <ion-item-option color="danger" (click)="removeAnimal(animalc.id_animal_silvestre, animalc.nom_comun)">
             <ion-icon slot="start" name="trash"></ion-icon>
           </ion-item-option>
         </ion-item-options>
@@ -60,7 +60,7 @@
           <ion-text>#{{animals.id_animal_silvestre}}</ion-text>
         </ion-item>
         <ion-item-options>
-          <ion-item-option color="success" (click)="updateAnimal(animalsilvestrecon)">
+          <ion-item-option color="success" (click)="updateAnimal(animals)">
             <ion-icon slot="start" name="pencil-sharp"></ion-icon>
           </ion-item-option>
         </ion-item-options>

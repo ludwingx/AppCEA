@@ -184,7 +184,7 @@
 
 <ion-item class="itemForm ion-margin-bottom" fill="outline">
   <ion-label position="floating">Animal Silvestre*</ion-label>
-  <ion-select formControlName="animal_silvestre" [interfaceOptions]="customAlertOptions" interface="alert" placeholder="Seleccione un animal silvestre">
+  <ion-select formControlName="animales_silvestres" [interfaceOptions]="customAlertOptions" interface="alert" placeholder="Seleccione un animal silvestre">
     <ion-select-option *ngFor="let animals of animalsilvestre" value="{{animals.id_animal_silvestre}}"> #{{animals.id_animal_silvestre}} - {{animals.nom_comun}}</ion-select-option>
   </ion-select>
 </ion-item>
@@ -243,8 +243,8 @@
 </div>
 
 <ion-item fill="outline">
-  <ion-label color="cea" position="floating"><b>Telefono*</b></ion-label>
-  <ion-input class="inputCenter" type="tel" formControlName="telefono" placeholder="Ingresa el telefono" ></ion-input>
+  <ion-label color="cea" position="floating"><b>Teléfono*</b></ion-label>
+  <ion-input class="inputCenter" type="tel" formControlName="telefono" placeholder="Ingresa el teléfono" ></ion-input>
 </ion-item>
 <div *ngFor="let error of errormensaje.telefono" class="ion-text-center ion-margin-bottom">
   <ng-container *ngIf="telefono.hasError(error.type) && 

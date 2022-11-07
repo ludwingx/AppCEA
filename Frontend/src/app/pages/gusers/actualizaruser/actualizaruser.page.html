@@ -18,7 +18,7 @@
 
     <br>
     <ion-item>
-      <ion-label position="floating">Correo electronico*</ion-label>
+      <ion-label position="floating">Correo electrónico*</ion-label>
       <ion-input type="email" [(ngModel)]="users.email_u" name="email"></ion-input>
     </ion-item>
     <br>
@@ -29,14 +29,14 @@
     </ion-item>
     <br>
     <ion-item>
-      <ion-label position="floating">Celula de Identidad*</ion-label>
+      <ion-label position="floating">Cédula de Identidad*</ion-label>
       <ion-input type="number" [(ngModel)]="users.ci_u" name="ci"></ion-input>
     </ion-item>
     <br>
     <ion-item >
       <ion-label position="stacked">Cargo*</ion-label>
       <ion-select  placeholder="{{datos.nom_cargo}}" [(ngModel)]="users.id_cargo" >
-        .
+        
         <ion-select-option *ngFor="let user of cargos"  value="{{user.id_cargo}}">{{user.nom_cargo}}</ion-select-option>
       </ion-select>
     </ion-item>

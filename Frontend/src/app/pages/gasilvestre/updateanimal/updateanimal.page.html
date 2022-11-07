@@ -18,8 +18,8 @@
   <ion-list class="listForm">
     <ion-item class="itemForm" fill="outline">
       <ion-label color="cea" position="floating">Especie*</ion-label>
-      <ion-select  [(ngModel)]="animalsilvestre.id_especies">
-        <ion-select-option *ngFor="let especie of especies" value="{{ especie.id_especies }}">{{especie.nom_especies}}</ion-select-option>
+      <ion-select placeholder="{{datos.nom_especies}}"  [(ngModel)]="animalsilvestre.id_especies">
+        <ion-select-option *ngFor="let animals of especies" value="{{ animals.id_especies }}">{{animals.nom_especies}}</ion-select-option>
       </ion-select>
       <ion-note slot="helper">Seleccione la especie</ion-note>
       <ion-note slot="error">Especie no seleccionada</ion-note>
@@ -29,7 +29,7 @@
       <ion-label position="floating" color="cea">Nombre Científico*</ion-label>
       <ion-input type="text" placeholder="Ingrese su Nombre/s y Apellidos" [(ngModel)]="animalsilvestre.nom_cientifico" ></ion-input>
       <ion-note slot="helper">Ingrese el Nombre Científico*</ion-note>
-      <ion-note slot="error">Nombre cientifico invalido</ion-note>
+      <ion-note slot="error">Nombre científico invalido</ion-note>
     </ion-item>
     <br>
     <ion-item class="itemForm" fill="outline">
@@ -41,8 +41,8 @@
     <br>
     <ion-item class="itemForm" fill="outline">
       <ion-label color="cea" position="floating">Edad*</ion-label>
-      <ion-select [(ngModel)]="animalsilvestre.id_edad">
-        <ion-select-option *ngFor="let edad of edades" value="{{ edad.id_edad }}">{{edad.nom_edad}}</ion-select-option>
+      <ion-select placeholder="{{datos.nom_edad}}" [(ngModel)]="animalsilvestre.id_edad">
+        <ion-select-option *ngFor="let animals of edades" value="{{ animals.id_edad }}">{{animals.nom_edad}}</ion-select-option>
       </ion-select>
       <ion-note slot="helper">Seleccione la edad</ion-note>
       <ion-note slot="error">Especie no seleccionada</ion-note>
@@ -50,8 +50,8 @@
     <br>
     <ion-item class="itemForm" fill="outline">
       <ion-label color="cea" position="floating">Sexo*</ion-label>
-      <ion-select [(ngModel)]="animalsilvestre.id_sexo">
-        <ion-select-option *ngFor="let sexo of sexos" value="{{ sexo.id_sexo }}">{{sexo.nom_sexo}}</ion-select-option>
+      <ion-select placeholder="{{datos.nom_sexo}}"  [(ngModel)]="animalsilvestre.id_sexo">
+        <ion-select-option *ngFor="let animals of sexos" value="{{ animals.id_sexo }}">{{animals.nom_sexo}}</ion-select-option>
       </ion-select>
       <ion-note slot="helper">Seleccione el sexo</ion-note>
       <ion-note slot="error">Especie no seleccionada</ion-note>

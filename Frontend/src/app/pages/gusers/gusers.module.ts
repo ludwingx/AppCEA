@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { GusersPageRoutingModule } from './gusers-routing.module';
 
 import { GusersPage } from './gusers.page';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    PipesModule,
     GusersPageRoutingModule
   ],
   declarations: [GusersPage]

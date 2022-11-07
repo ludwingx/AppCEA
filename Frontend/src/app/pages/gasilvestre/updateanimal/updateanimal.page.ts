@@ -96,7 +96,7 @@ export class UpdateanimalPage implements OnInit {
   async presentLoadingWithOptions(){
     const loading = await this.loadingController.create({
       //spinner: null,
-      duration: 2000,
+      duration: 3000,
       message: 'Actualizando datos del Animal silvestre...',
       //translucent: true,
       //cssClass: 'custom-class custom-loading'

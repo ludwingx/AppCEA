@@ -5,6 +5,7 @@ import { ConexionService } from 'src/app/servicios/conexion/conexion.service';
 import { CrearasPage } from './crearas/crearas.page';
 import { UpdateanimalPage } from './updateanimal/updateanimal.page';
 import { ListdelaniPage } from './listdelani/listdelani.page';
+import { Asilvestre } from 'src/app/interfaces/asilvestre';
 
 @Component({
   selector: 'app-gasilvestre',
@@ -12,8 +13,8 @@ import { ListdelaniPage } from './listdelani/listdelani.page';
   styleUrls: ['./gasilvestre.page.scss'],
 })
 export class GasilvestrePage implements OnInit {
-animalsilvestresin : any = [];
-animalsilvestrecon: any = [];
+animalsilvestresin : Asilvestre [];
+animalsilvestrecon : Asilvestre [];
 textoBuscar = '';
   constructor(private conexion: ConexionService,
               private modalCtrl: ModalController,
@@ -70,10 +71,10 @@ textoBuscar = '';
       return modal.onDidDismiss();
     })
   }
-  updateAnimal(animals:any){
+  updateAnimal(animalsilvestre:any){
     this.modalCtrl.create({
       component: UpdateanimalPage,
-      componentProps: { animals }
+      componentProps: { animalsilvestre }
     })
     .then(modal => {
       modal.present();

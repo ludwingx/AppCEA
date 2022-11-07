@@ -4,6 +4,11 @@
       <ion-back-button text="" defaultHref="login"></ion-back-button>
     </ion-buttons>
     <ion-title> Usuarios</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['listdisuser']">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -16,8 +21,8 @@
   <br />
   <ion-button expand="block" 
   color="cea" [routerLink]="['crearuser']">Crear Usuario</ion-button>
-  <ion-button expand="block" 
-  color="cea" [routerLink]="['listdisuser']" >Cuentas Deshabilitadas</ion-button>
+
+  <ion-searchbar animated="true" placeholder="Nombre del usuario" (ionChange)="buscar($event)"></ion-searchbar>
   <br />
     <ion-item class="ion-text-center">
       <ion-label>
@@ -26,7 +31,7 @@
         </ion-text>
       </ion-label>
     </ion-item>
-    <ion-list *ngFor="let user of users">
+    <ion-list *ngFor="let user of users | filtro: textoBuscar: 'nombre_u'">
       <ion-item-sliding >
         <ion-item>
           <ion-avatar slot="start">

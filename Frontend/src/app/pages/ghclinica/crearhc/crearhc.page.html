@@ -23,27 +23,11 @@
       <ion-note color="cea">Prog. Conservación de la Biodiversidad del Dpto. SC</ion-note>
       <br>
     <br>
-    <ion-item class="itemForm" fill="outline">
-      <ion-label class="itemLabel" position="floating">Tipo de especies*</ion-label>
-      <ion-select>
-        <ion-select-option *ngFor="let tipo of especies" value="{{tipo.id_especies}}">{{tipo.nom_especies}}</ion-select-option>
+    <ion-item class="itemForm ion-margin-bottom" fill="outline">
+      <ion-label position="floating">Animal Silvestre*</ion-label>
+      <ion-select placeholder="Seleccione un animal silvestre">
+        <ion-select-option *ngFor="let animals of animalsilvestre" value="{{animals.id_animal_silvestre}}"> #{{animals.id_animal_silvestre}} - {{animals.nom_comun}}</ion-select-option>
       </ion-select>
-      <ion-note slot="helper">Seleccione el tipo de especie</ion-note>
-      <ion-note slot="error">tipo de especie no seleccionada</ion-note>
-    </ion-item>
-    <br>
-    <ion-item fill="outline">
-      <ion-label color="cea" position="floating"><b>Nombre común*</b></ion-label>
-      <ion-input [(ngModel)]="hclinica.nom_comun_hc" class="inputCenter" type="text" placeholder="Ingresa el nombre común" ></ion-input>
-    </ion-item>
-    <br>
-    <ion-item class="itemForm" fill="outline">
-      <ion-label class="itemLabel" position="floating">Sexo*</ion-label>
-      <ion-select>
-        <ion-select-option *ngFor="let tipo of sexos" value="{{tipo.id_sexo}}">{{tipo.nom_sexo}}</ion-select-option>
-      </ion-select>
-      <ion-note slot="helper">Seleccione el tipo de especie</ion-note>
-      <ion-note slot="error">tipo de especie no seleccionada</ion-note>
     </ion-item>
     <br>
     <ion-item fill="outline">
@@ -90,7 +74,7 @@
     </ion-item>
     <br>
     <ion-item fill="outline">
-      <ion-label color="cea" position="floating"><b>Frecuencia Cardiaca*</b></ion-label>
+      <ion-label color="cea" position="floating"><b>Frecuencia Cardíaca*</b></ion-label>
       <ion-input [(ngModel)]="hclinica.frec_cardiaca_hc" class="inputCenter" type="number" placeholder="Ingresa datos de la frecuencia cardiaca" ></ion-input>
     </ion-item>
     <br>
@@ -188,8 +172,8 @@
     <h3><ion-label>Diagnostico</ion-label></h3>
     <ion-label slot="end">Fila: {{ nro }}</ion-label>
     <ion-item fill="outline">
-      <ion-label color="cea" position="floating"><b>Farmaco</b></ion-label>
-      <ion-input [(ngModel)]="tratdiagnData.farmaco_td" class="inputCenter" type="text" placeholder="Ingresa el dato del farmaco" ></ion-input>
+      <ion-label color="cea" position="floating"><b>Fármaco</b></ion-label>
+      <ion-input [(ngModel)]="tratdiagnData.farmaco_td" class="inputCenter" type="text" placeholder="Ingresa el dato del fármaco" ></ion-input>
     </ion-item>
     <br>
     <ion-item fill="outline">
@@ -215,7 +199,7 @@
       Agregar
     </ion-button>
     <ion-button (click)="registrarHc()" color="cea" expand="block">
-      Registrar Historia Clinica
+      Registrar Historia Clínica
     </ion-button>
   </ion-list> 
 </ion-content>

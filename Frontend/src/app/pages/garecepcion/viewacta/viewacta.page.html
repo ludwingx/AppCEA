@@ -9,21 +9,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+
   <div>
     <div class="logo-GAD">
       <img src="assets/logoGAD.png">
     </div>
-    
+
     <div class="titulo">
-      <h3><strong>SECRETARIA DE DESARROLLO SOSTENIBLE 
-        Y MEDIO AMBIENTE</strong></h3>
-      <h3><strong>DIRECCION DE RECURSOS NATURALES</strong></h3>
-      <h5>PROGRAMA INTEGRAL DE CONSERVACION DE LA 
+      <h3><strong>SECRETARIA DE DESARROLLO SOSTENIBLE
+          Y MEDIO AMBIENTE</strong></h3>
+      <h3><strong>DIRECCIÓN DE RECURSOS NATURALES</strong></h3>
+      <h5>PROGRAMA INTEGRAL DE CONSERVACIÓN DE LA
         BIODIVERSIDAD DEL DEPARTAMENTO DE SANTA CRUZ</h5>
-        <h3><u>ACTA DE RECEPCIÓN</u></h3>
+      <h3><u>ACTA DE RECEPCIÓN</u></h3>
     </div>
-    
+
     <div>
       <ion-row>
         <ion-col size="12">
@@ -46,11 +47,11 @@
         </ion-col>
       </ion-row>
     </div>
-    
+
     <div>
       <ion-item class="ion-text-center">
         <ion-label>
-          <ion-text >
+          <ion-text>
             <strong>Tipo de Atención</strong>
           </ion-text>
           <br>
@@ -60,18 +61,18 @@
         </ion-label>
       </ion-item>
     </div>
-    
+
     <div class="comunicado">
       <p>La Autoridad Ambiental Competente Departamental, a través de la Dirección de Recursos
         Naturales, comunica a usted que dando cumplimiento al Marco Legal vigente: Constitución política del Estado,
         Código Penal, Ley 1333, Ley 700 y Ley 12301, D.S 25458, Decreto Supremo N° 4489, y la resolución Administrativa
         SDS Y MA /001/2012 Y Decreto Departamental N° 140/2011, realiza la atención en la dirección:</p>
-    <p><strong>Lugar donde fue la entrega, rescate o decomiso del animal:</strong></p>
+      <p><strong>Lugar donde fue la entrega, rescate o decomiso del animal:</strong></p>
     </div>
-    
+
     <div class="lugar-entrega">
       <ion-row>
-        <ion-col size="12" >
+        <ion-col size="12">
           <ion-item class="ion-text-center">
             <ion-label>
               <ion-text>
@@ -121,17 +122,17 @@
         </ion-col>
       </ion-row>
     </div>
-    
+
     <div class="comunicado">
       <p><strong>
-        Lugar de donde procede el animal (donde encontro al animal 
-        la persona que hace la denuncia o llamada):
-      </strong></p>
+          Lugar de donde procede el animal (donde encontró al animal
+          la persona que hace la denuncia o llamada):
+        </strong></p>
     </div>
-    
+
     <div class="lugar-entrega">
       <ion-row>
-        <ion-col size="12" >
+        <ion-col size="12">
           <ion-item class="ion-text-center">
             <ion-label>
               <ion-text>
@@ -193,24 +194,24 @@
         </ion-col>
       </ion-row>
     </div>
-    
+
     <div class="comunicado">
       <p><strong>
-        Especies procedentes de la atencion:
-      </strong></p>
+          Especies procedentes de la atención:
+        </strong></p>
       <p>
         *Sexo: Macho(M), Hembra(H), Indeterminado(I)
       </p>
       <p>
-        *Edad: Neonato o pichon(N), Infante juvenil(i - j), Juvenil(J), Adulto(A)
+        *Edad: Neonato o pichón(N), Infante juvenil(i - j), Juvenil(J), Adulto(A)
         lo llenara la veterinaria que revise al animal
       </p>
     </div>
-    
+
     <div class="lugar-entrega">
       <ion-card *ngFor="let item of procedente; let i = index">
-        <ion-row >
-          <ion-col size="12" >
+        <ion-row>
+          <ion-col size="12">
             <ion-item class="ion-text-center">
               <ion-label>
                 <ion-text>
@@ -218,7 +219,7 @@
                 </ion-text>
                 <br>
                 <ion-text>
-                  <h3>Nombre Cientifico</h3>
+                  <h3>Nombre Científico</h3>
                 </ion-text>
                 <ion-text>
                   <h4>{{ item.nombre_cientifico }}</h4>
@@ -277,18 +278,18 @@
         </ion-row>
       </ion-card>
     </div>
-    
+
     <div class="comunicado">
       <p>
         Las especies serán derivados a la SDS Y MA de la Gobernación
-            de Santa Cruz, instalaciones del CAD
+        de Santa Cruz, instalaciones del CAD
       </p>
     </div>
-    
+
     <div class="lugar-entrega">
       <ion-card>
         <ion-row>
-          <ion-col size="12" >
+          <ion-col size="12">
             <ion-item class="ion-text-center">
               <ion-label>
                 <ion-text>
@@ -330,10 +331,10 @@
           </ion-col>
         </ion-row>
       </ion-card>
-    
+
       <ion-card>
         <ion-row>
-          <ion-col size="12" >
+          <ion-col size="12">
             <ion-item class="ion-text-center">
               <ion-label>
                 <ion-text>
@@ -353,7 +354,7 @@
             <ion-item class="ion-text-center">
               <ion-label>
                 <ion-text>
-                  <h3>Cedula</h3>
+                  <h3>Cédula</h3>
                 </ion-text>
                 <ion-text>
                   <h4>{{ dataActa.cedulaP }}</h4>
@@ -365,7 +366,7 @@
             <ion-item class="ion-text-center">
               <ion-label>
                 <ion-text>
-                  <h3>Telefono</h3>
+                  <h3>Teléfono</h3>
                 </ion-text>
                 <ion-text>
                   <h4>{{ dataActa.telefonoP }}</h4>
@@ -388,5 +389,5 @@
         </ion-row>
       </ion-card>
     </div>
-  </div>
-  </ion-content>
+  </div> 
+</ion-content>

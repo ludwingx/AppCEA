@@ -5,6 +5,7 @@
     
     $postjson = json_decode(file_get_contents("php://input"), TRUE);
 
+
     if($postjson['aksi'] == "registrar-ar"){
         $nro_acta = $postjson['nro_acta'];
         $fecha = $postjson['fecha'];
@@ -29,8 +30,7 @@
         $nombreP = $postjson['nombreP'];
         $telefonoP = $postjson['telefonoP'];
         $firmaP = $postjson['firmaP'];
-        $id_animal_silvestre;
-
+        $animal_silvestre;
         $observaciones;
         
         //registro de persona
@@ -39,8 +39,7 @@
         $repPersona = $mysqli->query("SELECT id_persona FROM tblpersonas WHERE cedula='$cedulaP'");
         $id_person = mysqli_fetch_array($repPersona);
         $id_person = $id_person["id_persona"];
-        
-        //registro de acta de recepcion
+
         $res2 = $mysqli->query("INSERT INTO acta_recepcion SET 
         num_acta_ar='$nro_acta',
         fecha_ar='$fecha',
@@ -64,17 +63,13 @@
         
         
         for($i = 0; $i < count($especie_proc); $i++){
-
-            $id_animal_silvestre[$i]= $especie_proc[$i]['id_animal_silvestre'];
-
+            $animales_silvestres[$i]= $especie_proc[$i]['animal_silvestre'];
             $observaciones[$i]= $especie_proc[$i]['observacion'];
         }
         
-        //registro de procedente de atencion
         for($i = 0; $i < count($especie_proc); $i++){
             $res3 = $mysqli->query("INSERT INTO procedente_atencion SET id_acta_recepcion=$id_acta,
-                id_animal_silvestre=$id_animal_silvestre[$i],
-
+                id_animal_silvestre=$animales_silvestres[$i],
                 observaciones_rec='$observaciones[$i]'");
         }
         
@@ -86,16 +81,14 @@
 
         echo $result;
         
-    }
     
-    else if($postjson['aksi'] == "ver-acta"){
-        $num_acta_ar = $postjson['num_acta_ar'];
-        $cont = 0;
-        $res = $mysqli->query("SELECT AR.num_acta_ar, AR.fecha_ar, AR.hora_ar,
+    }else if($postjson['aksi'] == "ver-acta"){
+
+        $res = $mysqli->query("SELECT AR.num_acta_ar as nro_acta, AR.fecha_ar as fecha, AR.hora_ar as hora,
         A.nom_tipo_atencion, MS.nom_mun, 
-        AR.nom_ldfe_barrio_ar, AR.nom_ldfecalle_ar, AR.num_ldfe_casa_ar,
-        AR.nom_ldp_barrio_ar, AR.nom_ldp_calle_ar, 
-        AR.nom_ldp_empresa_ar, AR.nom_ldp_area_ar, U.nombre_u, U.ci_u, U.firma_u,
+        AR.nom_ldfe_barrio_ar as barrioE, AR.nom_ldfecalle_ar as calleE, AR.num_ldfe_casa_ar as nro_casaE,
+        AR.nom_ldp_barrio_ar as barrioS, AR.nom_ldp_calle_ar as calleS, 
+        AR.nom_ldp_empresa_ar as empresa, AR.nom_ldp_area_ar as area, U.nombre_u, U.ci_u, U.firma_u,
         P.nombreC, P.cedula, P.telefono, P.firma
         FROM acta_recepcion as AR
         INNER JOIN tatencion as A
@@ -106,7 +99,7 @@
         ON AR.id_usuario=U.id_usuario
         INNER JOIN tblpersonas as P
         ON AR.id_persona=P.id_persona
-        WHERE AR.num_acta_ar='$num_acta_ar'");
+        WHERE AR.num_acta_ar='$nro_acta'");
         
         $res2 = $mysqli->query("SELECT MS.nom_mun FROM acta_recepcion as AR
         INNER JOIN municipios as MS
@@ -115,19 +108,15 @@
         $nombreMuS = mysqli_fetch_array($res2);
         $nombreMuS = $nombreMuS["nom_mun"];
         
-        $res3 = $mysqli->query("SELECT ES.nom_especies, A.nom_cientifico, A.nom_comun, E.nom_edad, S.nom_sexo, PA.observaciones_rec
+        $res3 = $mysqli->query("SELECT PA.nombre_cientifico, PA.nombre_comun, E.nom_edad, S.nom_sexo, PA.observaciones_rec
             FROM acta_recepcion as AR
             INNER JOIN procedente_atencion as PA
             ON AR.id_acta_recepcion=PA.id_acta_recepcion
-            INNER JOIN especies as ES
-            ON A.id_especies = ES.id_especies
             INNER JOIN edad as E
-            ON A.id_edad=E.id_edad
+            ON PA.id_edad=E.id_edad
             INNER JOIN sexo as S
-            ON A.id_sexo=S.id_sexo
-            INNER JOIN animal_silvestre as A
-            ON PA.id_animal_silvestre = A.animal_silvestre
-            WHERE AR.num_acta_ar='$num_acta_ar'");
+            ON PA.id_sexo=S.id_sexo
+            WHERE AR.num_acta_ar='$nro_acta'");
             
         
         
@@ -137,36 +126,35 @@
         if($check > 0 && $check2 > 0){
             $data= mysqli_fetch_array($res);
             $datauser = array(
-            'num_acta_ar' => $data["num_acta_ar"],
-            'fecha_ar' => $data["fecha_ar"],
-            'hora_ar' => $data["hora_ar"],
-            'nom_tipo_atencion' => $data["nom_tipo_atencion"],
+            'nro_acta' => $data["nro_acta"],
+            'fecha' => $data["fecha"],
+            'hora' => $data["hora"],
+            'tipo_atencion' => $data["nom_tipo_atencion"],
             'municipioE' => $data["nom_mun"],
-            'nom_ldfe_barrio_ar' => $data["nom_ldfe_barrio_ar"],
-            'nom_ldfecalle_ar' => $data["nom_ldfecalle_ar"],
-            'num_ldfe_casa_ar' => $data["num_ldfe_casa_ar"],
+            'barrioE' => $data["barrioE"],
+            'calleE' => $data["calleE"],
+            'nro_casaE' => $data["nro_casaE"],
             
             'municipioS' => $nombreMuS,
-            'nom_ldp_barrio_ar' => $data["nom_ldp_barrio_ar"],
-            'nom_ldp_calle_ar' => $data["nom_ldp_calle_ar"],
-            'nom_ldp_empresa_ar' => $data["nom_ldp_empresa_ar"],
-            'nom_ldp_area_ar' => $data["nom_ldp_area_ar"],
-            'nombre_u' => $data["nombre_u"],
-            'ci_u' => $data["ci_u"],
-            'firma_u' => $data["firma_u"],
-            'nombreC' => $data["nombreC"],
-            'cedula' => $data["cedula"],
-            'telefono' => $data["telefono"],
-            'firma' => $data["firma"]
+            'barrioS' => $data["barrioS"],
+            'calleS' => $data["calleS"],
+            'empresa' => $data["empresa"],
+            'area' => $data["area"],
+            'nombreFunc' => $data["nombre_u"],
+            'cedulaFunc' => $data["ci_u"],
+            'firmaFunc' => $data["firma_u"],
+            'nombreP' => $data["nombreC"],
+            'cedulaP' => $data["cedula"],
+            'telefonoP' => $data["telefono"],
+            'firmaP' => $data["firma"]
         );
         
         while ($data=mysqli_fetch_assoc($res3)) {
                 $procedente[$cont]= array(
-                    "nom_especies" => $data["nom_especies"],
-                    "nom_cientifico" => $data["nom_cientifico"],
-                    "nom_comun"=> $data["nom_comun"],
-                    "nom_edad" => $data["nom_edad"],
-                    "nom_sexo"=> $data["nom_sexo"],
+                    "nombre_cientifico" => $data["nombre_cientifico"],
+                    "nombre_comun"=> $data["nombre_comun"],
+                    "edad" => $data["nom_edad"],
+                    "sexo"=> $data["nom_sexo"],
                     "observacion"=> $data["observaciones_rec"]
                 );
                 $cont++;
@@ -179,57 +167,34 @@
         }
         echo $result;
     }
+    
     else if ($_GET['aksi'] == "list-arecepcion") {
 
-        $res = $mysqli->query("SELECT AR.num_acta_ar, AR.fecha_ar, AR.hora_ar,
-        A.nom_tipo_atencion, MS.nom_mun, 
-        AR.nom_ldfe_barrio_ar, AR.nom_ldfecalle_ar, AR.num_ldfe_casa_ar,
-        AR.nom_ldp_barrio_ar, AR.nom_ldp_calle_ar, 
-        AR.nom_ldp_empresa_ar, AR.nom_ldp_area_ar
-        FROM acta_recepcion as AR
-        INNER JOIN tatencion as A
-        ON AR.id_tipo_atencion=A.id_tipo_atencion
-        INNER JOIN municipios as MS
-        ON AR.id_ldfe_municipio=MS.id_municipio
-        INNER JOIN usuarios as U
-        ON AR.id_usuario=U.id_usuario
-        INNER JOIN tblpersonas as P
-        ON AR.id_persona=P.id_persona");
-        $cont = 0;
-        $check = mysqli_num_rows($res);
-    
-        if ($check > 0) {
-            while ($data = mysqli_fetch_assoc($res)) {
-                $datauser[$cont] = array(
-                    'num_acta_ar' => $data["num_acta_ar"],
-                    'fecha_ar' => $data["fecha_ar"],
-                    'hora_ar' => $data["hora_ar"],
-                    'nom_tipo_atencion' => $data["nom_tipo_atencion"],
-                    'nom_mun' => $data["nom_mun"],
-                    'nom_ldfe_barrio_ar' => $data["nom_ldfe_barrio_ar"],
-                    'nom_ldp_calle_ar' => $data["nom_ldp_calle_ar"],
-                    'num_ldfe_casa_ar' => $data["num_ldfe_casa_ar"],
-                    
-                    'nom_mun' => $nombreMuS,
-                    'nom_ldp_calle_ar' => $data["nom_ldp_barrio_ar"],
-                    'nom_ldp_calle_ar' => $data["nom_ldp_calle_ar"],
-                    'nom_ldp_empresa_ar' => $data["nom_ldp_empresa_ar"],
-                    'nom_ldp_area_ar' => $data["nom_ldp_area_ar"],
-                    'nombre_u' => $data["nombre_u"],
-                    'ci_u' => $data["ci_u"],
-                    'firma_u' => $data["firma_u"],
-                    'nombreC' => $data["nombreC"],
-                    'cedula' => $data["cedula"],
-                    'telefono' => $data["telefono"],
-                    'firma' => $data["firma"]
-                );
-                $cont++;
-            };
-            $result = json_encode(array('success' => TRUE, "listArecepcion" => $datauser));
-        } else {
-            $result = json_encode(array('success' => false, 'msg' => 'No existen animales registrados'));
-        }
-        echo $result;
+    $res = $mysqli->query("SELECT AR.id_acta_recepcion, AR.num_acta_ar, AR.fecha_ar, AR.hora_ar, A.nom_tipo_atencion
+    FROM acta_recepcion as AR
+    INNER JOIN tatencion as A
+    ON AR.id_tipo_atencion=A.id_tipo_atencion");
+    $cont = 0;
+    $check = mysqli_num_rows($res);
+
+    if ($check > 0) {
+        while ($data = mysqli_fetch_assoc($res)) {
+            $datauser[$cont] = array(
+                'id_acta_recepcion' => $data["id_acta_recepcion"],
+                'num_acta_ar' => $data["num_acta_ar"],
+                'fecha_ar' => $data["fecha_ar"],
+                'hora_ar' => $data["hora_ar"],
+                'nom_tipo_atencion' => $data["nom_tipo_atencion"],
+                'id_tipo_atencion' => $data["id_tipo_atencion"]
+
+            );
+            $cont++;
+        };
+        $result = json_encode(array('success' => TRUE, "listArecepcion" => $datauser));
+    } else {
+        $result = json_encode(array('success' => false, 'msg' => 'No existen animales registrados'));
+    }
+    echo $result;
     } else if($postjson['aksi'] == "update-ar"){
         $id_acta_recepcion = $postjson['id_acta_recepcion'];
         $num_acta_ar = $postjson['num_acta_ar'];

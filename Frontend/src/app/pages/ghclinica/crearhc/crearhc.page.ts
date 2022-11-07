@@ -7,6 +7,7 @@ import { Sexos } from 'src/app/interfaces/sexos';
 import { Mucosas } from 'src/app/interfaces/mucosas';
 import { Preferences } from '@capacitor/preferences';
 import { ToastController, LoadingController } from '@ionic/angular';
+import { Animalsilvestre } from 'src/app/interfaces/animalsilvestre';
 @Component({
   selector: 'app-crearhc',
   templateUrl: './crearhc.page.html',
@@ -59,11 +60,13 @@ export class CrearhcPage implements OnInit {
     via_td:"",
     hora_td:"",
   }
+  animalsilvestre: Animalsilvestre[];
   constructor(private conexion : ConexionService,
               private toastCtrl: ToastController,
               public loadingController: LoadingController) { }
 
   ngOnInit() {
+    this.ListAnimals();
     this.ListEspecies();
     this.ListSexo();
     this.ListMucosa();
@@ -72,6 +75,11 @@ export class CrearhcPage implements OnInit {
       this.dataStorage = JSON.parse(data.value);
       this.perfil(this.dataStorage.id_usuario);
 
+    })
+  }
+  ListAnimals(){
+    this.conexion.getdata("animals.php/?aksi=list-animals-sinplanilla").subscribe((data:any)=>{
+      this.animalsilvestre = data.listAnimalsSinPlanilla
     })
   }
   agregarTratamientoDiagnostico(){

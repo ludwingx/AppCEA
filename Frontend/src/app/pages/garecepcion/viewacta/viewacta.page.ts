@@ -1,5 +1,5 @@
 import { ConexionService } from './../../../servicios/conexion/conexion.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,23 +10,27 @@ import { Component, OnInit } from '@angular/core';
 export class ViewactaPage implements OnInit {
   dataActa:any = []
   procedente:any = []
+  datos:any
   constructor(private modalCtrl: ModalController,
+              private navParam: NavParams,
               private conexion: ConexionService,) { }
 
   ngOnInit() {
-    this.VerActa()
+
+    this.datos = this.navParam.get("arecepcion");
   }
   Cerrar(){
     this.modalCtrl.dismiss()
   }
 
-  VerActa(){
-    // const body = {
-    //   nro_acta: this.nro_acta,
-    //   aksi: "ver-acta"
-    // }
-    this.conexion.getdata("arecepcion.php/?aksi=list-arecepcion").subscribe((data:any)=>{
-      this.dataActa = data.listArecepcion
+  VerActa(id_acta_recepcion:string){
+    const body = {
+      id_acta_recepcion: id_acta_recepcion,
+      aksi: "ver-acta"
+    }
+    this.conexion.getdata("arecepcion.php/?aksi=ver-acta").subscribe((data:any)=>{
+      this.dataActa = data.VerActa
+      this.procedente = data.procedente
     })
   }
 }

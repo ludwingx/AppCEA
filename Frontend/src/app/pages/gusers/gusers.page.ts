@@ -13,7 +13,7 @@ import { User } from 'src/app/interfaces/usuario';
 })
 export class GusersPage implements OnInit {
   users: User[];
-  
+  textoBuscar = '';
   constructor(private conexion: ConexionService,
               private alertCtrl: AlertController,
               private modalCtrl : ModalController,
@@ -21,6 +21,9 @@ export class GusersPage implements OnInit {
 
   ngOnInit() {
     this.ListUser()
+  }
+  buscar( event ){
+    this.textoBuscar = event.detail.value;
   }
   doRefresh(event){
     this.ListUser();

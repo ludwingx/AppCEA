@@ -50,6 +50,10 @@ const routes: Routes = [
   {
     path: 'gasilvestre',
     loadChildren: () => import('./pages/gasilvestre/gasilvestre.module').then( m => m.GasilvestrePageModule)
+  },
+  {
+    path: 'consulta',
+    loadChildren: () => import('./pages/consulta/consulta.module').then( m => m.ConsultaPageModule)
   }
 
 ];
