@@ -1,0 +1,303 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="Cerrar()">
+        <ion-icon name="arrow-back-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Historia Clínica</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-center"><h3><u>HISTORIA CLÍNICA</u></h3></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col >
+        Centro de Atención y Derivación<br />
+        SDSMA - DIRENA <br />
+        Prog. Conservación de la Biodiversidad del Dpto. SC <br />
+      </ion-col>
+      <ion-col size="auto"><img class="tigreImg" src="assets/tigre.png"></ion-col>
+      <ion-col size="4"><img class="gobernacionImg" src="assets/logoGAD.png"></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <b>Fecha:</b> {{datos.fecha_hc}} <br/>
+        <b>Hora:</b> {{datos.hora_hc}} <br/>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <h3>ESPECIE:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.id_especies }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <h3>NOMBRE COMÚN:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.nom_comun }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <h3>SEXO:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.id_sexo }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <h3>EDAD</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.id_edad }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            <ion-text>
+              <h3>ANAMNESIS:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.anamnesis_hc }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            <ion-text>
+              <h3>MUCOSAS:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.nom_mucosa }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <ion-text>
+              <h3>Obs:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.observaciones_hc }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            <ion-text>
+              <h3>REV EXTERNA:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.nom_revext }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            <ion-text>
+              <h3>SIS. NERVIOSO:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.sis_nervioso_hc }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            <ion-text>
+              <h3>SIS. RESPIRATORIO:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.sis_respiratorio_hc }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <h3>TEMPERATURA:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.temperatura_hc }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <h3>FREC. CARDIACA:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.frec_cardiaca_hc }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <h3>PESO:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.peso_hc }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label>
+            <ion-text>
+              <h3>PRUEBAS COMPLEMENTARIAS:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.pruebas_complementarias_hc }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label>
+            <ion-text>
+              <h3>DIAGNOSTICO PRESUNTIVO:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.diagn_presuntivo_hc }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label>
+            <ion-text>
+              <h3>DIAGNOSTICO CONFIRMADO:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.diagn_confirmado_hc }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <div class="lugar-entrega">
+      <ion-card>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item class="ion-text-center">
+              <ion-label>
+                <ion-text>
+                  <h2>MEDICO:</h2>
+                </ion-text>
+                <ion-text>
+                  <h3>{{ datos.nombre_u }}</h3>
+                </ion-text>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item class="ion-text-center">
+              <ion-label>
+                <ion-text>
+                  <h3>FIRMA:</h3>
+                </ion-text>
+                <ion-text>
+                  <img src="{{ datos.firma_u }}">
+                </ion-text>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label>
+            <ion-text>
+              <h3>HIDRATACIÓN:</h3>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <ion-text>
+              <h3>Reposición:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.hreposicion_hc }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <ion-text>
+              <h3>Mantenimiento:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.hmantenimiento_hc }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <ion-text>
+              <h3>Perdidas:</h3>
+            </ion-text>
+            <ion-text>
+              <h4>{{ datos.hperdidas_hc }}</h4>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+
+</ion-content>

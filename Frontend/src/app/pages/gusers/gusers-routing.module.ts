@@ -20,6 +20,10 @@ const routes: Routes = [
     path: 'listdisuser',
     loadChildren: () => import('./listdisuser/listdisuser.module').then( m => m.ListdisuserPageModule)
   },
+  {
+    path: 'viewuser',
+    loadChildren: () => import('./viewuser/viewuser.module').then( m => m.ViewuserPageModule)
+  },
 
 
 ];

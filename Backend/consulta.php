@@ -11,9 +11,9 @@
         $check=mysqli_num_rows($res);
         if($check > 0){
     
-            while ($data=mysqli_fetch_object($res)) {
+            while ($data=mysqli_fetch_row($res)) {
                     $dataacta[$cont] = array(
-                    'id_tipo_atencion' => $data["totalar"]
+                    'totalar' => $data["totalar"]
                     );
                     $cont++;
                 };

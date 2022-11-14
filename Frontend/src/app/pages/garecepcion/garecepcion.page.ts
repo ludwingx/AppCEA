@@ -19,7 +19,12 @@ export class GarecepcionPage implements OnInit {
     this.ListActa();
     console.log(this.arecepcion)
   }
-
+  doRefresh(event){
+    this.ListActa();
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
+  }
   async ModalVerActa(){
     const modal = await this.modalCtrl.create({
       component: VerActaPage,

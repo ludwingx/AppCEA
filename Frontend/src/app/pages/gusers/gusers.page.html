@@ -43,6 +43,7 @@
               {{ 'Cargo: ' + user.nom_cargo + ' | ' + user.email_u}}
             </p>
           </ion-label>
+          <ion-icon size="large" (click)="viewUser(user)" color="cea" slot="end" name="id-card-outline"></ion-icon>
         </ion-item>
       <ion-item-options side="end">
         <ion-item-option color="success" (click)="updateUser(user)">

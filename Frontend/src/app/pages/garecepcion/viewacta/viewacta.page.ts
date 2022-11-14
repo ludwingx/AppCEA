@@ -22,15 +22,4 @@ export class ViewactaPage implements OnInit {
   Cerrar(){
     this.modalCtrl.dismiss()
   }
-
-  VerActa(id_acta_recepcion:string){
-    const body = {
-      id_acta_recepcion: id_acta_recepcion,
-      aksi: "ver-acta"
-    }
-    this.conexion.getdata("arecepcion.php/?aksi=ver-acta").subscribe((data:any)=>{
-      this.dataActa = data.VerActa
-      this.procedente = data.procedente
-    })
-  }
 }

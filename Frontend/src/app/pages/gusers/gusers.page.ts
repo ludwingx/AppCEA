@@ -1,3 +1,4 @@
+import { ViewuserPage } from './viewuser/viewuser.page';
 import { CrearuserPage } from './crearuser/crearuser.page';
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
@@ -44,7 +45,16 @@ export class GusersPage implements OnInit {
       this.users = data.listUsers
     })
   }
-  
+  viewUser(users:any){
+    this.modalCtrl.create({
+      component: ViewuserPage,
+      componentProps: { users }
+    })
+    .then(modal => {
+      modal.present();
+      return modal.onDidDismiss();
+    })
+  }
 
   updateUser(users:any){
     this.modalCtrl.create({

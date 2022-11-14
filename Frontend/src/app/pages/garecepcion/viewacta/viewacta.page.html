@@ -30,19 +30,19 @@
         <ion-col size="12">
           <ion-item>
             <ion-label position="floating">Numero de acta</ion-label>
-            <ion-input value="{{ dataActa.nro_acta }}"></ion-input>
+            <ion-input value="{{ datos.num_acta_ar }}"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item>
             <ion-label position="floating">Fecha</ion-label>
-            <ion-input value="{{ dataActa.fecha }}"></ion-input>
+            <ion-input value="{{ datos.fecha_ar }}"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item>
             <ion-label position="floating">Hora</ion-label>
-            <ion-input value="{{ dataActa.hora }}"></ion-input>
+            <ion-input value="{{ datos.hora_ar }}"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -56,7 +56,7 @@
           </ion-text>
           <br>
           <ion-text>
-            {{ dataActa.tipo_atencion }}
+            {{ datos.nom_tipo_atencion }}
           </ion-text>
         </ion-label>
       </ion-item>
@@ -79,7 +79,7 @@
                 <h3>Municipio</h3>
               </ion-text>
               <ion-text>
-                <h4>{{ dataActa.municipioE }}</h4>
+                <h4>{{ datos.municipioE }}</h4>
               </ion-text>
             </ion-label>
           </ion-item>
@@ -91,7 +91,7 @@
                 <h3>Barrio</h3>
               </ion-text>
               <ion-text>
-                <h4>{{ dataActa.barrioE }}</h4>
+                <h4>{{ datos.barrioE }}</h4>
               </ion-text>
             </ion-label>
           </ion-item>
@@ -103,7 +103,7 @@
                 <h3>Calle/Avenida</h3>
               </ion-text>
               <ion-text>
-                <h4>{{ dataActa.calleE }}</h4>
+                <h4>{{ datos.calleE }}</h4>
               </ion-text>
             </ion-label>
           </ion-item>
@@ -115,7 +115,7 @@
                 <h3>Nº Casa</h3>
               </ion-text>
               <ion-text>
-                <h4>{{ dataActa.nro_casaE }}</h4>
+                <h4>{{ datos.nro_casaE }}</h4>
               </ion-text>
             </ion-label>
           </ion-item>
@@ -139,7 +139,7 @@
                 <h3>Municipio</h3>
               </ion-text>
               <ion-text>
-                <h4>{{ dataActa.municipioS }}</h4>
+                <h4>{{ datos.municipioS }}</h4>
               </ion-text>
             </ion-label>
           </ion-item>
@@ -151,7 +151,7 @@
                 <h3>Barrio</h3>
               </ion-text>
               <ion-text>
-                <h4>{{ dataActa.barrioS }}</h4>
+                <h4>{{ datos.barrioS }}</h4>
               </ion-text>
             </ion-label>
           </ion-item>
@@ -163,7 +163,7 @@
                 <h3>Calle/Avenida</h3>
               </ion-text>
               <ion-text>
-                <h4>{{ dataActa.calleS }}</h4>
+                <h4>{{ datos.calleS }}</h4>
               </ion-text>
             </ion-label>
           </ion-item>
@@ -175,7 +175,7 @@
                 <h3>Empresa y/o Institución</h3>
               </ion-text>
               <ion-text>
-                <h4>{{ dataActa.empresa }}</h4>
+                <h4>{{ datos.empresa }}</h4>
               </ion-text>
             </ion-label>
           </ion-item>
@@ -187,7 +187,7 @@
                 <h3>Area Verde, Area protegida, otro</h3>
               </ion-text>
               <ion-text>
-                <h4>{{ dataActa.area }}</h4>
+                <h4>{{ datos.area }}</h4>
               </ion-text>
             </ion-label>
           </ion-item>
@@ -300,7 +300,7 @@
                   <h3>Nombre</h3>
                 </ion-text>
                 <ion-text>
-                  <h4>{{ dataActa.nombreFunc }}</h4>
+                  <h4>{{ datos.nombreFunc }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -312,7 +312,7 @@
                   <h3>Cedula</h3>
                 </ion-text>
                 <ion-text>
-                  <h4>{{ dataActa.cedulaFunc }}</h4>
+                  <h4>{{ datos.cedulaFunc }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -324,7 +324,7 @@
                   <h3>Firma</h3>
                 </ion-text>
                 <ion-text>
-                  <img src="{{ dataActa.firmaFunc }}">
+                  <img src="{{ datos.firmaFunc }}">
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -345,7 +345,7 @@
                   <h3>Nombre</h3>
                 </ion-text>
                 <ion-text>
-                  <h4>{{ dataActa.nombreP }}</h4>
+                  <h4>{{ datos.nombreP }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -357,7 +357,7 @@
                   <h3>Cédula</h3>
                 </ion-text>
                 <ion-text>
-                  <h4>{{ dataActa.cedulaP }}</h4>
+                  <h4>{{ datos.cedulaP }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -369,7 +369,7 @@
                   <h3>Teléfono</h3>
                 </ion-text>
                 <ion-text>
-                  <h4>{{ dataActa.telefonoP }}</h4>
+                  <h4>{{ datos.telefonoP }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -381,7 +381,7 @@
                   <h3>Firma</h3>
                 </ion-text>
                 <ion-text>
-                  <img src="{{ dataActa.firmaP }}">
+                  <img src="{{ datos.firmaP }}">
                 </ion-text>
               </ion-label>
             </ion-item>

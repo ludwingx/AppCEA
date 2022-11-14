@@ -1,5 +1,4 @@
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
-import { Animalsilvestre } from 'src/app/interfaces/animalsilvestre';
 import { Component, OnInit } from '@angular/core';
 import { ConexionService } from 'src/app/servicios/conexion/conexion.service';
 import { CrearasPage } from './crearas/crearas.page';

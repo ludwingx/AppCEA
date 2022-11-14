@@ -10,6 +10,10 @@ const routes: Routes = [
   },  {
     path: 'crearhc',
     loadChildren: () => import('./crearhc/crearhc.module').then( m => m.CrearhcPageModule)
+  },
+  {
+    path: 'viewhistoria',
+    loadChildren: () => import('./viewhistoria/viewhistoria.module').then( m => m.ViewhistoriaPageModule)
   }
 
 ];

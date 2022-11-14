@@ -1,7 +1,10 @@
+import { ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Animalsilvestre } from 'src/app/interfaces/animalsilvestre';
+import { Hclinica } from 'src/app/interfaces/hclinica';
 
 import { ConexionService } from 'src/app/servicios/conexion/conexion.service';
+import { ViewhistoriaPage } from './viewhistoria/viewhistoria.page';
 
 @Component({
   selector: 'app-ghclinica',
@@ -9,22 +12,28 @@ import { ConexionService } from 'src/app/servicios/conexion/conexion.service';
   styleUrls: ['./ghclinica.page.scss'],
 })
 export class GhclinicaPage implements OnInit {
-  asilvestresin : Animalsilvestre[];
-  asilvestrecon : Animalsilvestre[];
-  constructor(private conexion: ConexionService) { }
+  hclinica: Hclinica[];
 
-  ngOnInit() {
-    // this.ListAnimalesSilvestresCon();
-    this.ListAnimalesSilvestresSin();
+  constructor(private conexion: ConexionService,
+              private modalCtrl: ModalController) { }
+
+  ngOnInit(){
+    this.ListHistoria();
   }
-  // ListAnimalesSilvestresCon(){
-  //   this.conexion.getdata("asilvestre.php/?aksi=list-AsilvestreCon").subscribe((data:any)=>{
-  //     this.asilvestrecon = data.listAsilvestreCon
-  //   })
-  // }
-  ListAnimalesSilvestresSin(){
-    this.conexion.getdata("asilvestre.php/?aksi=list-AsilvestreSin").subscribe((data:any)=>{
-      this.asilvestresin = data.listAsilvestreSin
+
+  ListHistoria(){
+    this.conexion.getdata("hclinica.php/?aksi=list-hclinica").subscribe((data:any)=>{
+      this.hclinica = data.listHclinica
+    })
+  }
+  verHistoria(historia:any){
+    this.modalCtrl.create({
+      component: ViewhistoriaPage,
+      componentProps: { historia }
+    })
+    .then(modal => {
+      modal.present();
+      return modal.onDidDismiss();
     })
   }
 }

@@ -2,10 +2,6 @@ export interface Hclinica{
     id_historia_clinica:string;
     fecha_hc:string;
     hora_hc:string;
-    id_especies:string;
-    nom_comun_hc:string;
-    id_sexo:string;
-    id_edad:string;
     anamnesis_hc:string;
     id_mucosas:string;
     observaciones_hc:string;
@@ -21,4 +17,12 @@ export interface Hclinica{
     hreposicion_hc:string;
     hmantenimiento_hc:string;
     hperdidas_hc:string;
+
+    id_animal_silvestre:string;
+    nom_especies:string;
+    nom_cientifico:string;
+    nom_comun:string;
+    nom_edad:string;
+    nom_sexo:string;
+
 }

@@ -16,6 +16,9 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./crearar.page.scss'],
 })
 export class CreararPage implements OnInit {
+    customCounterFormatter(inputLength: number, maxLength: number) {
+    return `${maxLength - inputLength} characters remaining`;
+  }
   get num_acta(){
     return this.formulario.get("num_acta");
   }

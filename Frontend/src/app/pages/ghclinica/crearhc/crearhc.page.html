@@ -1,22 +1,40 @@
 <ion-header>
-  <ion-toolbar class="color-cea-fondo">
-    <ion-title>Historia Clinica</ion-title>
-    <ion-buttons mode="md" class="ion-no-text" slot="start">
-      <ion-back-button text="" defaultHref=""></ion-back-button>
+  <ion-toolbar color="cea">
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="arrow-back-sharp"></ion-icon>
+      </ion-button>
     </ion-buttons>
+    <ion-title>Historia Clínica</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list class="listForm">
-    <ion-item fill="outline">
+  <form [formGroup]="formulario" class="listForm">
+    <ion-item fill="outline" class="ion-margin-top">
       <ion-label><b>Fecha:</b></ion-label>
-      <ion-input [(ngModel)]="hclinica.fecha_hc" class="datetime" slot="end" type="date"></ion-input>
+      <ion-input class="datetime" slot="end" formControlName="fecha_hc"
+       type="date"></ion-input>
     </ion-item>
+    <div *ngFor="let error of errormensaje.fecha_hc" class="ion-text-center ion-margin-bottom">
+      <ng-container *ngIf="fecha_hc.hasError(error.type) && 
+      (fecha_hc.dirty || fecha_hc.touched)">
+      <small class="error-message">{{ error.message }}</small>
+      </ng-container>
+  </div>
+  
+    <br>
     <ion-item fill="outline">
       <ion-label><b>Hora:</b></ion-label>
-      <ion-input [(ngModel)]="hclinica.hora_hc" class="datetime"  slot="end" type="time"></ion-input>
+      <ion-input class="datetime"  slot="end" formControlName="hora_hc"
+       type="time"></ion-input>
     </ion-item>
+    <div *ngFor="let error of errormensaje.hora_hc" class="ion-text-center ion-margin-bottom">
+      <ng-container *ngIf="hora_hc.hasError(error.type) && 
+      (hora_hc.dirty || hora_hc.touched)">
+      <small class="error-message">{{ error.message }}</small>
+      </ng-container>
+  </div>
       <br>
       <ion-label color="cea"><h3>Centro de Atención y Derivación</h3></ion-label>
       <ion-label color="cea"><h4>SDMA-DIRENA</h4></ion-label>
@@ -25,19 +43,19 @@
     <br>
     <ion-item class="itemForm ion-margin-bottom" fill="outline">
       <ion-label position="floating">Animal Silvestre*</ion-label>
-      <ion-select placeholder="Seleccione un animal silvestre">
+      <ion-select formControlName="id_animal_silvestre" [interfaceOptions]="customAlertOptions" interface="alert" placeholder="Seleccione un animal silvestre">
         <ion-select-option *ngFor="let animals of animalsilvestre" value="{{animals.id_animal_silvestre}}"> #{{animals.id_animal_silvestre}} - {{animals.nom_comun}}</ion-select-option>
       </ion-select>
     </ion-item>
     <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Anamnesis*</b></ion-label>
-      <ion-input [(ngModel)]="hclinica.anamnesis_hc" class="inputCenter" type="text" placeholder="Ingresa el dato de la anamnesis" ></ion-input>
+      <ion-input formControlName="anamnesis_hc" class="inputCenter" type="text" placeholder="Ingresa el dato de la anamnesis" ></ion-input>
     </ion-item>
     <br>
     <ion-item class="itemForm" fill="outline">
       <ion-label class="itemLabel" position="floating">Mucosa*</ion-label>
-      <ion-select>
+      <ion-select formControlName="id_mucosa">
         <ion-select-option *ngFor="let tipo of mucosas" value="{{tipo.id_mucosa}}">{{tipo.nom_mucosa}}</ion-select-option>
       </ion-select>
       <ion-note slot="helper">Seleccione el tipo de mucosa</ion-note>
@@ -46,12 +64,12 @@
     <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating">Observaciones</ion-label>
-      <ion-textarea></ion-textarea>
+      <ion-textarea formControlName="observaciones_hc"></ion-textarea>
     </ion-item>
     <br>
     <ion-item class="itemForm" fill="outline">
       <ion-label class="itemLabel" position="floating">Rev Externa*</ion-label>
-      <ion-select>
+      <ion-select formControlName="id_revext">
         <ion-select-option *ngFor="let tipo of revext" value="{{tipo.id_revext}}">{{tipo.nom_revext}}</ion-select-option>
       </ion-select>
       <ion-note slot="helper">Seleccione el tipo de mucosa</ion-note>
@@ -60,41 +78,41 @@
     <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Sistema Nervioso*</b></ion-label>
-      <ion-input [(ngModel)]="hclinica.sis_nervioso_hc" class="inputCenter" type="text" placeholder="Ingresa datos del sistema nervioso" ></ion-input>
+      <ion-input formControlName="sis_nervioso_hc" class="inputCenter" type="text" placeholder="Ingresa datos del sistema nervioso" ></ion-input>
     </ion-item>
     <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Sistema Respiratorio*</b></ion-label>
-      <ion-input [(ngModel)]="hclinica.sis_respiratorio_hc" class="inputCenter" type="text" placeholder="Ingresa datos del sistema respiratorio" ></ion-input>
+      <ion-input formControlName="sis_respiratorio_hc" class="inputCenter" type="text" placeholder="Ingresa datos del sistema respiratorio" ></ion-input>
     </ion-item>
     <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Temperatura*</b></ion-label>
-      <ion-input [(ngModel)]="hclinica.temperatura_hc" class="inputCenter" type="number" placeholder="Ingresa la temperatura del animal silvestre" ></ion-input>
+      <ion-input formControlName="temperatura_hc" class="inputCenter" type="number" placeholder="Ingresa la temperatura del animal silvestre" ></ion-input>
     </ion-item>
     <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Frecuencia Cardíaca*</b></ion-label>
-      <ion-input [(ngModel)]="hclinica.frec_cardiaca_hc" class="inputCenter" type="number" placeholder="Ingresa datos de la frecuencia cardiaca" ></ion-input>
+      <ion-input formControlName="frec_cardiaca_hc" class="inputCenter" type="number" placeholder="Ingresa datos de la frecuencia cardiaca" ></ion-input>
     </ion-item>
     <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Peso*</b></ion-label>
-      <ion-input [(ngModel)]="hclinica.peso_hc" class="inputCenter" type="text" placeholder="Ingresa datos del peso en KG" ></ion-input>
+      <ion-input formControlName="peso_hc" class="inputCenter" type="text" placeholder="Ingresa datos del peso en KG" ></ion-input>
     </ion-item>
     <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating">Pruebas Complementarias*</ion-label>
-      <ion-textarea [(ngModel)]="hclinica.pruebas_complementarias_hc"></ion-textarea>
+      <ion-textarea formControlName="pruebas_complementarias_hc"></ion-textarea>
     </ion-item>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Diagnostico presuntivo*</b></ion-label>
-      <ion-input [(ngModel)]="hclinica.diagn_presuntivo_hc" class="inputCenter" type="text" placeholder="Ingresa datos del diagnostico presuntivo" ></ion-input>
+      <ion-input formControlName="diagn_presuntivo_hc" class="inputCenter" type="text" placeholder="Ingresa datos del diagnostico presuntivo" ></ion-input>
     </ion-item>
     <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Diagnostico confirmado*</b></ion-label>
-      <ion-input [(ngModel)]="hclinica.diagn_confirmado_hc" class="inputCenter" type="text" placeholder="Ingresa datos del diagnostico confirmado" ></ion-input>
+      <ion-input formControlName="diagn_confirmado_hc" class="inputCenter" type="text" placeholder="Ingresa datos del diagnostico confirmado" ></ion-input>
     </ion-item>
     <br>
     <ion-item>
@@ -136,70 +154,51 @@
     <h2><ion-label color="cea">Hidratación</ion-label></h2>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Reposición*</b></ion-label>
-      <ion-input [(ngModel)]="hclinica.hreposicion_hc" class="inputCenter" type="text" placeholder="Ingresa el datos de la reposición" ></ion-input>
+      <ion-input formControlName="hreposicion_hc" class="inputCenter" type="text" placeholder="Ingresa el datos de la reposición" ></ion-input>
     </ion-item>
     <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Mantenimiento*</b></ion-label>
-      <ion-input [(ngModel)]="hclinica.hmantenimiento_hc" class="inputCenter" type="text" placeholder="Ingresa el dato del mantenimiento" ></ion-input>
+      <ion-input formControlName="hmantenimiento_hc" class="inputCenter" type="text" placeholder="Ingresa el dato del mantenimiento" ></ion-input>
     </ion-item>
     <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Perdidas*</b></ion-label>
-      <ion-input [(ngModel)]="hclinica.hperdidas_hc" class="inputCenter" type="text" placeholder="Ingresa el dato de las perdidas" ></ion-input>
+      <ion-input formControlName="hperdidas_hc" class="inputCenter" type="text" placeholder="Ingresa el dato de las perdidas" ></ion-input>
     </ion-item>
     <br>
-    <!-- <ion-grid class="grid">
-      <ion-row>
-        <ion-col class="colHead">TRATAMIENTO
-          <ion-button (click)="" expand="block" fill="clear" shape="round">
-            Agregar
-          </ion-button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="colHead">Diagnostico</ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="colHead">Farmaco</ion-col>
-        <ion-col class="colHead">Acción</ion-col>
-        <ion-col class="colHead">Dosis</ion-col>
-        <ion-col class="colHead">Vía</ion-col>
-        <ion-col class="colHead">Hora</ion-col>
-      </ion-row>
-    </ion-grid> -->
     <h2><ion-label>TRATAMIENTO</ion-label></h2>
     <h3><ion-label>Diagnostico</ion-label></h3>
     <ion-label slot="end">Fila: {{ nro }}</ion-label>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Fármaco</b></ion-label>
-      <ion-input [(ngModel)]="tratdiagnData.farmaco_td" class="inputCenter" type="text" placeholder="Ingresa el dato del fármaco" ></ion-input>
+      <ion-input formControlName="farmaco_td" class="inputCenter" type="text" placeholder="Ingresa el dato del fármaco" ></ion-input>
     </ion-item>
     <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Acción*</b></ion-label>
-      <ion-input [(ngModel)]="tratdiagnData.accion_td" class="inputCenter" type="text" placeholder="Ingresa el dato de la acción" ></ion-input>
+      <ion-input formControlName="accion_td" class="inputCenter" type="text" placeholder="Ingresa el dato de la acción" ></ion-input>
     </ion-item>
     <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Dosis*</b></ion-label>
-      <ion-input [(ngModel)]="tratdiagnData.dosis_td" class="inputCenter" type="text" placeholder="Ingresa el dato de la dosis" ></ion-input>
+      <ion-input formControlName="dosis_td" class="inputCenter" type="text" placeholder="Ingresa el dato de la dosis" ></ion-input>
     </ion-item>
     <br>
     <ion-item fill="outline">
       <ion-label color="cea" position="floating"><b>Vía*</b></ion-label>
-      <ion-input [(ngModel)]="tratdiagnData.via_td" class="inputCenter" type="text" placeholder="Ingresa el dato de la vía" ></ion-input>
+      <ion-input formControlName="via_td" class="inputCenter" type="text" placeholder="Ingresa el dato de la vía" ></ion-input>
     </ion-item>
     <br>
     <ion-item fill="outline">
       <ion-label><b>Hora:</b></ion-label>
-      <ion-input [(ngModel)]="tratdiagnData.hora_td" class="datetime"  slot="end" type="time"></ion-input>
+      <ion-input formControlName="hora_td" class="datetime"  slot="end" type="time"></ion-input>
     </ion-item>
     <ion-button (click)="agregarTratamientoDiagnostico()" color="cea">
       Agregar
     </ion-button>
-    <ion-button (click)="registrarHc()" color="cea" expand="block">
+    <ion-button (click)="registrarHc(formulario.value)" color="cea" expand="block">
       Registrar Historia Clínica
     </ion-button>
-  </ion-list> 
+  </form> 
 </ion-content>

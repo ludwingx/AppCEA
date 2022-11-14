@@ -10,4 +10,15 @@
 <ion-content>
   <br>
   <ion-button expand="block" color="cea" [routerLink]="['/ghclinica/crearhc']" >Crear Ficha de Historia Clínica</ion-button>
+  <br>
+  <ion-list >
+    <ion-item *ngFor="let historia of hclinica"  >
+      <ion-label>
+        <h2>{{historia.nom_cientifico}} - {{historia.nom_comun}}</h2>
+        <p>{{historia.fecha_hc}} / {{historia.hora_hc}}</p>
+        </ion-label>
+        <ion-icon button class="icon" size="large" (click)="verHistoria(historia)" color="cea" name="reader-outline"></ion-icon>
+      </ion-item>
+      <br>
+  </ion-list>
 </ion-content>

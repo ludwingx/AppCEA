@@ -30,7 +30,7 @@
         $nombreP = $postjson['nombreP'];
         $telefonoP = $postjson['telefonoP'];
         $firmaP = $postjson['firmaP'];
-        $animal_silvestre;
+        $id_animal_silvestre;
         $observaciones;
         
         //registro de persona
@@ -63,13 +63,13 @@
         
         
         for($i = 0; $i < count($especie_proc); $i++){
-            $animales_silvestres[$i]= $especie_proc[$i]['animal_silvestre'];
+            $animal_silvestre[$i]= $especie_proc[$i]['animal_silvestre'];
             $observaciones[$i]= $especie_proc[$i]['observacion'];
         }
         
         for($i = 0; $i < count($especie_proc); $i++){
             $res3 = $mysqli->query("INSERT INTO procedente_atencion SET id_acta_recepcion=$id_acta,
-                id_animal_silvestre=$animales_silvestres[$i],
+                id_animal_silvestre=$animal_silvestre[$i],
                 observaciones_rec='$observaciones[$i]'");
         }
         
@@ -170,13 +170,27 @@
     
     else if ($_GET['aksi'] == "list-arecepcion") {
 
-    $res = $mysqli->query("SELECT AR.id_acta_recepcion, AR.num_acta_ar, AR.fecha_ar, AR.hora_ar, A.nom_tipo_atencion
+    $res = $mysqli->query("SELECT AR.id_acta_recepcion, AR.num_acta_ar, AR.fecha_ar, AR.hora_ar, A.nom_tipo_atencion,
+    MS.nom_mun,AR.nom_ldfe_barrio_ar, AR.nom_ldfecalle_ar, AR.num_ldfe_casa_ar, AR.nom_ldp_barrio_ar, AR.nom_ldp_calle_ar, 
+    AR.nom_ldp_empresa_ar, AR.nom_ldp_area_ar
     FROM acta_recepcion as AR
     INNER JOIN tatencion as A
-    ON AR.id_tipo_atencion=A.id_tipo_atencion");
+    ON AR.id_tipo_atencion=A.id_tipo_atencion
+    INNER JOIN municipios as MS
+    ON AR.id_ldfe_municipio=MS.id_municipio");
     $cont = 0;
     $check = mysqli_num_rows($res);
+    
+    $res2 = $mysqli->query("SELECT MS.nom_mun FROM acta_recepcion as AR
+    INNER JOIN municipios as MS
+    ON AR.id_ldp_municipio=MS.id_municipio");
+    
+    $nombreMuS = mysqli_fetch_array($res2);
+    $nombreMuS = $nombreMuS["nom_mun"];
 
+    $check =mysqli_num_rows($res);
+    $check2 =mysqli_num_rows($res3);
+    
     if ($check > 0) {
         while ($data = mysqli_fetch_assoc($res)) {
             $datauser[$cont] = array(
@@ -185,7 +199,17 @@
                 'fecha_ar' => $data["fecha_ar"],
                 'hora_ar' => $data["hora_ar"],
                 'nom_tipo_atencion' => $data["nom_tipo_atencion"],
-                'id_tipo_atencion' => $data["id_tipo_atencion"]
+                'id_tipo_atencion' => $data["id_tipo_atencion"],
+                'municipioE' => $data["nom_mun"],
+                'nom_ldfe_barrio_ar' => $data["nom_ldfe_barrio_ar"],
+                'nom_ldfecalle_ar' => $data["nom_ldfecalle_ar"],
+                'num_ldfe_casa_ar' => $data["num_ldfe_casa_ar"],
+                
+                'municipioS' => $nombreMuS,
+                'barrioS' => $data["barrioS"],
+                'calleS' => $data["calleS"],
+                'empresa' => $data["empresa"],
+                'area' => $data["area"]
 
             );
             $cont++;

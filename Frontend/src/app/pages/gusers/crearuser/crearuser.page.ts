@@ -67,9 +67,10 @@ export class CrearuserPage implements AfterViewInit {
     this.conexion.postdata(body,"usuario.php").subscribe((data:any)=>{
       if (data.success) {
         this.loadingController.dismiss();
-        this.closeModal();
+        
         console.log(body)
         this.mensaje(data.msg)
+        this.closeModal();
       } else {
         this.loadingController.dismiss();
         this.mensaje(data.msg)
