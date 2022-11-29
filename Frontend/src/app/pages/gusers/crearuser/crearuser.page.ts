@@ -43,16 +43,11 @@ export class CrearuserPage implements AfterViewInit {
     })
     t.present();
   }
-  closeModal(){
-    this.modalCtrl.dismiss(null,'close');
-  }
-
   ListCargo(){
     this.conexion.getdata("cargo.php/?aksi=list-cargo").subscribe((data:any)=>{
       this.cargos = data.listCargo
     })
   }
-
   RegisterUser(){
     this.presentLoadingWithOptions();
     const body = {
@@ -77,6 +72,9 @@ export class CrearuserPage implements AfterViewInit {
       }
     })
   }
+  closeModal(){
+    this.modalCtrl.dismiss(null,'close');
+  }
   togglePassword():void{
     this.showPassword = !this.showPassword;
     if(this.passwordToggleIcon == 'eye'){
@@ -88,22 +86,16 @@ export class CrearuserPage implements AfterViewInit {
   ngAfterViewInit() {
     this.signaturePad = new SignaturePad(this.canvasEl.nativeElement);
   }
-
   startDrawing(event: Event) {
     this.touchEvent = this.signaturePad.toDataURL()
     console.log(event);
-    // works in device not in browser
-
   }
-
   moved(event: Event) {
-    // works in device not in browser
+  //funciona en el dispositivo no en el navegador
   }
-
   clearPad() {
     this.signaturePad.clear();
   }
-
   savePad() {
     const base64Data = this.signaturePad.toDataURL();
     this.users.firma_u = base64Data;

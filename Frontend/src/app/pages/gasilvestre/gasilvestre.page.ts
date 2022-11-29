@@ -83,7 +83,7 @@ textoBuscar = '';
   removeAnimal(id_animal_silvestre:string, nom_comun:string){
     this.alertCtrl.create({
       header: 'Desactivar',
-      message: '¿Estás seguro de que quieres desactivar de la lista a ' + nom_comun + ' #' + id_animal_silvestre + '?',
+      message: '¿Estás seguro de que quieres desactivar a ' + nom_comun + ' #' + id_animal_silvestre + '?',
       buttons: [{
         text: 'Si',
         handler: () => {

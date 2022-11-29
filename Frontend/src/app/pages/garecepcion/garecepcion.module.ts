@@ -9,6 +9,7 @@ import { GarecepcionPageRoutingModule } from './garecepcion-routing.module';
 import { GarecepcionPage } from './garecepcion.page';
 import { VerActaPage } from '../../modales/ver-acta/ver-acta.page';
 import { VerActaPageModule } from '../../modales/ver-acta/ver-acta.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   entryComponents:[
@@ -18,6 +19,7 @@ import { VerActaPageModule } from '../../modales/ver-acta/ver-acta.module';
     CommonModule,
     FormsModule,
     VerActaPageModule,
+    PipesModule,
     IonicModule,
     GarecepcionPageRoutingModule
   ],

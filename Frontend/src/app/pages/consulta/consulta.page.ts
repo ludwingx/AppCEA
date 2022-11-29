@@ -8,15 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./consulta.page.scss'],
 })
 export class ConsultaPage implements OnInit {
-  consentrega:any = []
+
   constructor(private conexion: ConexionService) { }
 
   ngOnInit() {
-    this.totalEntregas();
+
   }
-  totalEntregas(){
-    this.conexion.getdata("consulta.php/?aksi=consentrega").subscribe((data:any)=>{
-      this.consentrega = data.consActa
-    })
-  }
+
 }

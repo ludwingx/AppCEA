@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'viewhistoria',
     loadChildren: () => import('./viewhistoria/viewhistoria.module').then( m => m.ViewhistoriaPageModule)
+  },
+  {
+    path: 'updatehc',
+    loadChildren: () => import('./updatehc/updatehc.module').then( m => m.UpdatehcPageModule)
   }
 
 ];

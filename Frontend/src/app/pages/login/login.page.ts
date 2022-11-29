@@ -1,22 +1,33 @@
 import { ConexionService } from './../../servicios/conexion/conexion.service';
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, NavController, ToastController } from '@ionic/angular';
+import { LoadingController, NavController, ToastController, AlertController } from '@ionic/angular';
 import { Preferences } from '@capacitor/preferences';
+import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  get email_u(){
+    return this.formLogin.get("email_u");
+  }
+  get password_u(){
+    return this.formLogin.get("password_u");
+  }
+  formLogin = this.formbuilder.group({
+    email_u: ["",[Validators.required]],
+    password_u: ["",[Validators.required]],
+  });
   tipo: string = "password";
-  email_u: string;
-  password_u: string; 
   showPassword = false;
   passwordToggleIcon = 'eye';
   constructor(private toastCtrl: ToastController,
      private navCtrl: NavController, 
      private conexion: ConexionService,
-     public loadingController: LoadingController
+     private formbuilder: FormBuilder,
+     public loadingController: LoadingController,
+     private alertCtrl: AlertController
     ) {}
   ngOnInit() {
   }
@@ -35,13 +46,14 @@ export class LoginPage implements OnInit {
       this.tipo = "password"
     }
   }
-  login(){
+  login(data:any){
     this.presentLoadingWithOptions();
     const body = {
-      email_u: this.email_u,
-      password_u: this.password_u,
+      email_u: data.email_u,
+      password_u: data.password_u,
       aksi: "login"
     }
+
     this.conexion.postdata(body,"usuario.php").subscribe((data:any) => {
       const alerta = data.msg;
       if (data.success){
@@ -52,7 +64,8 @@ export class LoginPage implements OnInit {
       }
       else{
         this.loadingController.dismiss();
-        this.mensaje(alerta);
+        this.datosIncorrectos();
+
       }
     })
   }
@@ -67,12 +80,30 @@ export class LoginPage implements OnInit {
   async presentLoadingWithOptions(){
     const loading = await this.loadingController.create({
       //spinner: null,
-      //duration: 5000,
+      duration: 5000,
       message: 'Iniciando sesión...',
       //translucent: true,
       //cssClass: 'custom-class custom-loading'
       cssClass: 'custom-loading'
     });
     return await loading.present();
+  }
+  public errormensaje = {
+    email_u:[
+      {type:"required", message:"Correo Electrónico requerido"}
+    ],
+    password_u:[
+      {type:"required", message:"Contraseña requerida"}
+    ],
+  }
+  async datosIncorrectos() {
+    const alert = await this.alertCtrl.create({
+      header: 'Error al iniciar sesión',
+      subHeader: 'Correo electrónico o contraseña incorrecta',
+      message: 'Por favor, inténtalo otra vez',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 }

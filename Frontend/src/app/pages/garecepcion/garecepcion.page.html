@@ -17,15 +17,29 @@
     <ion-button expand="block" color="cea" [routerLink]="['/garecepcion/crearar']">Crear Acta de Recepción</ion-button>
     <br>
     <ion-button expand="block" color="cea" (click)="ModalVerActa()">Consulta de acta</ion-button>
+    <br>
+    <ion-searchbar animated="true" placeholder="Número de acta" (ionChange)="buscar($event)"></ion-searchbar>
     <ion-list >
-      <ion-item *ngFor="let acta of arecepcion"  >
-        <ion-label>
-          <h2>{{acta.num_acta_ar}} - <ion-text color="cea">{{acta.nom_tipo_atencion}}</ion-text> </h2> 
-          <p>{{acta.fecha_ar}} / {{acta.hora_ar}}</p>
-          </ion-label>
-          <ion-icon button class="icon" size="large" (click)="verActa(acta)" color="cea" name="reader-outline"></ion-icon>
-        </ion-item>
-        <br>
+      <ion-item *ngFor="let acta of arecepcion | filtro: textoBuscar: 'num_acta_ar'"  >
+        <ion-item-sliding>
+          <ion-item>
+            <ion-label>
+              <h2>{{acta.num_acta_ar}} - <ion-text color="cea">{{acta.nom_tipo_atencion}}</ion-text> </h2> 
+              <p>{{acta.fecha_ar}} / {{acta.hora_ar}}</p>
+              </ion-label>
+              <ion-icon button class="icon" size="large" (click)="verActa(acta)" color="cea" name="reader-outline"></ion-icon>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option color="success" (click)="updateAr(acta)">
+                <ion-icon slot="start" name="pencil-sharp"></ion-icon>
+              </ion-item-option>
+              <ion-item-option color="danger" (click)="removeAr(acta.id_acta_recepcion, acta.num_acta_ar)">
+                <ion-icon slot="start" name="trash"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+      </ion-item>
+      <br>
     </ion-list>
   </ion-content>
   

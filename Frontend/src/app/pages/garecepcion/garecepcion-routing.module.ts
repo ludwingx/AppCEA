@@ -11,9 +11,14 @@ const routes: Routes = [
   {
     path: 'crearar',
     loadChildren: () => import('./crearar/crearar.module').then( m => m.CreararPageModule)
-  },  {
+  },
+  {
     path: 'viewacta',
     loadChildren: () => import('./viewacta/viewacta.module').then( m => m.ViewactaPageModule)
+  },
+  {
+    path: 'updatear',
+    loadChildren: () => import('./updatear/updatear.module').then( m => m.UpdatearPageModule)
   }
 
 ];

@@ -6,23 +6,33 @@
     <img src="../../assets/logotypes/logocea.png" alt="Ionic logo">
   </div>
 
-  <form #loginForm="ngForm" novalidate>
-    <ion-list class="boxlogin">
-      <ion-item>
+  <form  [formGroup]="formLogin" #loginForm="ngForm" novalidate class="boxlogin">
+      <ion-item class="itemForm" fill="outline">
         <ion-label position="floating">Correo Electrónico</ion-label>
-        <ion-input type = "email"  [(ngModel)]="email_u" name="email"></ion-input>
+        <ion-input type = "email"  formControlName="email_u" name="email"></ion-input>
       </ion-item>
-
-      <ion-item>
+      <div *ngFor="let error of errormensaje.email_u" class="ion-text-center ion-margin-bottom">
+        <ng-container *ngIf="email_u.hasError(error.type) && 
+        (email_u.dirty || email_u.touched)">
+        <small class="error-message">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <br>
+      <ion-item class="itemForm" fill="outline">
         <ion-label position="floating">Contraseña</ion-label>
-        <ion-input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password_u" name="password"></ion-input>
+        <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="password_u" name="password"></ion-input>
         <ion-icon slot="end" class="passwordIcon" item-end [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
       </ion-item>
+      <div *ngFor="let error of errormensaje.password_u" class="ion-text-center ion-margin-bottom">
+        <ng-container *ngIf="password_u.hasError(error.type) && 
+        (password_u.dirty || password_u.touched)">
+        <small class="error-message">{{ error.message }}</small>
+        </ng-container>
+      </div>
 
-    </ion-list>
     <ion-row>
       <ion-col class="btnlogin">
-        <ion-button (click)="login()" expand="block" color="ion-color-cea">
+        <ion-button (click)="login(formLogin.value)" expand="block" color="ion-color-cea">
           Iniciar sesión
         </ion-button>
       </ion-col>
