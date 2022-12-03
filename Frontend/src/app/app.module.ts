@@ -10,11 +10,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { PipesModule } from './pages/pipes/pipes.module';
+import { File } from '@awesome-cordova-plugins/file/ngx';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule,HttpClientModule,PipesModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },DatePipe],
+  providers: [File,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

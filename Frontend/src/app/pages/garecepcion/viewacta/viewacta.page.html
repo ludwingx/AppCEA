@@ -6,223 +6,88 @@
       </ion-button>
     </ion-buttons>
     <ion-title>Acta de Recepción</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="generarPdf()" >
+        <ion-icon color="danger" slot="start" name="document-outline">
+        </ion-icon>
+        <ion-label>PDF</ion-label>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <div class="print-pdf" id="print-pdf">
+    <div class="print-wrapper" id="print-wrapper">
+      <div>
+      <div class="logo-GAD">
+        <img src="assets/logoGAD.png">
+      </div>
 
-  <div>
-    <div class="logo-GAD">
-      <img src="assets/logoGAD.png">
-    </div>
+      <div class="titulo">
+        <h3><strong>SECRETARIA DE DESARROLLO SOSTENIBLE
+            Y MEDIO AMBIENTE</strong></h3>
+        <h3><strong>DIRECCIÓN DE RECURSOS NATURALES</strong></h3>
+        <h5>PROGRAMA INTEGRAL DE CONSERVACIÓN DE LA
+          BIODIVERSIDAD DEL DEPARTAMENTO DE SANTA CRUZ</h5>
+        <h3><u>ACTA DE RECEPCIÓN</u></h3>
+      </div>
 
-    <div class="titulo">
-      <h3><strong>SECRETARIA DE DESARROLLO SOSTENIBLE
-          Y MEDIO AMBIENTE</strong></h3>
-      <h3><strong>DIRECCIÓN DE RECURSOS NATURALES</strong></h3>
-      <h5>PROGRAMA INTEGRAL DE CONSERVACIÓN DE LA
-        BIODIVERSIDAD DEL DEPARTAMENTO DE SANTA CRUZ</h5>
-      <h3><u>ACTA DE RECEPCIÓN</u></h3>
-    </div>
+      <div>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Numero de acta</ion-label>
+              <ion-input value="{{ datos.num_acta_ar }}"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Fecha</ion-label>
+              <ion-input value="{{ datos.fecha_ar }}"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Hora</ion-label>
+              <ion-input value="{{ datos.hora_ar }}"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
 
-    <div>
-      <ion-row>
-        <ion-col size="12">
-          <ion-item>
-            <ion-label position="floating">Numero de acta</ion-label>
-            <ion-input value="{{ datos.num_acta_ar }}"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item>
-            <ion-label position="floating">Fecha</ion-label>
-            <ion-input value="{{ datos.fecha_ar }}"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item>
-            <ion-label position="floating">Hora</ion-label>
-            <ion-input value="{{ datos.hora_ar }}"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </div>
+      <div>
+        <ion-item class="ion-text-center">
+          <ion-label>
+            <ion-text>
+              <strong>Tipo de Atención</strong>
+            </ion-text>
+            <br>
+            <ion-text>
+              {{ datos.nom_tipo_atencion }}
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </div>
 
-    <div>
-      <ion-item class="ion-text-center">
-        <ion-label>
-          <ion-text>
-            <strong>Tipo de Atención</strong>
-          </ion-text>
-          <br>
-          <ion-text>
-            {{ datos.nom_tipo_atencion }}
-          </ion-text>
-        </ion-label>
-      </ion-item>
-    </div>
+      <div class="comunicado">
+        <p>La Autoridad Ambiental Competente Departamental, a través de la Dirección de Recursos
+          Naturales, comunica a usted que dando cumplimiento al Marco Legal vigente: Constitución política del Estado,
+          Código Penal, Ley 1333, Ley 700 y Ley 12301, D.S 25458, Decreto Supremo N° 4489, y la resolución Administrativa
+          SDS Y MA /001/2012 Y Decreto Departamental N° 140/2011, realiza la atención en la dirección:</p>
+        <p><strong>Lugar donde fue la entrega, rescate o decomiso del animal:</strong></p>
+      </div>
 
-    <div class="comunicado">
-      <p>La Autoridad Ambiental Competente Departamental, a través de la Dirección de Recursos
-        Naturales, comunica a usted que dando cumplimiento al Marco Legal vigente: Constitución política del Estado,
-        Código Penal, Ley 1333, Ley 700 y Ley 12301, D.S 25458, Decreto Supremo N° 4489, y la resolución Administrativa
-        SDS Y MA /001/2012 Y Decreto Departamental N° 140/2011, realiza la atención en la dirección:</p>
-      <p><strong>Lugar donde fue la entrega, rescate o decomiso del animal:</strong></p>
-    </div>
-
-    <div class="lugar-entrega">
-      <ion-row>
-        <ion-col size="12">
-          <ion-item class="ion-text-center">
-            <ion-label>
-              <ion-text>
-                <h3>Municipio</h3>
-              </ion-text>
-              <ion-text>
-                <h4>{{ datos.municipioE }}</h4>
-              </ion-text>
-            </ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="12">
-          <ion-item class="ion-text-center">
-            <ion-label>
-              <ion-text>
-                <h3>Barrio</h3>
-              </ion-text>
-              <ion-text>
-                <h4>{{ datos.barrioE }}</h4>
-              </ion-text>
-            </ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="12">
-          <ion-item class="ion-text-center">
-            <ion-label>
-              <ion-text>
-                <h3>Calle/Avenida</h3>
-              </ion-text>
-              <ion-text>
-                <h4>{{ datos.calleE }}</h4>
-              </ion-text>
-            </ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="12">
-          <ion-item class="ion-text-center">
-            <ion-label>
-              <ion-text>
-                <h3>Nº Casa</h3>
-              </ion-text>
-              <ion-text>
-                <h4>{{ datos.nro_casaE }}</h4>
-              </ion-text>
-            </ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </div>
-
-    <div class="comunicado">
-      <p><strong>
-          Lugar de donde procede el animal (donde encontró al animal
-          la persona que hace la denuncia o llamada):
-        </strong></p>
-    </div>
-
-    <div class="lugar-entrega">
-      <ion-row>
-        <ion-col size="12">
-          <ion-item class="ion-text-center">
-            <ion-label>
-              <ion-text>
-                <h3>Municipio</h3>
-              </ion-text>
-              <ion-text>
-                <h4>{{ datos.municipioS }}</h4>
-              </ion-text>
-            </ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="12">
-          <ion-item class="ion-text-center">
-            <ion-label>
-              <ion-text>
-                <h3>Barrio</h3>
-              </ion-text>
-              <ion-text>
-                <h4>{{ datos.barrioS }}</h4>
-              </ion-text>
-            </ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="12">
-          <ion-item class="ion-text-center">
-            <ion-label>
-              <ion-text>
-                <h3>Calle/Avenida</h3>
-              </ion-text>
-              <ion-text>
-                <h4>{{ datos.calleS }}</h4>
-              </ion-text>
-            </ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="12">
-          <ion-item class="ion-text-center">
-            <ion-label>
-              <ion-text>
-                <h3>Empresa y/o Institución</h3>
-              </ion-text>
-              <ion-text>
-                <h4>{{ datos.empresa }}</h4>
-              </ion-text>
-            </ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="12">
-          <ion-item class="ion-text-center">
-            <ion-label>
-              <ion-text>
-                <h3>Area Verde, Area protegida, otro</h3>
-              </ion-text>
-              <ion-text>
-                <h4>{{ datos.area }}</h4>
-              </ion-text>
-            </ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </div>
-
-    <div class="comunicado">
-      <p><strong>
-          Especies procedentes de la atención:
-        </strong></p>
-      <p>
-        *Sexo: Macho(M), Hembra(H), Indeterminado(I)
-      </p>
-      <p>
-        *Edad: Neonato o pichón(N), Infante juvenil(i - j), Juvenil(J), Adulto(A)
-        lo llenara la veterinaria que revise al animal
-      </p>
-    </div>
-
-    <div class="lugar-entrega">
-      <ion-card *ngFor="let item of procedente; let i = index">
+      <div class="lugar-entrega">
         <ion-row>
           <ion-col size="12">
             <ion-item class="ion-text-center">
               <ion-label>
                 <ion-text>
-                  <h1>{{ i + 1 }}</h1>
-                </ion-text>
-                <br>
-                <ion-text>
-                  <h3>Nombre Científico</h3>
+                  <h3>Municipio</h3>
                 </ion-text>
                 <ion-text>
-                  <h4>{{ item.nombre_cientifico }}</h4>
+                  <h4>{{ datos.municipioE }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -231,34 +96,10 @@
             <ion-item class="ion-text-center">
               <ion-label>
                 <ion-text>
-                  <h3>Nombre Comun</h3>
+                  <h3>Barrio</h3>
                 </ion-text>
                 <ion-text>
-                  <h4>{{ item.nombre_comun }}</h4>
-                </ion-text>
-              </ion-label>
-            </ion-item>
-          </ion-col>
-          <ion-col size="6">
-            <ion-item class="ion-text-center">
-              <ion-label>
-                <ion-text>
-                  <h3>Edad</h3>
-                </ion-text>
-                <ion-text>
-                  <h4>{{ item.edad }}</h4>
-                </ion-text>
-              </ion-label>
-            </ion-item>
-          </ion-col>
-          <ion-col size="6">
-            <ion-item class="ion-text-center">
-              <ion-label>
-                <ion-text>
-                  <h3>Sexo</h3>
-                </ion-text>
-                <ion-text>
-                  <h4>{{ item.sexo }}</h4>
+                  <h4>{{ datos.barrioE }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -267,40 +108,46 @@
             <ion-item class="ion-text-center">
               <ion-label>
                 <ion-text>
-                  <h3>Observaciones</h3>
+                  <h3>Calle/Avenida</h3>
                 </ion-text>
                 <ion-text>
-                  <ion-note>{{ item.observacion }}</ion-note>
+                  <h4>{{ datos.calleE }}</h4>
+                </ion-text>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item class="ion-text-center">
+              <ion-label>
+                <ion-text>
+                  <h3>Nº Casa</h3>
+                </ion-text>
+                <ion-text>
+                  <h4>{{ datos.nro_casaE }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
           </ion-col>
         </ion-row>
-      </ion-card>
-    </div>
+      </div>
 
-    <div class="comunicado">
-      <p>
-        Las especies serán derivados a la SDS Y MA de la Gobernación
-        de Santa Cruz, instalaciones del CAD
-      </p>
-    </div>
+      <div class="comunicado">
+        <p><strong>
+            Lugar de donde procede el animal (donde encontró al animal
+            la persona que hace la denuncia o llamada):
+          </strong></p>
+      </div>
 
-    <div class="lugar-entrega">
-      <ion-card>
+      <div class="lugar-entrega">
         <ion-row>
           <ion-col size="12">
             <ion-item class="ion-text-center">
               <ion-label>
                 <ion-text>
-                  <h2>Funcionario Recepcionante</h2>
-                </ion-text>
-                <br>
-                <ion-text>
-                  <h3>Nombre</h3>
+                  <h3>Municipio</h3>
                 </ion-text>
                 <ion-text>
-                  <h4>{{ datos.nombreFunc }}</h4>
+                  <h4>{{ datos.municipioS }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -309,10 +156,10 @@
             <ion-item class="ion-text-center">
               <ion-label>
                 <ion-text>
-                  <h3>Cedula</h3>
+                  <h3>Barrio</h3>
                 </ion-text>
                 <ion-text>
-                  <h4>{{ datos.cedulaFunc }}</h4>
+                  <h4>{{ datos.barrioS }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -321,73 +168,236 @@
             <ion-item class="ion-text-center">
               <ion-label>
                 <ion-text>
-                  <h3>Firma</h3>
+                  <h3>Calle/Avenida</h3>
                 </ion-text>
                 <ion-text>
-                  <img src="{{ datos.firmaFunc }}">
+                  <h4>{{ datos.calleS }}</h4>
+                </ion-text>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item class="ion-text-center">
+              <ion-label>
+                <ion-text>
+                  <h3>Empresa y/o Institución</h3>
+                </ion-text>
+                <ion-text>
+                  <h4>{{ datos.empresa }}</h4>
+                </ion-text>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item class="ion-text-center">
+              <ion-label>
+                <ion-text>
+                  <h3>Area Verde, Area protegida, otro</h3>
+                </ion-text>
+                <ion-text>
+                  <h4>{{ datos.area }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
           </ion-col>
         </ion-row>
-      </ion-card>
+      </div>
 
-      <ion-card>
-        <ion-row>
-          <ion-col size="12">
-            <ion-item class="ion-text-center">
-              <ion-label>
-                <ion-text>
-                  <h2>Persona(Entidad) que efectua la entrega</h2>
-                </ion-text>
-                <br>
-                <ion-text>
-                  <h3>Nombre</h3>
-                </ion-text>
-                <ion-text>
-                  <h4>{{ datos.nombreP }}</h4>
-                </ion-text>
-              </ion-label>
-            </ion-item>
-          </ion-col>
-          <ion-col size="6">
-            <ion-item class="ion-text-center">
-              <ion-label>
-                <ion-text>
-                  <h3>Cédula</h3>
-                </ion-text>
-                <ion-text>
-                  <h4>{{ datos.cedulaP }}</h4>
-                </ion-text>
-              </ion-label>
-            </ion-item>
-          </ion-col>
-          <ion-col size="6">
-            <ion-item class="ion-text-center">
-              <ion-label>
-                <ion-text>
-                  <h3>Teléfono</h3>
-                </ion-text>
-                <ion-text>
-                  <h4>{{ datos.telefonoP }}</h4>
-                </ion-text>
-              </ion-label>
-            </ion-item>
-          </ion-col>
-          <ion-col size="12">
-            <ion-item class="ion-text-center">
-              <ion-label>
-                <ion-text>
-                  <h3>Firma</h3>
-                </ion-text>
-                <ion-text>
-                  <img src="{{ datos.firmaP }}">
-                </ion-text>
-              </ion-label>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </div>
+      <div class="comunicado">
+        <p><strong>
+            Especies procedentes de la atención:
+          </strong></p>
+        <p>
+          *Sexo: Macho(M), Hembra(H), Indeterminado(I)
+        </p>
+        <p>
+          *Edad: Neonato o pichón(N), Infante juvenil(i - j), Juvenil(J), Adulto(A)
+          lo llenara la veterinaria que revise al animal
+        </p>
+      </div>
+
+      <div class="lugar-entrega">
+        <ion-card *ngFor="let item of procedente; let i = index">
+          <ion-row>
+            <ion-col size="12">
+              <ion-item class="ion-text-center">
+                <ion-label>
+                  <ion-text>
+                    <h1>{{ i + 1 }}</h1>
+                  </ion-text>
+                  <br>
+                  <ion-text>
+                    <h3>Nombre Científico</h3>
+                  </ion-text>
+                  <ion-text>
+                    <h4>{{ item.nombre_cientifico }}</h4>
+                  </ion-text>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item class="ion-text-center">
+                <ion-label>
+                  <ion-text>
+                    <h3>Nombre Comun</h3>
+                  </ion-text>
+                  <ion-text>
+                    <h4>{{ item.nombre_comun }}</h4>
+                  </ion-text>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <ion-item class="ion-text-center">
+                <ion-label>
+                  <ion-text>
+                    <h3>Edad</h3>
+                  </ion-text>
+                  <ion-text>
+                    <h4>{{ item.edad }}</h4>
+                  </ion-text>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <ion-item class="ion-text-center">
+                <ion-label>
+                  <ion-text>
+                    <h3>Sexo</h3>
+                  </ion-text>
+                  <ion-text>
+                    <h4>{{ item.sexo }}</h4>
+                  </ion-text>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item class="ion-text-center">
+                <ion-label>
+                  <ion-text>
+                    <h3>Observaciones</h3>
+                  </ion-text>
+                  <ion-text>
+                    <ion-note>{{ item.observacion }}</ion-note>
+                  </ion-text>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
+
+      <div class="comunicado">
+        <p>
+          Las especies serán derivados a la SDS Y MA de la Gobernación
+          de Santa Cruz, instalaciones del CAD
+        </p>
+      </div>
+
+      <div class="lugar-entrega">
+        <ion-card>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item class="ion-text-center">
+                <ion-label>
+                  <ion-text>
+                    <h2>Funcionario Recepcionante</h2>
+                  </ion-text>
+                  <br>
+                  <ion-text>
+                    <h3>Nombre</h3>
+                  </ion-text>
+                  <ion-text>
+                    <h4>{{ datos.nombreFunc }}</h4>
+                  </ion-text>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item class="ion-text-center">
+                <ion-label>
+                  <ion-text>
+                    <h3>Cedula</h3>
+                  </ion-text>
+                  <ion-text>
+                    <h4>{{ datos.cedulaFunc }}</h4>
+                  </ion-text>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item class="ion-text-center">
+                <ion-label>
+                  <ion-text>
+                    <h3>Firma</h3>
+                  </ion-text>
+                  <ion-text>
+                    <img src="{{ datos.firmaFunc }}">
+                  </ion-text>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <ion-card>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item class="ion-text-center">
+                <ion-label>
+                  <ion-text>
+                    <h2>Persona(Entidad) que efectua la entrega</h2>
+                  </ion-text>
+                  <br>
+                  <ion-text>
+                    <h3>Nombre</h3>
+                  </ion-text>
+                  <ion-text>
+                    <h4>{{ datos.nombreP }}</h4>
+                  </ion-text>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <ion-item class="ion-text-center">
+                <ion-label>
+                  <ion-text>
+                    <h3>Cédula</h3>
+                  </ion-text>
+                  <ion-text>
+                    <h4>{{ datos.cedulaP }}</h4>
+                  </ion-text>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <ion-item class="ion-text-center">
+                <ion-label>
+                  <ion-text>
+                    <h3>Teléfono</h3>
+                  </ion-text>
+                  <ion-text>
+                    <h4>{{ datos.telefonoP }}</h4>
+                  </ion-text>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item class="ion-text-center">
+                <ion-label>
+                  <ion-text>
+                    <h3>Firma</h3>
+                  </ion-text>
+                  <ion-text>
+                    <img src="{{ datos.firmaP }}">
+                  </ion-text>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
+    </div> 
   </div> 
+</div>
 </ion-content>
