@@ -4,15 +4,25 @@
       <ion-back-button text="" defaultHref="home"></ion-back-button>
     </ion-buttons>
     <ion-title> Historia Clínica</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openEliminate()">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
   <br>
   <ion-button expand="block" color="cea" [routerLink]="['/ghclinica/crearhc']" >Crear Ficha de Historia Clínica</ion-button>
   <br>
   <ion-searchbar animated="true" placeholder="Nombre común del animal" (ionChange)="buscar($event)"></ion-searchbar>
-  <ion-list >
+<ion-list >
 
     <ion-item *ngFor="let historia of hclinica | filtro: textoBuscar: 'nom_comun'"  >
       <ion-item-sliding>
@@ -24,9 +34,9 @@
             <ion-icon button class="icon" size="large" (click)="verHistoria(historia)" color="cea" name="reader-outline"></ion-icon>
           </ion-item>
           <ion-item-options>
-            <ion-item-option color="success" (click)="updateHc(historia)">
+            <!-- <ion-item-option color="success" (click)="updateHc(historia)">
               <ion-icon slot="start" name="pencil-sharp"></ion-icon>
-            </ion-item-option>
+            </ion-item-option> -->
             <ion-item-option color="danger" (click)="removeHc(historia.id_historia_clinica, historia.nom_comun)">
               <ion-icon slot="start" name="trash"></ion-icon>
             </ion-item-option>

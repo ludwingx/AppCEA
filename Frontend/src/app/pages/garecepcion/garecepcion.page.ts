@@ -5,6 +5,7 @@ import { ModalController, AlertController, ToastController } from '@ionic/angula
 import { VerActaPage } from '../../modales/ver-acta/ver-acta.page';
 import { ViewactaPage } from './viewacta/viewacta.page';
 import { UpdatearPage } from './updatear/updatear.page';
+import { ListdelarPage } from './listdelar/listdelar.page';
 
 @Component({
   selector: 'app-garecepcion',
@@ -21,7 +22,7 @@ export class GarecepcionPage implements OnInit {
 
   ngOnInit() {
     this.ListActa();
-    console.log(this.arecepcion)
+
   }
   async mensaje (m: string){
     const t = await this.toastCtrl.create({
@@ -48,7 +49,7 @@ export class GarecepcionPage implements OnInit {
   ListActa(){
     this.conexion.getdata("arecepcion.php/?aksi=list-arecepcion").subscribe((data:any)=>{
       this.arecepcion = data.listArecepcion
-      this.arecepcion = data.procedente
+      console.log(this.arecepcion)
     })
   }
   buscar( event ){
@@ -58,6 +59,16 @@ export class GarecepcionPage implements OnInit {
     this.modalCtrl.create({
       component: ViewactaPage,
       componentProps: { arecepcion }
+    })
+    .then(modal => {
+      modal.present();
+      return modal.onDidDismiss();
+    })
+  }
+  openEliminate(){
+    this.modalCtrl.create({
+      component: ListdelarPage,
+      // componentProps: { dataUser }
     })
     .then(modal => {
       modal.present();
@@ -82,8 +93,8 @@ export class GarecepcionPage implements OnInit {
         text: 'Si',
         handler: () => {
           const body = {
-            id_animal_silvestre: id_acta_recepcion,
-            aksi: "delete-as"
+            id_acta_recepcion: id_acta_recepcion,
+            aksi: "delete-ar"
           }
           this.conexion.postdata(body,"arecepcion.php").subscribe((data:any)=>{
             if (data.success) {

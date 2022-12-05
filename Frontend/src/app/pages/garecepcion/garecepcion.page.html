@@ -4,6 +4,11 @@
       <ion-back-button text="" defaultHref="home"></ion-back-button>
     </ion-buttons>
     <ion-title> Acta de Recepción</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openEliminate()">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
   
@@ -30,9 +35,9 @@
               <ion-icon button class="icon" size="large" (click)="verActa(acta)" color="cea" name="reader-outline"></ion-icon>
             </ion-item>
             <ion-item-options>
-              <ion-item-option color="success" (click)="updateAr(acta)">
+              <!-- <ion-item-option color="success" (click)="updateAr(acta)">
                 <ion-icon slot="start" name="pencil-sharp"></ion-icon>
-              </ion-item-option>
+              </ion-item-option> -->
               <ion-item-option color="danger" (click)="removeAr(acta.id_acta_recepcion, acta.num_acta_ar)">
                 <ion-icon slot="start" name="trash"></ion-icon>
               </ion-item-option>

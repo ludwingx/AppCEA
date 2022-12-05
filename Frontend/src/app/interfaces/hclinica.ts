@@ -17,7 +17,7 @@ export interface Hclinica{
     hreposicion_hc:string;
     hmantenimiento_hc:string;
     hperdidas_hc:string;
-
+    
     id_animal_silvestre:string;
     nom_especies:string;
     nom_cientifico:string;
@@ -25,4 +25,9 @@ export interface Hclinica{
     nom_edad:string;
     nom_sexo:string;
 
+    farmaco_td:string;
+    dosis_td:string;
+    accion_td:string;
+    via_td:string;
+    hora_td:string;
 }

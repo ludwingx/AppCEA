@@ -25,23 +25,32 @@ export class ViewactaPage implements OnInit {
 
   ngOnInit() {
     this.datos = this.navParam.get("arecepcion");
-    console.log(this.datos)
+    this.lista_animales()
   }
   Cerrar(){
     this.modalCtrl.dismiss()
   }
+  lista_animales(){
+    const body = {
+      num_acta_ar: this.datos.num_acta_ar,
+      aksi: "lista-acta-animales"
+    }
+    this.conexion.postdata(body,"arecepcion.php").subscribe((data:any)=>{
+      this.procedente = data.procedente
+    })
+  }
+
   generarPdf(){
     var doc = new JSPDF("p","mm","legal");
     doc.addImage("assets/logoGAD.png","PNG",145,10,50,25)
     doc.setFontSize(13)
     doc.setFont("","arial")
-    doc.text("SECRETARIA DE DESARROLLO SOSTENIBLE Y MEDIO AMBIENTE",
-    doc.internal.pageSize.getWidth()/2,40,{align:"center"})
+    doc.text("SECRETARIA DE DESARROLLO SOSTENIBLE Y MEDIO AMBIENTE",doc.internal.pageSize.getWidth()/2,40,{align:"center"})
     doc.text("DIRECCIÓN DE RECURSOS NATURALES",doc.internal.pageSize.getWidth()/2,45,{align:"center"})
     doc.setFontSize(10)
     doc.text("PROGRAMA INTEGRAL DE CONSERVACIÓN DE LA BIODIVERSIDAD DEL DEPARTAMENTO DE SANTA CRUZ",doc.internal.pageSize.getWidth()/2,50,{align:"center"})
     // doc.text(this.datos.num_acta_ar,doc.internal.pageSize.getWidth()/2,80,{align:"center"})
-    doc.line(132,59,78,59)
+    doc.line(140,59,75,59)
     doc.setFontSize(15)
     doc.setFont("","bold")
     doc.text("ACTA DE RECEPCIÓN", doc.internal.pageSize.getWidth()/2,58, {align:"center"})
@@ -73,9 +82,9 @@ export class ViewactaPage implements OnInit {
     doc.setFont("","arial")
     doc.table(5, 115, data1, header1,  {} )
     doc.setFont("","bold")
-    doc.text("Lugar donde procede el animal",10,140)
+    doc.text("Lugar donde procede el animal",10,142)
     doc.setFont("","arial")
-    doc.text("(donde encontro al animal la persona que hace la denuncia o llamada): ",68,140)
+    doc.text("(donde encontro al animal la persona que hace la denuncia o llamada): ",68,142)
     let data2 = [
       {
         Municipio: this.datos.municipioS,
@@ -92,57 +101,59 @@ export class ViewactaPage implements OnInit {
     let data3= [
       {
         'N°': '1',
-        'Nombre común': 'this.datos.nom_comun',
-        'Edad': 'this.datos.nom_edad',
-        'Sexo': 'this.datos.nom_sexo',
-        'Observaciones': 'this.datos.observaciones_rec'
+        'Nombre común': this.procedente[0].nom_comun,
+        'Edad': this.procedente[0].nom_edad,
+        'Sexo': this.procedente[0].nom_sexo,
+        'Observaciones': this.procedente[0].observaciones_rec
       },
       {
-        'N°': '1',
-        'Nombre común': 'this.datos.nom_comun',
-        'Edad': 'this.datos.nom_edad',
-        'Sexo': 'this.datos.nom_sexo',
-        'Observaciones': 'this.datos.observaciones_rec'
+        'N°': '2',
+        'Nombre común': this.procedente[1] == undefined ? "-" : this.procedente[1].nom_comun,
+        'Edad': this.procedente[1] == undefined ? "-" : this.procedente[1].nom_edad,
+        'Sexo': this.procedente[1] == undefined ? "-" : this.procedente[1].nom_sexo,
+        'Observaciones': this.procedente[1] == undefined ? "-" : this.procedente[1].nom_sexo
       },
+      
       {
-        'N°': '1',
-        'Nombre común': 'this.datos.nom_comun',
-        'Edad': 'this.datos.nom_edad',
-        'Sexo': 'this.datos.nom_sexo',
-        'Observaciones': 'this.datos.observaciones_rec'
-      },      {
-        'N°': '1',
-        'Nombre común': 'this.datos.nom_comun',
-        'Edad': 'this.datos.nom_edad',
-        'Sexo': 'this.datos.nom_sexo',
-        'Observaciones': 'this.datos.observaciones_rec'
+        'N°': '3',
+        'Nombre común': this.procedente[2] == undefined ? "-" : this.procedente[2].nom_comun,
+        'Edad': this.procedente[2] == undefined ? "-" : this.procedente[2].nom_edad,
+        'Sexo': this.procedente[2] == undefined ? "-" : this.procedente[2].nom_sexo,
+        'Observaciones': this.procedente[2] == undefined ? "-" : this.procedente[2].observaciones_rec
+      },      
+      {
+        'N°': '4',
+        'Nombre común': this.procedente[3]== undefined ? "-" : this.procedente[3].nom_comun,
+        'Edad': this.procedente[3] == undefined ? "-" : this.procedente[3].nom_edad,
+        'Sexo': this.procedente[3]== undefined ? "-" : this.procedente[3].nom_sexo ,
+        'Observaciones': this.procedente[3]== undefined ? "-" : this.procedente[3].observaciones_rec
       }
     ]
     let header3 = this.createHeaders4(['N°','Nombre común','Edad','Sexo','Observaciones'])
     doc.table(5, 185, data3, header3,  {})
-    doc.text("Las especies serán derivados a la SDS YMA de la Gobernación de Santa Cruz, instalaciones del CAD:",10,265)
-    doc.line(10,266,180,266)
+    doc.text("Las especies serán derivados a la SDS YMA de la Gobernación de Santa Cruz, instalaciones del CAD:",10,250)
+    doc.line(10,251,180,251)
     doc.setFont("","bold")
-    doc.text("Funcionario recepcionante:",10,270)
-    doc.text("Persona (Entidad) que efectúa la entrega:",110,270)
+    doc.text("Funcionario recepcionante:",10,255)
+    doc.text("Persona (Entidad) que efectúa la entrega:",110,255)
     doc.setFont("","arial")
-    doc.text("Nombre:",10,275)
-    doc.text(this.datos.nombre_u,28, 275)
-    doc.text("Nombre:",110,275)
-    doc.text(this.datos.nombreC,130, 275)
-    doc.text("Firma:",10,290)
-    doc.addImage(this.datos.firma_u,"BASE64",30,280,40,20)
-    doc.text("Firma:",110,290)
-    doc.addImage(this.datos.firma,"BASE64",122,280,40,20)
-    doc.text("C.I.:",10,315)
-    doc.text(this.datos.ci_u,28, 315)
-    doc.text("Telf.:",110,308)
-    doc.text(this.datos.telefono,130, 308)
-    doc.text("C.I.:",110,315)
-    doc.text(this.datos.cedula,130, 315)
+    doc.text("Nombre:",10,260)
+    doc.text(this.datos.nombre_u,28, 260)
+    doc.text("Nombre:",110,260)
+    doc.text(this.datos.nombreC,130, 260)
+    doc.text("Firma:",10,275)
+    doc.addImage(this.datos.firma_u,"BASE64",30,265,40,20)
+    doc.text("Firma:",110,275)
+    doc.addImage(this.datos.firma,"BASE64",122,265,40,20)
+    doc.text("C.I.:",10,300)
+    doc.text(this.datos.ci_u,28, 300)
+    doc.text("Telf.:",110,293)
+    doc.text(this.datos.telefono,130, 293)
+    doc.text("C.I.:",110,300)
+    doc.text(this.datos.cedula,130, 300)
 
 
-    doc.save("esto.pdf")
+    doc.save("AR"+ this.datos.num_acta_ar +".pdf")
   }
 
   createHeaders(keys) {

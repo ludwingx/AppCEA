@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'updatehc',
     loadChildren: () => import('./updatehc/updatehc.module').then( m => m.UpdatehcPageModule)
+  },
+  {
+    path: 'listdelhc',
+    loadChildren: () => import('./listdelhc/listdelhc.module').then( m => m.ListdelhcPageModule)
   }
 
 ];

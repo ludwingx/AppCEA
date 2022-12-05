@@ -14,6 +14,7 @@ import domtoimage from 'dom-to-image';
 })
 export class ViewhistoriaPage implements OnInit {
   hclinica: Hclinica[];
+  tratamiento:any = []
   datos:any
   constructor(private modalCtrl: ModalController,
               private conexion: ConexionService,
@@ -24,11 +25,22 @@ export class ViewhistoriaPage implements OnInit {
 
   ngOnInit() {
     this.datos = this.navParam.get("historia");
-    this.verHistoria();
+    this.lista_hc();
+    console.log(this.tratamiento)
   }
   Cerrar(){
     this.modalCtrl.dismiss()
   }
+  lista_hc(){
+    const body = {
+      id_historia_clinica: this.datos.id_historia_clinica,
+      aksi: "lista-historia-animales"
+    }
+    this.conexion.postdata(body,"hclinica.php").subscribe((data:any)=>{
+      this.tratamiento = data.tratamiento
+    })
+  }
+
   verHistoria(){
     this.conexion.getdata("hclinica.php/?aksi=list-hclinica").subscribe((data:any)=>{
       this.hclinica = data.listHclinica
@@ -41,7 +53,7 @@ export class ViewhistoriaPage implements OnInit {
     doc.setFontSize(15)
     doc.setFont("bold")
     doc.text("HISTORIA CLÍNICA", doc.internal.pageSize.getWidth()/2,25, {align:"center"})
-    doc.setFont("regular")
+    doc.setFont("bold")
     doc.setFontSize(10)
     doc.text("FECHA: "+ this.datos.fecha_hc,10,27)
     doc.text("HORA: " + this.datos.hora_hc,45,27)
@@ -51,10 +63,13 @@ export class ViewhistoriaPage implements OnInit {
     doc.text("Prog. Conservación de la Biodiversidad del Dpto. SC",10,36)
     doc.setFontSize(12)
     doc.setFont("bold")
-    doc.text("ESPECIE:" + this.datos.id_especies,10,45)
+    doc.text("ESPECIE:",10,45)
+    doc.setFont("regular")
+    doc.text(this.datos.nom_especies,35,45)
+    doc.setFont("bold")
     doc.text("NOMBRE COMÚN:" + this.datos.nom_comun,60,45)
-    doc.text("SEXO:" + this.datos.id_sexo,130,45)
-    doc.text("EDAD:" + this.datos.id_edad,170,45)
+    doc.text("SEXO:" + this.datos.nom_sexo,130,45)
+    doc.text("EDAD:" + this.datos.nom_edad,170,45)
     doc.text("ANAMNESIS: " + this.datos.anamnesis_hc,10,50)
     doc.text("MUCOSAS: " + this.datos.nom_mucosa + "                           OBS: " + this.datos.observaciones_hc, 10,55)
     doc.text("REV EXTERNA: " + this.datos.nom_revext, 10,60)
@@ -65,22 +80,38 @@ export class ViewhistoriaPage implements OnInit {
     doc.text("DIAGNOSTICO CONFIRMADO: " + this.datos.diagn_confirmado_hc,110,80)
     doc.text("MEDICO: " + this.datos.nombre_u, 10,90)
     doc.text("FIRMA: ",110,90)
-    doc.addImage(this.datos.firma_u,"BASE64",130,90,40,30)
-    doc.text("HIDRATACIÓN",10,120)
-    doc.text("Reposición: ",10,125)
-    doc.text("Mantenimiento: ",10,130)
-    doc.text("Pérdidas: ",10,135)
+    doc.addImage(this.datos.firma_u,"BASE64",130,85,40,20)
+    doc.text("HIDRATACIÓN",10,110)
+    doc.text("Reposición: "+ this.datos.hreposicion_hc,10,115)
+    doc.text("Mantenimiento: "+this.datos.hmantenimiento_hc,10,120)
+    doc.text("Pérdidas: "+this.datos.hperdidas_hc,10,125)
     let data= [
       {
-        'FARMACO': '4',
-        'Acción':'4',
-        'Dosis':'4',
-        'Vía':'4',
-        'Hora':'4'
-      }
+        'FARMACO': this.tratamiento[0].farmaco_td,
+        'Acción': this.tratamiento[0].accion_td,
+        'Dosis': this.tratamiento[0].dosis_td,
+        'Vía': this.tratamiento[0].via_td,
+        'Hora':this.tratamiento[0].hora_td
+      },
+      {
+        'FARMACO': this.tratamiento[1]== undefined ? "-" : this.tratamiento[1].farmaco_td,
+        'Acción': this.tratamiento[1] == undefined ? "-" : this.tratamiento[1].accion_td,
+        'Dosis': this.tratamiento[1]== undefined ? "-" : this.tratamiento[1].dosis_td ,
+        'Vía': this.tratamiento[1]== undefined ? "-" : this.tratamiento[1].via_td,
+        'Hora':this.tratamiento[1]== undefined ? "-" : this.tratamiento[1].hora_td
+      },
+      
     ]
     let header = this.createHeaders(['FARMACO','Acción','Dosis','Vía','Hora'])
-    doc.table(5, 185, data, header,  {})
+    doc.setFontSize(13)
+    doc.setFont("bold")
+    doc.line(10,128,205,128)
+    doc.line(10,142,10,128)
+    doc.text("TRATAMIENTO",10,132)
+    doc.line(10,134,205,134)
+    doc.line(205,142,205,128)
+    doc.text("DIAGNOSTICO",10,138)
+    doc.table(10, 140, data, header,  {})
     doc.save("HC.pdf")
 
   }
@@ -88,7 +119,7 @@ export class ViewhistoriaPage implements OnInit {
     return keys.map(key => ({
       'name': key,
       'prompt': key,
-      'width':65,
+      'width':52,
       'align':'center',
       'padding':0,
     }));

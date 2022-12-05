@@ -45,7 +45,7 @@
               <h3>ESPECIE:</h3>
             </ion-text>
             <ion-text>
-              <h4>{{ datos.id_especies }}</h4>
+              <h4>{{ datos.nom_especies }}</h4>
             </ion-text>
           </ion-label>
         </ion-item>
@@ -69,7 +69,7 @@
               <h3>SEXO:</h3>
             </ion-text>
             <ion-text>
-              <h4>{{ datos.id_sexo }}</h4>
+              <h4>{{ datos.nom_sexo }}</h4>
             </ion-text>
           </ion-label>
         </ion-item>
@@ -81,7 +81,7 @@
               <h3>EDAD</h3>
             </ion-text>
             <ion-text>
-              <h4>{{ datos.id_edad }}</h4>
+              <h4>{{ datos.nom_edad }}</h4>
             </ion-text>
           </ion-label>
         </ion-item>
@@ -305,6 +305,81 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  
+  <div class="lugar-entrega">
+    <ion-card *ngFor="let item of tratamiento; let i = index">
+      <ion-row>
+        <ion-col size="12">
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h1>{{ i + 1 }}</h1>
+              </ion-text>
+              <br>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h3>Farmaco</h3>
+              </ion-text>
+              <ion-text>
+                <h4>{{ item.farmaco_td}}</h4>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h3>Acción</h3>
+              </ion-text>
+              <ion-text>
+                <h4>{{ item.accion_td }}</h4>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h3>Dosis</h3>
+              </ion-text>
+              <ion-text>
+                <h4>{{ item.dosis_td }}</h4>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h3>Vía</h3>
+              </ion-text>
+              <ion-text>
+                <ion-note>{{ item.via_td }}</ion-note>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item class="ion-text-center">
+            <ion-label>
+              <ion-text>
+                <h3>Hora</h3>
+              </ion-text>
+              <ion-text>
+                <ion-note>{{ item.hora_td }}</ion-note>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
 
 </ion-content>

@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="arrow-back-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Deshabilitados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item class="ion-text-center">
+    <ion-label  color="cea">-Lista de actas de recepciones deshabilitadas-</ion-label>
+  </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let acta of arecepcion">
+      <ion-label>
+        <h2>{{acta.num_acta_ar}} - <ion-text color="cea">{{acta.nom_tipo_atencion}}</ion-text> </h2> 
+        <p>{{acta.fecha_ar}} / {{acta.hora_ar}}</p>
+      </ion-label>
+      <ion-icon button class="icon" size="large" (click)="enableActa(acta.id_acta_recepcion,acta.num_acta_ar)" color="cea" name="refresh-circle"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

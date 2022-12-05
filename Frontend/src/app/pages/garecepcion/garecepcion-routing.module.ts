@@ -19,7 +19,11 @@ const routes: Routes = [
   {
     path: 'updatear',
     loadChildren: () => import('./updatear/updatear.module').then( m => m.UpdatearPageModule)
+  },  {
+    path: 'listdelar',
+    loadChildren: () => import('./listdelar/listdelar.module').then( m => m.ListdelarPageModule)
   }
+
 
 ];
 

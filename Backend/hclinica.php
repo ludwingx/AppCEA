@@ -165,7 +165,7 @@
     else if ($_GET['aksi'] == "list-hclinica") {
 
         $res = $mysqli->query("SELECT HC.id_historia_clinica, HC.fecha_hc, HC.hora_hc, A.nom_cientifico,
-        A.nom_comun, A.id_especies, A.id_edad, A.id_sexo, HC.anamnesis_hc, M.nom_mucosa, HC.observaciones_hc,
+        A.nom_comun, ES.nom_especies, E.nom_edad, S.nom_sexo, HC.anamnesis_hc, M.nom_mucosa, HC.observaciones_hc,
         RV.nom_revext, HC.pruebas_complementarias_hc, HC.diagn_presuntivo_hc, HC.diagn_confirmado_hc, HC.sis_nervioso_hc,
         HC.sis_respiratorio_hc, HC.temperatura_hc, HC.frec_cardiaca_hc, HC.peso_hc, HC.hreposicion_hc, HC.hmantenimiento_hc,
         HC.hperdidas_hc, U.nombre_u, U.firma_u
@@ -174,10 +174,17 @@
         ON HC.id_animal_silvestre=A.id_animal_silvestre
         INNER JOIN mucosas as M
         ON HC.id_mucosa = M.id_mucosa
+        INNER JOIN especies as ES
+        ON ES.id_especies = A.id_especies
+        INNER JOIN edad as E
+        ON E.id_edad = A.id_edad
+        INNER JOIN sexo as S
+        ON S.id_sexo = A.id_sexo
         INNER JOIN revext as RV
         ON HC.id_revext = RV.id_revext
         INNER JOIN usuarios as U
-        ON HC.id_usuario=U.id_usuario");
+        ON HC.id_usuario=U.id_usuario
+        WHERE estado_hc = '1'");
         $cont = 0;
         $check = mysqli_num_rows($res);
     
@@ -189,10 +196,9 @@
                     'hora_hc' => $data["hora_hc"],
                     'nom_cientifico' => $data["nom_cientifico"],
                     'nom_comun' => $data["nom_comun"],
-                    'id_especies' => $data["id_especies"],
-                    'id_edad' => $data["id_edad"],
-                    'id_sexo' => $data["id_sexo"],
-                    'id_animal_silvestre' => $data["id_animal_silvestre"],
+                    'nom_especies' => $data["nom_especies"],
+                    'nom_edad' => $data["nom_edad"],
+                    'nom_sexo' => $data["nom_sexo"],
                     'anamnesis_hc' => $data["anamnesis_hc"],
                     'nom_mucosa' => $data["nom_mucosa"],
                     'nom_revext' => $data["nom_revext"],
@@ -210,14 +216,151 @@
                     'hperdidas_hc' => $data["hperdidas_hc"],
                     'nombre_u' => $data["nombre_u"],
                     'firma_u' => $data["firma_u"]
-    
                 );
                 $cont++;
-            };
-            $result = json_encode(array('success' => TRUE, "listHclinica" => $datauser));
+            }
+            $result = json_encode(array('success' => TRUE, "listHclinica" => $datauser, "tratamiento" =>$tratamiento));
         } else {
             $result = json_encode(array('success' => false, 'msg' => 'No existen animales registrados'));
         }
         echo $result;
     }
+    else if($postjson['aksi'] == "lista-historia-animales"){
+        $id_historia_clinica = $postjson['id_historia_clinica'];
+        $cont = 0;
+        $res3 = $mysqli->query("SELECT TD.farmaco_td, TD.accion_td, TD.dosis_td, TD.via_td, TD.hora_td
+        FROM historia_clinica AS HC 
+        INNER JOIN tratamiento_diagnostico as TD
+        ON HC.id_historia_clinica=TD.id_historia_clinica 
+        WHERE HC.id_historia_clinica=$id_historia_clinica");
+        $check2 =mysqli_num_rows($res3);
+        if($check2 > 0){
+            while ($data=mysqli_fetch_assoc($res3)) {
+                    $tratamiento[$cont]= array(
+                        "farmaco_td"=> $data["farmaco_td"],
+                        "accion_td"=> $data["accion_td"],
+                        "dosis_td"=> $data["dosis_td"],
+                        "via_td"=> $data["via_td"],
+                        "hora_td"=> $data["hora_td"]
+                    );
+                    $cont++;
+                }
+                $result = json_encode(array('success' => TRUE, "tratamiento"=>$tratamiento));
+        } else {
+            $result = json_encode(array('success' => false, 'msg' => 'No existen animales registrados'));
+        }
+        echo $result;
+            
+    }
+    else if ($_GET['aksi'] == "list-eliminate") {
+
+        $res = $mysqli->query("SELECT HC.id_historia_clinica, HC.fecha_hc, HC.hora_hc, A.nom_cientifico,
+        A.nom_comun, ES.nom_especies, E.nom_edad, S.nom_sexo, HC.anamnesis_hc, M.nom_mucosa, HC.observaciones_hc,
+        RV.nom_revext, HC.pruebas_complementarias_hc, HC.diagn_presuntivo_hc, HC.diagn_confirmado_hc, HC.sis_nervioso_hc,
+        HC.sis_respiratorio_hc, HC.temperatura_hc, HC.frec_cardiaca_hc, HC.peso_hc, HC.hreposicion_hc, HC.hmantenimiento_hc,
+        HC.hperdidas_hc, U.nombre_u, U.firma_u
+        FROM historia_clinica as HC
+        INNER JOIN animal_silvestre as A
+        ON HC.id_animal_silvestre=A.id_animal_silvestre
+        INNER JOIN mucosas as M
+        ON HC.id_mucosa = M.id_mucosa
+        INNER JOIN especies as ES
+        ON ES.id_especies = A.id_especies
+        INNER JOIN edad as E
+        ON E.id_edad = A.id_edad
+        INNER JOIN sexo as S
+        ON S.id_sexo = A.id_sexo
+        INNER JOIN revext as RV
+        ON HC.id_revext = RV.id_revext
+        INNER JOIN usuarios as U
+        ON HC.id_usuario=U.id_usuario
+        WHERE estado_hc = '0'");
+        $cont = 0;
+        $check = mysqli_num_rows($res);
+    
+        if ($check > 0) {
+            while ($data = mysqli_fetch_assoc($res)) {
+                $datauser[$cont] = array(
+                    'id_historia_clinica' => $data["id_historia_clinica"],
+                    'fecha_hc' => $data["fecha_hc"],
+                    'hora_hc' => $data["hora_hc"],
+                    'nom_cientifico' => $data["nom_cientifico"],
+                    'nom_comun' => $data["nom_comun"],
+                    'nom_especies' => $data["nom_especies"],
+                    'nom_edad' => $data["nom_edad"],
+                    'nom_sexo' => $data["nom_sexo"],
+                    'anamnesis_hc' => $data["anamnesis_hc"],
+                    'nom_mucosa' => $data["nom_mucosa"],
+                    'nom_revext' => $data["nom_revext"],
+                    'observaciones_hc' => $data["observaciones_hc"],
+                    'pruebas_complementarias_hc' => $data["pruebas_complementarias_hc"],
+                    'diagn_presuntivo_hc' => $data["diagn_presuntivo_hc"],
+                    'diagn_confirmado_hc' => $data["diagn_confirmado_hc"],
+                    'sis_nervioso_hc' => $data["sis_nervioso_hc"],
+                    'sis_respiratorio_hc' => $data["sis_respiratorio_hc"],
+                    'temperatura_hc' => $data["temperatura_hc"],
+                    'frec_cardiaca_hc' => $data["frec_cardiaca_hc"],
+                    'peso_hc' => $data["peso_hc"],
+                    'hreposicion_hc' => $data["hreposicion_hc"],
+                    'hmantenimiento_hc' => $data["hmantenimiento_hc"],
+                    'hperdidas_hc' => $data["hperdidas_hc"],
+                    'nombre_u' => $data["nombre_u"],
+                    'firma_u' => $data["firma_u"]
+                );
+                $cont++;
+            }
+            $result = json_encode(array('success' => TRUE, "listDisHc" => $datauser, "tratamiento" =>$tratamiento));
+        } else {
+            $result = json_encode(array('success' => false, 'msg' => 'No existen animales registrados'));
+        }
+        echo $result;
+    }
+    else if($postjson['aksi'] == "lista-historia-animales"){
+        $id_historia_clinica = $postjson['id_historia_clinica'];
+        $cont = 0;
+        $res3 = $mysqli->query("SELECT TD.farmaco_td, TD.accion_td, TD.dosis_td, TD.via_td, TD.hora_td
+        FROM historia_clinica AS HC 
+        INNER JOIN tratamiento_diagnostico as TD
+        ON HC.id_historia_clinica=TD.id_historia_clinica 
+        WHERE HC.id_historia_clinica=$id_historia_clinica");
+        $check2 =mysqli_num_rows($res3);
+        if($check2 > 0){
+            while ($data=mysqli_fetch_assoc($res3)) {
+                    $tratamiento[$cont]= array(
+                        "farmaco_td"=> $data["farmaco_td"],
+                        "accion_td"=> $data["accion_td"],
+                        "dosis_td"=> $data["dosis_td"],
+                        "via_td"=> $data["via_td"],
+                        "hora_td"=> $data["hora_td"]
+                    );
+                    $cont++;
+                }
+                $result = json_encode(array('success' => TRUE, "tratamiento"=>$tratamiento));
+        } else {
+            $result = json_encode(array('success' => false, 'msg' => 'No existen animales registrados'));
+        }
+        echo $result;
+            
+    }
+    else if($postjson['aksi'] == "deshabilitar-hc"){
+        $id_historia_clinica = $postjson["id_historia_clinica"];
+        $res = $mysqli -> query("UPDATE historia_clinica SET estado_hc = '0' WHERE id_historia_clinica = $id_historia_clinica");
+        if ($res) {
+            $result = json_encode(array("success" => TRUE, "msg" => "Historia Clínica deshabilitada"));
+        } else {
+            $result = json_encode(array("success" => false, 'msg' => 'Hubo un error al deshabilitar la historia clínica'));
+        }
+        echo $result;
+    }
+    else if($postjson['aksi'] == "habilitar-hc"){
+        $id_historia_clinica = $postjson["id_historia_clinica"];
+        $res = $mysqli -> query("UPDATE historia_clinica SET estado_hc = '1' WHERE id_historia_clinica = $id_historia_clinica");
+        if ($res) {
+            $result = json_encode(array("success" => TRUE, "msg" => "Historia Clínica habilitada"));
+        } else {
+            $result = json_encode(array("success" => false, 'msg' => 'Hubo un error al habilitar la historia clínica'));
+        }
+        echo $result;
+    }
+    
 ?>
