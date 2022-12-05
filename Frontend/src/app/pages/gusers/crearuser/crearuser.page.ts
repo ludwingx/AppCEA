@@ -65,7 +65,7 @@ export class CrearuserPage implements AfterViewInit {
         
         console.log(body)
         this.mensaje(data.msg)
-        this.closeModal();
+        this.closeModal()
       } else {
         this.loadingController.dismiss();
         this.mensaje(data.msg)

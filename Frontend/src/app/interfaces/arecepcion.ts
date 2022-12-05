@@ -10,11 +10,13 @@ export interface Arecepcion{
     nom_ldfe_barrio_ar:string;
     nom_ldfecalle_ar:string;
     num_ldfe_casa_ar:string;
+
     id_lpd_municipio:string;
     nom_ldp_barrio_ar:string;
     nom_ldp_calle_ar:string;
     nom_ldp_empresa_ar:string;
     nombre_ldp_area_ar:string;
+    
     nombre_u:string;
     ci_u:string;
     firma_u:string;
@@ -29,5 +31,5 @@ export interface Arecepcion{
     nom_comun:string;
     nom_edad:string;
     nom_sexo:string;
-    observacion:string;
+    observaciones_rec:string;
 }

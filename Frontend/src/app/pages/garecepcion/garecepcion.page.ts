@@ -48,6 +48,7 @@ export class GarecepcionPage implements OnInit {
   ListActa(){
     this.conexion.getdata("arecepcion.php/?aksi=list-arecepcion").subscribe((data:any)=>{
       this.arecepcion = data.listArecepcion
+      this.arecepcion = data.procedente
     })
   }
   buscar( event ){

@@ -6,6 +6,13 @@
       </ion-button>
     </ion-buttons>
     <ion-title>Historia Clínica</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="generarPdf()" >
+        <ion-icon color="danger" name="document-outline">
+        </ion-icon>
+        <ion-label>PDF</ion-label>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

@@ -107,12 +107,13 @@ export class ActualizaruserPage implements OnInit {
 
   savePad() {
     const base64Data = this.signaturePad.toDataURL();
-    this.users.firma = base64Data;
+    this.users.firma_u = base64Data;
+
   }
   async presentLoadingWithOptions(){
     const loading = await this.loadingController.create({
       //spinner: null,
-      //duration: 5000,
+      duration: 2500,
       message: 'Actualizando Usuario...',
       //translucent: true,
       //cssClass: 'custom-class custom-loading'

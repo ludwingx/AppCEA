@@ -1,8 +1,0 @@
-npm install dom-to-image
-npm install @types/dom-to-image
-
-npm install jspdf
-npm install @types/jspdf
-
-npm install cordova-plugin-file
-npm install @awesome-cordova-plugins/file

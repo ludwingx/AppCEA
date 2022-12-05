@@ -17,9 +17,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="print-pdf" id="print-pdf">
-    <div class="print-wrapper" id="print-wrapper">
-      <div>
+      <div id="print-pdf">
       <div class="logo-GAD">
         <img src="assets/logoGAD.png">
       </div>
@@ -99,7 +97,7 @@
                   <h3>Barrio</h3>
                 </ion-text>
                 <ion-text>
-                  <h4>{{ datos.barrioE }}</h4>
+                  <h4>{{ datos.nom_ldfe_barrio_ar }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -111,7 +109,7 @@
                   <h3>Calle/Avenida</h3>
                 </ion-text>
                 <ion-text>
-                  <h4>{{ datos.calleE }}</h4>
+                  <h4>{{ datos.nom_ldfecalle_ar }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -123,7 +121,7 @@
                   <h3>Nº Casa</h3>
                 </ion-text>
                 <ion-text>
-                  <h4>{{ datos.nro_casaE }}</h4>
+                  <h4>{{ datos.num_ldfe_casa_ar }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -159,7 +157,7 @@
                   <h3>Barrio</h3>
                 </ion-text>
                 <ion-text>
-                  <h4>{{ datos.barrioS }}</h4>
+                  <h4>{{ datos.nom_ldp_barrio_ar }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -171,7 +169,7 @@
                   <h3>Calle/Avenida</h3>
                 </ion-text>
                 <ion-text>
-                  <h4>{{ datos.calleS }}</h4>
+                  <h4>{{ datos.nom_ldp_calle_ar }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -183,7 +181,7 @@
                   <h3>Empresa y/o Institución</h3>
                 </ion-text>
                 <ion-text>
-                  <h4>{{ datos.empresa }}</h4>
+                  <h4>{{ datos.nom_ldp_empresa_ar }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -195,7 +193,7 @@
                   <h3>Area Verde, Area protegida, otro</h3>
                 </ion-text>
                 <ion-text>
-                  <h4>{{ datos.area }}</h4>
+                  <h4>{{ datos.nom_ldp_area_ar }}</h4>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -230,7 +228,7 @@
                     <h3>Nombre Científico</h3>
                   </ion-text>
                   <ion-text>
-                    <h4>{{ item.nombre_cientifico }}</h4>
+                    <h4>{{ item.nom_cientifico }}</h4>
                   </ion-text>
                 </ion-label>
               </ion-item>
@@ -242,7 +240,7 @@
                     <h3>Nombre Comun</h3>
                   </ion-text>
                   <ion-text>
-                    <h4>{{ item.nombre_comun }}</h4>
+                    <h4>{{ item.nom_comun }}</h4>
                   </ion-text>
                 </ion-label>
               </ion-item>
@@ -254,7 +252,7 @@
                     <h3>Edad</h3>
                   </ion-text>
                   <ion-text>
-                    <h4>{{ item.edad }}</h4>
+                    <h4>{{ item.nom_edad }}</h4>
                   </ion-text>
                 </ion-label>
               </ion-item>
@@ -266,7 +264,7 @@
                     <h3>Sexo</h3>
                   </ion-text>
                   <ion-text>
-                    <h4>{{ item.sexo }}</h4>
+                    <h4>{{ item.nom_sexo }}</h4>
                   </ion-text>
                 </ion-label>
               </ion-item>
@@ -278,7 +276,7 @@
                     <h3>Observaciones</h3>
                   </ion-text>
                   <ion-text>
-                    <ion-note>{{ item.observacion }}</ion-note>
+                    <ion-note>{{ item.observaciones_rec }}</ion-note>
                   </ion-text>
                 </ion-label>
               </ion-item>
@@ -308,7 +306,7 @@
                     <h3>Nombre</h3>
                   </ion-text>
                   <ion-text>
-                    <h4>{{ datos.nombreFunc }}</h4>
+                    <h4>{{ datos.nombre_u }}</h4>
                   </ion-text>
                 </ion-label>
               </ion-item>
@@ -320,7 +318,7 @@
                     <h3>Cedula</h3>
                   </ion-text>
                   <ion-text>
-                    <h4>{{ datos.cedulaFunc }}</h4>
+                    <h4>{{ datos.ci_u }}</h4>
                   </ion-text>
                 </ion-label>
               </ion-item>
@@ -332,7 +330,7 @@
                     <h3>Firma</h3>
                   </ion-text>
                   <ion-text>
-                    <img src="{{ datos.firmaFunc }}">
+                    <img src="{{ datos.firma_u }}">
                   </ion-text>
                 </ion-label>
               </ion-item>
@@ -346,14 +344,15 @@
               <ion-item class="ion-text-center">
                 <ion-label>
                   <ion-text>
-                    <h2>Persona(Entidad) que efectua la entrega</h2>
+                    <h2>Persona(Entidad)</h2>
+                    <h2> que efectua la entrega</h2>
                   </ion-text>
                   <br>
                   <ion-text>
                     <h3>Nombre</h3>
                   </ion-text>
                   <ion-text>
-                    <h4>{{ datos.nombreP }}</h4>
+                    <h4>{{ datos.nombreC }}</h4>
                   </ion-text>
                 </ion-label>
               </ion-item>
@@ -365,7 +364,7 @@
                     <h3>Cédula</h3>
                   </ion-text>
                   <ion-text>
-                    <h4>{{ datos.cedulaP }}</h4>
+                    <h4>{{ datos.cedula }}</h4>
                   </ion-text>
                 </ion-label>
               </ion-item>
@@ -377,7 +376,7 @@
                     <h3>Teléfono</h3>
                   </ion-text>
                   <ion-text>
-                    <h4>{{ datos.telefonoP }}</h4>
+                    <h4>{{ datos.telefono }}</h4>
                   </ion-text>
                 </ion-label>
               </ion-item>
@@ -389,7 +388,7 @@
                     <h3>Firma</h3>
                   </ion-text>
                   <ion-text>
-                    <img src="{{ datos.firmaP }}">
+                    <img src="{{ datos.firma }}">
                   </ion-text>
                 </ion-label>
               </ion-item>
@@ -398,6 +397,4 @@
         </ion-card>
       </div>
     </div> 
-  </div> 
-</div>
 </ion-content>

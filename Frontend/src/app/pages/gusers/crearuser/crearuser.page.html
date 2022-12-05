@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar color="cea">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/gusers" ></ion-back-button>
+      <ion-button (click)="closeModal()">
+        <ion-icon name="arrow-back-sharp"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Ingresa tus datos personales</ion-title>
   </ion-toolbar>

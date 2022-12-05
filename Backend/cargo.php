@@ -7,7 +7,7 @@ include("conexion.php");
 $postjson = json_decode(file_get_contents("php://input"),TRUE);
 
 if($_GET['aksi']=="list-cargo"){
-    $res = $mysqli->query("SELECT * FROM cargos WHERE id_cargo:='2',id_cargo:='3'");
+    $res = $mysqli->query("SELECT * FROM cargos WHERE id_cargo > 1");
     $cont = 0;
     $check=mysqli_num_rows($res);
     if($check > 0){

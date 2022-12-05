@@ -55,7 +55,15 @@ export class GusersPage implements OnInit {
       return modal.onDidDismiss();
     })
   }
-
+  createUser(){
+    this.modalCtrl.create({
+      component: CrearuserPage
+    })
+    .then(modal => {
+      modal.present();
+      return modal.onDidDismiss();
+    })
+  }
   updateUser(users:any){
     this.modalCtrl.create({
       component: ActualizaruserPage,

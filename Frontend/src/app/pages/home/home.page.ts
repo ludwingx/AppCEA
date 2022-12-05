@@ -9,7 +9,8 @@ import { Preferences } from '@capacitor/preferences';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit { 
+  recepcionista : number = 0
   dataStorage:any
   dataUser:any = [
     {
@@ -33,7 +34,7 @@ export class HomePage implements OnInit {
       
       this.dataStorage = JSON.parse(data.value);
       this.perfil(this.dataStorage.id_usuario);
-
+      this.roles(this.dataStorage.id_cargo)
     })
 
   }
@@ -102,5 +103,23 @@ export class HomePage implements OnInit {
       cssClass: 'custom-loading',
     });
     return await loading.present();
+  }
+
+  roles(id_cargo:number){
+    var admin = id_cargo
+    console.log(id_cargo)
+    
+    if (admin==2) {
+      this.recepcionista = 2
+      console.log(this.recepcionista)
+    }
+    else if(admin==3){
+      this.recepcionista = 3
+      console.log(this.recepcionista)
+    }
+    else if(admin==1){
+      this.recepcionista = 1
+      console.log(this.recepcionista)
+    }
   }
 }

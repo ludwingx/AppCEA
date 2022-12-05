@@ -58,7 +58,7 @@
     </ion-item>
     <ion-grid fixed>
       <ion-row>
-        <ion-col>
+        <ion-col *ngIf="recepcionista == 1" >
           <ion-card button [routerLink]="['/gusers']">
             <ion-card-header>
               <ion-avatar>
@@ -70,7 +70,7 @@
             </ion-card-content>
           </ion-card>
         </ion-col>
-        <ion-col>
+        <ion-col *ngIf="recepcionista == 3 || recepcionista == 1" >
           <ion-card button [routerLink]="['/gasilvestre']">
             <ion-card-header>
               <ion-avatar>
@@ -82,7 +82,7 @@
             </ion-card-content>
           </ion-card>
         </ion-col>
-        <ion-col>
+        <ion-col *ngIf="recepcionista == 2 || recepcionista == 1">
           <ion-card button  [routerLink]="['/garecepcion']">
             <ion-card-header>
               <ion-avatar>
@@ -94,7 +94,7 @@
             </ion-card-content>
           </ion-card>
         </ion-col>
-        <ion-col>
+        <ion-col *ngIf="recepcionista == 3 || recepcionista == 1">
           <ion-card button [routerLink]="['/ghclinica']">
             <ion-card-header>
               <ion-avatar>
