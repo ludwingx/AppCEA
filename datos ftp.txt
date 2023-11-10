@@ -1,11 +1,1 @@
-Base de datos
-usuario:vldevelor82_adminCEA
-contraseña: saIP%3*]Ve[{
-BD: vldevelor82_bd_cea
-144.126.143.151
 
-FTP
-usuario: adminCEA@vldeveloper.com
-servidor ftp: ftp.vldeveloper.com
-puerto: 21
-contraseña: U,%r35HVv8FH
